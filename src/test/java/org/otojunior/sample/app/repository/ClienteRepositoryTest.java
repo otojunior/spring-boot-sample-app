@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.otojunior.sample.app.entity.Cliente;
 import org.otojunior.sample.app.entity.ClienteTest;
 import org.otojunior.sample.app.entity.Endereco;
+import org.otojunior.sample.app.entity.InformacaoContato;
 import org.otojunior.sample.app.entity.Uf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -51,7 +52,12 @@ public class ClienteRepositoryTest {
 		assertEquals(Month.JANUARY, dataNascimento.getMonth());
 		assertEquals(15, dataNascimento.getDayOfMonth());
 		
-		Endereco endereco = cliente.getEndereco();
+		InformacaoContato informacaoContato = cliente.getInformacaoContato();
+		assertEquals("joaquim@teste.com", informacaoContato.getEmail());
+		assertEquals("3122223333", informacaoContato.getTelefone());
+		assertEquals("31988887777", informacaoContato.getCelular());
+
+		Endereco endereco = cliente.getEnderecos().get(0);
 		assertNotNull(endereco);
 		assertEquals("Rua Teste de Unidade", endereco.getLogradouro());
 		assertEquals("12345A", endereco.getNumero());

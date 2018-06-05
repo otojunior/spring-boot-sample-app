@@ -3,25 +3,21 @@
  */
 package org.otojunior.sample.app.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Endereço.
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
  *
  */
-@Embeddable
-public class Endereco implements Serializable {
+@Entity
+public class Endereco extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
@@ -53,6 +49,12 @@ public class Endereco implements Serializable {
 	@Size(min=0, max=8)
 	@Column(length=8)
 	private String cep;
+	
+	@Column(nullable=false)
+	private boolean ativo;
+	
+	@ManyToOne
+	private Cliente cliente;
 
 	/**
 	 * @return the bairro
@@ -73,6 +75,13 @@ public class Endereco implements Serializable {
 	 */
 	public String getCidade() {
 		return cidade;
+	}
+
+	/**
+	 * @return the cliente
+	 */
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 	/**
@@ -104,6 +113,20 @@ public class Endereco implements Serializable {
 	}
 
 	/**
+	 * @return the ativo
+	 */
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	/**
+	 * @param ativo the ativo to set
+	 */
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	/**
 	 * @param bairro the bairro to set
 	 */
 	public void setBairro(String bairro) {
@@ -124,6 +147,13 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
+	/**
+	 * @param cliente the cliente to set
+	 */
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
 	/**
 	 * @param complemento the complemento to set
 	 */
@@ -150,13 +180,5 @@ public class Endereco implements Serializable {
 	 */
 	public void setUf(Uf uf) {
 		this.uf = uf;
-	}
-	
-	/**
-	 * 
-	 */
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 }

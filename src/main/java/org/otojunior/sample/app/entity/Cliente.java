@@ -4,10 +4,18 @@
 package org.otojunior.sample.app.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,9 +44,28 @@ public class Cliente extends AbstractEntity {
 	@Column(nullable=false)
 	private LocalDate dataNascimento;
 	
+	@Lob
+	@Basic(fetch=FetchType.LAZY)
+	@Column(nullable=true)
+	private byte[] foto;
+	
 	@Valid
 	@Embedded
-	private Endereco endereco;
+	private InformacaoContato informacaoContato;
+	
+	@Valid
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true, mappedBy="cliente")
+	private List<Endereco> enderecos = new ArrayList<>();
+
+	/**
+	 * 
+	 * @param endereco
+	 */
+	public Cliente addEndereco(Endereco endereco) {
+		this.enderecos.add(endereco);
+		endereco.setCliente(this);
+		return this;
+	}
 
 	/**
 	 * @return the cpf
@@ -57,8 +84,22 @@ public class Cliente extends AbstractEntity {
 	/**
 	 * @return the endereco
 	 */
-	public Endereco getEndereco() {
-		return endereco;
+	public List<Endereco> getEnderecos() {
+		return Collections.unmodifiableList(enderecos);
+	}
+
+	/**
+	 * @return the foto
+	 */
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @return the informacaoContato
+	 */
+	public InformacaoContato getInformacaoContato() {
+		return informacaoContato;
 	}
 
 	/**
@@ -66,6 +107,16 @@ public class Cliente extends AbstractEntity {
 	 */
 	public String getNome() {
 		return nome;
+	}
+
+	/**
+	 * 
+	 * @param endereco
+	 */
+	public Cliente removeEndereco(Endereco endereco) {
+		this.enderecos.remove(endereco);
+		endereco.setCliente(null);
+		return this;
 	}
 
 	/**
@@ -83,12 +134,19 @@ public class Cliente extends AbstractEntity {
 	}
 
 	/**
-	 * @param endereco the endereco to set
+	 * @param foto the foto to set
 	 */
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
+	/**
+	 * @param informacaoContato the informacaoContato to set
+	 */
+	public void setInformacaoContato(InformacaoContato informacaoContato) {
+		this.informacaoContato = informacaoContato;
+	}
+	
 	/**
 	 * @param nome the nome to set
 	 */

@@ -13,7 +13,7 @@ public class EnderecoTest {
 	 * @return
 	 */
 	public static Endereco of() {
-		return of("Rua Teste de Unidade", "12345A", "AP 123 BL 99", "Bairro Teste",
+		return of(false, "Rua Teste de Unidade", "12345A", "AP 123 BL 99", "Bairro Teste",
 			"Belo Horizonte", Uf.MG, "30000000");
 	}
 	
@@ -28,9 +28,10 @@ public class EnderecoTest {
 	 * @param cep
 	 * @return
 	 */
-	public static Endereco of(String logradouro, String numero, String complemento, String bairro, 
+	public static Endereco of(boolean ativo, String logradouro, String numero, String complemento, String bairro, 
 			String cidade, Uf uf, String cep) {
 		Endereco endereco = new Endereco();
+		endereco.setAtivo(ativo);
 		endereco.setBairro(bairro);
 		endereco.setCep(cep);
 		endereco.setCidade(cidade);
