@@ -12,11 +12,12 @@ import javax.persistence.EntityManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.otojunior.sample.app.entity.Cliente;
+import org.otojunior.sample.app.backend.entity.Cliente;
+import org.otojunior.sample.app.backend.entity.Endereco;
+import org.otojunior.sample.app.backend.entity.InformacaoContato;
+import org.otojunior.sample.app.backend.entity.Uf;
+import org.otojunior.sample.app.backend.repository.ClienteRepository;
 import org.otojunior.sample.app.entity.ClienteTest;
-import org.otojunior.sample.app.entity.Endereco;
-import org.otojunior.sample.app.entity.InformacaoContato;
-import org.otojunior.sample.app.entity.Uf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -35,7 +36,7 @@ public class ClienteRepositoryTest {
 	private ClienteRepository repository;
 	
 	/**
-	 * Test method for {@link org.otojunior.sample.app.repository.ClienteRepository#findByCpf(java.lang.String)}.
+	 * Test method for {@link org.otojunior.sample.app.backend.repository.ClienteRepository#findByCpf(java.lang.String)}.
 	 */
 	@Test
 	public void testFindByCpf() {

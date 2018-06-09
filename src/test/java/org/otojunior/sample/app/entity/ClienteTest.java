@@ -6,6 +6,10 @@ package org.otojunior.sample.app.entity;
 import java.time.LocalDate;
 import java.time.Month;
 
+import org.otojunior.sample.app.backend.entity.Cliente;
+import org.otojunior.sample.app.backend.entity.Endereco;
+import org.otojunior.sample.app.backend.entity.InformacaoContato;
+
 /**
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
  *

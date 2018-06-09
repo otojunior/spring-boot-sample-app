@@ -1,9 +1,9 @@
 /**
  * 
  */
-package org.otojunior.sample.app.repository;
+package org.otojunior.sample.app.backend.repository;
 
-import org.otojunior.sample.app.entity.Cliente;
+import org.otojunior.sample.app.backend.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

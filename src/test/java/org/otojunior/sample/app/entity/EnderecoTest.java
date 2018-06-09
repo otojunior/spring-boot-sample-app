@@ -3,6 +3,9 @@
  */
 package org.otojunior.sample.app.entity;
 
+import org.otojunior.sample.app.backend.entity.Endereco;
+import org.otojunior.sample.app.backend.entity.Uf;
+
 /**
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
  *

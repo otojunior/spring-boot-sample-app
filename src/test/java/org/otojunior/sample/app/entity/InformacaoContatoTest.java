@@ -3,6 +3,8 @@
  */
 package org.otojunior.sample.app.entity;
 
+import org.otojunior.sample.app.backend.entity.InformacaoContato;
+
 /**
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
  *
