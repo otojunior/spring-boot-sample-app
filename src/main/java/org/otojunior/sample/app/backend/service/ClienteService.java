@@ -23,8 +23,8 @@ public class ClienteService {
 	 * 
 	 * @param cliente
 	 */
-	public void delete(Cliente cliente) {
-		repository.delete(cliente);
+	public void deleteById(Long id) {
+		repository.deleteById(id);
 	}
 	
 	/**
@@ -41,7 +41,9 @@ public class ClienteService {
 	 * @return
 	 */
 	public Cliente findByCpf(String cpf) {
-		return repository.findByCpf(cpf);
+		return repository.
+			findByCpf(cpf).
+			orElse(null);
 	}
 	
 	/**
@@ -50,14 +52,16 @@ public class ClienteService {
 	 * @return
 	 */
 	public Cliente findById(Long id) {
-		return repository.findById(id).orElse(null);
+		return repository.
+			findById(id).
+			orElse(null);
 	}
 
 	/**
 	 * 
 	 * @param cliente
 	 */
-	public void save(Cliente cliente) {
-		repository.save(cliente);
+	public Cliente save(Cliente cliente) {
+		return repository.save(cliente);
 	}
 }

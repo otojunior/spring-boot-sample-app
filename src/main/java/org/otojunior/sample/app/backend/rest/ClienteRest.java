@@ -8,12 +8,16 @@ import java.util.List;
 import org.otojunior.sample.app.backend.entity.Cliente;
 import org.otojunior.sample.app.backend.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,19 +25,25 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("/api/cliente")
+@RequestMapping("/api")
 public class ClienteRest {
 	@Autowired
 	private ClienteService service;
 	
 	/**
 	 * 
-	 * @param cpf
-	 * @return
+	 * @param cliente
 	 */
-	@GetMapping("/find")
-	public List<Cliente> findAll() {
-		return service.findAll();
+	@DeleteMapping("/cliente/{id}")
+	public ResponseEntity<?> deleteById(@PathVariable Long id) {
+		ResponseEntity<?> response = null;
+		try {
+			service.deleteById(id);
+			response = ResponseEntity.noContent().build();
+		} catch (EmptyResultDataAccessException e) {
+			response = ResponseEntity.notFound().build();
+		}
+		return response;
 	}
 	
 	/**
@@ -41,9 +51,25 @@ public class ClienteRest {
 	 * @param cpf
 	 * @return
 	 */
-	@GetMapping("/find/cpf/{cpf}")
-	public Cliente findByCpf(@PathVariable String cpf) {
-		return service.findByCpf(cpf);
+	@GetMapping("/clientes")
+	public ResponseEntity<List<Cliente>> findAll() {
+		List<Cliente> all = service.findAll();
+		return CollectionUtils.isEmpty(all) ?
+			ResponseEntity.noContent().build() :
+			ResponseEntity.ok(all);
+	}
+	
+	/**
+	 * 
+	 * @param cpf
+	 * @return
+	 */
+	@GetMapping("/cliente")
+	public ResponseEntity<Cliente> findByCpf(@RequestParam String cpf) {
+		Cliente cliente = service.findByCpf(cpf);
+		return (cliente == null) ?
+			ResponseEntity.noContent().build() :
+			ResponseEntity.ok(cliente);
 	}
 	
 	/**
@@ -51,36 +77,21 @@ public class ClienteRest {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/find/id/{id}")
-	public Cliente findById(@PathVariable Long id) {
-		return service.findById(id);
+	@GetMapping("/cliente/{id}")
+	public ResponseEntity<Cliente> findById(@PathVariable Long id) {
+		Cliente cliente = service.findById(id);
+		return (cliente == null) ?
+			ResponseEntity.noContent().build() :
+			ResponseEntity.ok(cliente);
 	}
 	
 	/**
 	 * 
 	 * @param cliente
 	 */
-	@PostMapping("/save")
-	public void save(@RequestBody Cliente cliente) {
-		service.save(cliente);
-	}
-	
-	/**
-	 * 
-	 * @param cliente
-	 */
-	@DeleteMapping("/delete")
-	public void delete(@RequestBody Cliente cliente) {
-		service.delete(cliente);
-	}
-	
-	/**
-	 * 
-	 * @param cliente
-	 */
-	@DeleteMapping("/delete/id/{id}")
-	public void delete(@PathVariable Long id) {
-		Cliente cliente = findById(id);
-		service.delete(cliente );
+	@PostMapping("/cliente")
+	public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
+		Cliente salvo = service.save(cliente);
+		return ResponseEntity.ok(salvo);
 	}
 }

@@ -42,7 +42,7 @@ public class ClienteRepositoryTest {
 	public void testFindByCpf() {
 		entityManager.persist(ClienteTest.of());
 		
-		Cliente cliente = repository.findByCpf("00000000191");
+		Cliente cliente = repository.findByCpf("00000000191").orElse(null);
 		assertNotNull(cliente);
 		assertEquals("00000000191", cliente.getCpf());
 		assertEquals("Joaquim da Silva", cliente.getNome());
