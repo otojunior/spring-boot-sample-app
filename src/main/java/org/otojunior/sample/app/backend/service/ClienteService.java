@@ -41,9 +41,16 @@ public class ClienteService {
 	 * @return
 	 */
 	public Cliente findByCpf(String cpf) {
-		return repository.
-			findByCpf(cpf).
-			orElse(null);
+		return repository.findByCpf(cpf).orElse(null);
+	}
+	
+	/**
+	 * 
+	 * @param cpf
+	 * @return
+	 */
+	public Cliente findByNome(String nome) {
+		return repository.findByNome(nome).orElse(null);
 	}
 	
 	/**
@@ -52,9 +59,7 @@ public class ClienteService {
 	 * @return
 	 */
 	public Cliente findById(Long id) {
-		return repository.
-			findById(id).
-			orElse(null);
+		return repository.findById(id).orElse(null);
 	}
 
 	/**

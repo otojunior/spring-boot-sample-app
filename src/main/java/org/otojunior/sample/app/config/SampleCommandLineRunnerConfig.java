@@ -37,13 +37,25 @@ public class SampleCommandLineRunnerConfig implements CommandLineRunner {
 	 */
 	private List<Cliente> of() {
 		List<Cliente> clientes = new ArrayList<>();
-		for (int i = 0; i < 3; i++) {
-			Cliente cliente = new Cliente();
-			cliente.setCpf("00000000191");
-			cliente.setDataNascimento(LocalDate.now());
-			cliente.setNome("Teste " + i);
-			clientes.add(cliente);
-		}
+		
+		Cliente cliente = new Cliente();
+		cliente.setCpf("00000000191");
+		cliente.setDataNascimento(LocalDate.now());
+		cliente.setNome("Teste1");
+		clientes.add(cliente);
+		
+		cliente = new Cliente();
+		cliente.setCpf("00000000272");
+		cliente.setDataNascimento(LocalDate.now());
+		cliente.setNome("Teste2");
+		clientes.add(cliente);
+		
+		cliente = new Cliente();
+		cliente.setCpf("00000000353");
+		cliente.setDataNascimento(LocalDate.now());
+		cliente.setNome("Teste3");
+		clientes.add(cliente);
+		
 		return clientes;
 	}
 }
