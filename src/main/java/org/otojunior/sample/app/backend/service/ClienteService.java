@@ -4,6 +4,7 @@
 package org.otojunior.sample.app.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.otojunior.sample.app.backend.entity.Cliente;
 import org.otojunior.sample.app.backend.repository.ClienteRepository;
@@ -40,8 +41,8 @@ public class ClienteService {
 	 * @param cpf
 	 * @return
 	 */
-	public Cliente findByCpf(String cpf) {
-		return repository.findByCpf(cpf).orElse(null);
+	public Optional<Cliente> findByCpf(String cpf) {
+		return repository.findByCpf(cpf);
 	}
 	
 	/**
@@ -49,8 +50,8 @@ public class ClienteService {
 	 * @param cpf
 	 * @return
 	 */
-	public Cliente findByNome(String nome) {
-		return repository.findByNome(nome).orElse(null);
+	public Optional<Cliente> findByNome(String nome) {
+		return repository.findByNome(nome);
 	}
 	
 	/**
@@ -58,8 +59,8 @@ public class ClienteService {
 	 * @param id
 	 * @return
 	 */
-	public Cliente findById(Long id) {
-		return repository.findById(id).orElse(null);
+	public Optional<Cliente> findById(Long id) {
+		return repository.findById(id);
 	}
 
 	/**
