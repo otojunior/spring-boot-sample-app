@@ -38,13 +38,17 @@ public class ClienteTest {
 	 * @return
 	 */
 	public static Cliente of(String cpf, String nome, LocalDate dataNascimento, InformacaoContato informacaoContato, 
-			Endereco endereco) {
+			Endereco... enderecos) {
 		Cliente cliente = new Cliente();
 		cliente.setCpf(cpf);
 		cliente.setDataNascimento(dataNascimento);
 		cliente.setNome(nome);
 		cliente.setInformacaoContato(informacaoContato);
-		cliente.addEndereco(endereco);
+		if (enderecos != null) {
+			for (Endereco endereco : enderecos) {
+				cliente.addEndereco(endereco);
+			}
+		}
 		return cliente;
 	}
 }

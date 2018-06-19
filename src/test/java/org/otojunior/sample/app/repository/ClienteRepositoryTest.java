@@ -3,12 +3,11 @@
  */
 package org.otojunior.sample.app.repository;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDate;
 import java.time.Month;
-
-import javax.persistence.EntityManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +19,7 @@ import org.otojunior.sample.app.backend.repository.ClienteRepository;
 import org.otojunior.sample.app.entity.ClienteTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -30,7 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @DataJpaTest
 public class ClienteRepositoryTest {
 	@Autowired
-	private EntityManager entityManager;
+	private TestEntityManager entityManager;
 	
 	@Autowired
 	private ClienteRepository repository;
