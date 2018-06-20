@@ -20,9 +20,28 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// Configurações comuns de segurança de URL.
 		http.
-			authorizeRequests().antMatchers("/").permitAll().and().
-			authorizeRequests().antMatchers("/h2-console/**").permitAll().and().
+			authorizeRequests().
+				antMatchers("/").
+				permitAll().and().
+			authorizeRequests().
+				antMatchers("/h2-console/**").
+				permitAll().and().
+			authorizeRequests().
+				antMatchers("/api/cliente/**").
+				permitAll().anyRequest().authenticated().and().
+			authorizeRequests().
+				antMatchers("/api/endereco/**").
+				hasRole("ADMIN").anyRequest().authenticated();
+		
+		// Específico para Form Login
+		http.
+		 formLogin().loginPage("/login").permitAll().and().
+		 logout().permitAll();
+		
+		// Específico para acesso ao H2-Console sem necessitar de autenticação.
+		http.
 			csrf().disable().
 			headers().frameOptions().disable();
 	}
