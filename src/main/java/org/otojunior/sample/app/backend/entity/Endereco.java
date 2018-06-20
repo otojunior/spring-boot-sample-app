@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Endereço.
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
@@ -53,6 +55,7 @@ public class Endereco extends AbstractEntity {
 	@Column(nullable=false)
 	private boolean ativo;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Cliente cliente;
 

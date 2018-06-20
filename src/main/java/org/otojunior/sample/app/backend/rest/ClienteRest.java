@@ -102,7 +102,7 @@ public class ClienteRest {
 			
 		return ResponseEntity.ok(cliente);
 	}
-	
+
 	/**
 	 * 
 	 * @param id
@@ -117,7 +117,7 @@ public class ClienteRest {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Cliente encontrado. ID={}: {}", id, cliente);
 		}
-			
+
 		return ResponseEntity.ok(cliente);
 	}
 	
@@ -132,7 +132,7 @@ public class ClienteRest {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("save: {}", salvo);
 		}
-		
+
 		return ResponseEntity.ok(salvo);
 	}
 }
