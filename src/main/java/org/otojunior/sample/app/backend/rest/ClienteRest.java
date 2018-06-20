@@ -4,10 +4,9 @@
 package org.otojunior.sample.app.backend.rest;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.otojunior.sample.app.backend.entity.Cliente;
-import org.otojunior.sample.app.backend.exception.ClienteNaoEncontradoException;
+import org.otojunior.sample.app.backend.exception.HttpNotFoundException;
 import org.otojunior.sample.app.backend.service.ClienteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,9 +41,11 @@ public class ClienteRest {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		service.deleteById(id);
+		
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Cliente excluído: {}", id);
 		}
+		
 		return ResponseEntity.ok("Cliente excluído: " + id);
 	}
 	
@@ -56,15 +57,14 @@ public class ClienteRest {
 	@GetMapping
 	public ResponseEntity<List<Cliente>> findAll() {
 		List<Cliente> clientes = service.findAll();
-		ResponseEntity<List<Cliente>> retorno = null;
-		if (!CollectionUtils.isEmpty(clientes)) {
+		
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Clientes encontrados: {}", clientes.size());
-			retorno = ResponseEntity.ok(clientes);
-		} else {
-			LOG.warn("Nenhum cliente encontrado");
-			retorno = ResponseEntity.noContent().build();
 		}
-		return retorno;
+		
+		return (CollectionUtils.isEmpty(clientes)) ?
+			ResponseEntity.noContent().build() : 
+			ResponseEntity.ok(clientes);
 	}
 	
 	/**
@@ -74,16 +74,15 @@ public class ClienteRest {
 	 */
 	@GetMapping(path="", params="cpf")
 	public ResponseEntity<Cliente> findByCpf(@RequestParam String cpf) {
-		Optional<Cliente> cliente = service.findByCpf(cpf);
-		ResponseEntity<Cliente> retorno = null;
-		if (cliente.isPresent()) {
-			LOG.debug("Cliente encontrado. CPF={}: {}", cpf, cliente.get());
-			retorno = ResponseEntity.ok(cliente.get());
-		} else {
-			LOG.warn("Cliente não encontrado. CPF={}", cpf);
-			throw new ClienteNaoEncontradoException("CPF=", cpf);
-		} 
-		return retorno;
+		Cliente cliente = service.
+			findByCpf(cpf).
+			orElseThrow(() -> new HttpNotFoundException("Cliente não encontrado. CPF=" + cpf));
+		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Cliente encontrado. CPF={}: {}", cpf, cliente);
+		}
+		
+		return ResponseEntity.ok(cliente);
 	}
 	
 	/**
@@ -93,16 +92,15 @@ public class ClienteRest {
 	 */
 	@GetMapping(path="", params="nome")
 	public ResponseEntity<Cliente> findByNome(@RequestParam String nome) {
-		Optional<Cliente> cliente = service.findByNome(nome);
-		ResponseEntity<Cliente> retorno = null;
-		if (cliente.isPresent()) {
-			LOG.debug("Cliente encontrado. Nome={}: {}", nome, cliente.get());
-			retorno = ResponseEntity.ok(cliente.get());
-		} else {
-			LOG.warn("Cliente não encontrado. Nome={}", nome);
-			throw new ClienteNaoEncontradoException("Nome=", nome);
-		} 
-		return retorno;
+		Cliente cliente = service.
+			findByNome(nome).
+			orElseThrow(() -> new HttpNotFoundException("Cliente não encontrado. Nome=" + nome));
+			
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Cliente encontrado. Nome={}: {}", nome, cliente);
+		}
+			
+		return ResponseEntity.ok(cliente);
 	}
 	
 	/**
@@ -112,16 +110,15 @@ public class ClienteRest {
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> findById(@PathVariable Long id) {
-		Optional<Cliente> cliente = service.findById(id);
-		ResponseEntity<Cliente> retorno = null;
-		if (cliente.isPresent()) {
-			LOG.debug("Cliente encontrado. Id={}: {}", id, cliente.get());
-			retorno = ResponseEntity.ok(cliente.get());
-		} else {
-			LOG.warn("Cliente não encontrado. Id={}", id);
-			throw new ClienteNaoEncontradoException("ID=", id.toString());
-		} 
-		return retorno;
+		Cliente cliente = service.
+			findById(id).
+			orElseThrow(() -> new HttpNotFoundException("Cliente não encontrado. ID=" + id));
+			
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Cliente encontrado. ID={}: {}", id, cliente);
+		}
+			
+		return ResponseEntity.ok(cliente);
 	}
 	
 	/**
@@ -133,7 +130,7 @@ public class ClienteRest {
 		Cliente salvo = service.save(cliente);
 		
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("save: {}", cliente);
+			LOG.debug("save: {}", salvo);
 		}
 		
 		return ResponseEntity.ok(salvo);
