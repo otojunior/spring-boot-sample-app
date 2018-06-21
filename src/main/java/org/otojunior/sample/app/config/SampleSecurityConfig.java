@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
- *
+ * Refeência: http://www.baeldung.com/spring-security-expressions
  */
 @Configuration
 @EnableWebSecurity
@@ -20,24 +20,20 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// Configurações de segurança das aplicações utilitárias.
+		http.authorizeRequests().
+			antMatchers("/h2-console/**").
+			permitAll();
+		
 		// Configurações comuns de segurança de URL.
 		http.
-			authorizeRequests().
-				antMatchers("/").
-				permitAll().and().
-			authorizeRequests().
-				antMatchers("/h2-console/**").
-				permitAll().and().
-			authorizeRequests().
-				antMatchers("/api/cliente/**").
-				permitAll().anyRequest().authenticated().and().
-			authorizeRequests().
-				antMatchers("/api/endereco/**").
-				hasRole("ADMIN").anyRequest().authenticated();
+			authorizeRequests().antMatchers("/").permitAll().and().
+			authorizeRequests().antMatchers("/api/cliente/**").authenticated().and().
+			authorizeRequests().antMatchers("/api/endereco/**").hasRole("TESTE");
 		
 		// Específico para Form Login
 		http.
-		 formLogin().loginPage("/login").permitAll().and().
+		 formLogin().permitAll().and().
 		 logout().permitAll();
 		
 		// Específico para acesso ao H2-Console sem necessitar de autenticação.
