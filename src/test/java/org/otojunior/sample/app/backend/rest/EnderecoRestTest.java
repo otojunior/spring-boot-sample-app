@@ -4,18 +4,17 @@
 package org.otojunior.sample.app.backend.rest;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.fail;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.otojunior.sample.app.backend.entity.Endereco;
 import org.otojunior.sample.app.backend.entity.Uf;
 import org.otojunior.sample.app.backend.service.EnderecoService;
@@ -23,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -32,7 +30,7 @@ import org.springframework.test.web.servlet.MockMvc;
  *
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(EnderecoRest.class)
+@WebMvcTest(controllers=EnderecoRest.class, secure=false)
 public class EnderecoRestTest {
 	@MockBean
 	private EnderecoService enderecoService;
@@ -40,38 +38,29 @@ public class EnderecoRestTest {
 	@Autowired
 	private MockMvc mvc;
 	
-	
-
-	
 	/**
-	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findAll()}.
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findById(java.lang.Long)}.
 	 * @throws Exception 
 	 */
 	@Test
-	@WithMockUser(username="user", password="passwd")
-	public void testFindById() throws Exception {
-		Endereco endereco = new Endereco();
-		endereco.setAtivo(true);
-		endereco.setLogradouro("Rua Teste de Unidade");
-		endereco.setNumero("123A");
-		endereco.setBairro("Bairro Teste");
-		endereco.setCidade("Belo Horizonte");
-		endereco.setUf(Uf.MG);
-		endereco.setCep("31234567");
-		Optional<Endereco> opt = Optional.of(endereco);
+	public void testFindAllComRegistros() throws Exception {
+		given(enderecoService.findAll()).
+		willReturn(enderecos());
 		
-		BDDMockito.
-			given(enderecoService.findById(1L)).
-			willReturn(opt);
-		
-		mvc.perform(get("/api/endereco/1").accept(MediaType.APPLICATION_JSON_UTF8)).
+		mvc.perform(get("/api/endereco").accept(MediaType.APPLICATION_JSON_UTF8)).
 			andExpect(status().isOk()).
-			andExpect(jsonPath("$.logradouro", equalTo("Rua Teste de Unidade"))).
-			andExpect(jsonPath("$.numero", equalTo("123A"))).
-			andExpect(jsonPath("$.bairro", equalTo("Bairro Teste"))).
-			andExpect(jsonPath("$.cidade", equalTo("Belo Horizonte"))).
-			andExpect(jsonPath("$.uf", equalTo("MG"))).
-			andExpect(jsonPath("$.cep", equalTo("31234567")));
+			andExpect(jsonPath("$[0].logradouro", equalTo("Rua Teste de Unidade 1"))).
+			andExpect(jsonPath("$[0].numero", equalTo("1201"))).
+			andExpect(jsonPath("$[0].bairro", equalTo("Bairro Teste 1"))).
+			andExpect(jsonPath("$[0].cidade", equalTo("Belo Horizonte"))).
+			andExpect(jsonPath("$[0].uf", equalTo("MG"))).
+			andExpect(jsonPath("$[0].cep", equalTo("12345678"))).
+			andExpect(jsonPath("$[1].logradouro", equalTo("Rua Teste de Unidade 2"))).
+			andExpect(jsonPath("$[1].numero", equalTo("1202"))).
+			andExpect(jsonPath("$[1].bairro", equalTo("Bairro Teste 2"))).
+			andExpect(jsonPath("$[1].cidade", equalTo("Belo Horizonte"))).
+			andExpect(jsonPath("$[1].uf", equalTo("MG"))).
+			andExpect(jsonPath("$[1].cep", equalTo("22345678")));
 	}
 
 	/**
@@ -79,60 +68,61 @@ public class EnderecoRestTest {
 	 * @throws Exception 
 	 */
 	@Test
-	@WithMockUser(username="user", password="passwd")
-	public void testFindByCep() throws Exception {
-		Endereco endereco = new Endereco();
-		endereco.setAtivo(true);
-		endereco.setLogradouro("Rua Teste de Unidade");
-		endereco.setNumero("123A");
-		endereco.setBairro("Bairro Teste");
-		endereco.setCidade("Belo Horizonte");
-		endereco.setUf(Uf.MG);
-		endereco.setCep("31234567");
-		Optional<Endereco> opt = Optional.of(endereco);
+	public void testFindByCepEncontrado() throws Exception {
+		Optional<Endereco> opt = Optional.of(enderecos().get(0));
 		
-		BDDMockito.
-			given(enderecoService.findByCep("31234567")).
-			willReturn(opt);
+		given(enderecoService.findByCep("12345678")).
+		willReturn(opt);
 		
-		mvc.perform(get("/api/endereco?cep=31234567").accept(MediaType.APPLICATION_JSON_UTF8)).
+		mvc.perform(get("/api/endereco?cep=12345678").accept(MediaType.APPLICATION_JSON_UTF8)).
 			andExpect(status().isOk()).
-			andExpect(jsonPath("$.logradouro", equalTo("Rua Teste de Unidade"))).
-			andExpect(jsonPath("$.numero", equalTo("123A"))).
-			andExpect(jsonPath("$.bairro", equalTo("Bairro Teste"))).
+			andExpect(jsonPath("$.logradouro", equalTo("Rua Teste de Unidade 1"))).
+			andExpect(jsonPath("$.numero", equalTo("1201"))).
+			andExpect(jsonPath("$.bairro", equalTo("Bairro Teste 1"))).
 			andExpect(jsonPath("$.cidade", equalTo("Belo Horizonte"))).
 			andExpect(jsonPath("$.uf", equalTo("MG"))).
-			andExpect(jsonPath("$.cep", equalTo("31234567")));
+			andExpect(jsonPath("$.cep", equalTo("12345678")));
 	}
 
 	/**
-	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findById(java.lang.Long)}.
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findAll()}.
 	 * @throws Exception 
 	 */
 	@Test
-	@WithMockUser(username="user", password="passwd")
-	public void testFindAll() throws Exception {
-		Endereco endereco = new Endereco();
-		endereco.setAtivo(true);
-		endereco.setLogradouro("Rua Teste de Unidade");
-		endereco.setNumero("123A");
-		endereco.setBairro("Bairro Teste");
-		endereco.setCidade("Belo Horizonte");
-		endereco.setUf(Uf.MG);
-		endereco.setCep("31234567");
-		List<Endereco> lst = Collections.singletonList(endereco);
+	public void testFindById() throws Exception {
+		Optional<Endereco> opt = Optional.of(enderecos().get(1));
 		
-		BDDMockito.
-			given(enderecoService.findAll()).
-			willReturn(lst);
+		given(enderecoService.findById(2L)).
+		willReturn(opt);
 		
-		mvc.perform(get("/api/endereco").accept(MediaType.APPLICATION_JSON_UTF8)).
+		mvc.perform(get("/api/endereco/2").accept(MediaType.APPLICATION_JSON_UTF8)).
 			andExpect(status().isOk()).
-			andExpect(jsonPath("$[0].logradouro", equalTo("Rua Teste de Unidade"))).
-			andExpect(jsonPath("$[0].numero", equalTo("123A"))).
-			andExpect(jsonPath("$[0].bairro", equalTo("Bairro Teste"))).
-			andExpect(jsonPath("$[0].cidade", equalTo("Belo Horizonte"))).
-			andExpect(jsonPath("$[0].uf", equalTo("MG"))).
-			andExpect(jsonPath("$[0].cep", equalTo("31234567")));
+			andExpect(jsonPath("$.logradouro", equalTo("Rua Teste de Unidade 2"))).
+			andExpect(jsonPath("$.numero", equalTo("1202"))).
+			andExpect(jsonPath("$.bairro", equalTo("Bairro Teste 2"))).
+			andExpect(jsonPath("$.cidade", equalTo("Belo Horizonte"))).
+			andExpect(jsonPath("$.uf", equalTo("MG"))).
+			andExpect(jsonPath("$.cep", equalTo("22345678")));
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private List<Endereco> enderecos() {
+		final int N = 3; 
+		List<Endereco> enderecos = new ArrayList<>();
+		for (int i = 1; i <= N; i++) {
+			Endereco endereco = new Endereco();
+			endereco.setAtivo(i == N ? true : false);
+			endereco.setLogradouro("Rua Teste de Unidade " + i);
+			endereco.setNumero("120" + i);
+			endereco.setBairro("Bairro Teste " + i);
+			endereco.setCidade("Belo Horizonte");
+			endereco.setUf(Uf.MG);
+			endereco.setCep(i + "2345678");
+			enderecos.add(endereco);
+		}
+		return enderecos;
 	}
 }
