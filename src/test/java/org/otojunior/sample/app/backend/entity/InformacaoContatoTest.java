@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.otojunior.sample.app.entity;
+package org.otojunior.sample.app.backend.entity;
 
 import org.otojunior.sample.app.backend.entity.InformacaoContato;
 

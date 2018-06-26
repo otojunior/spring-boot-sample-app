@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.otojunior.sample.app.repository;
+package org.otojunior.sample.app.backend.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -12,11 +12,11 @@ import java.time.Month;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.otojunior.sample.app.backend.entity.Cliente;
+import org.otojunior.sample.app.backend.entity.ClienteTest;
 import org.otojunior.sample.app.backend.entity.Endereco;
 import org.otojunior.sample.app.backend.entity.InformacaoContato;
 import org.otojunior.sample.app.backend.entity.Uf;
 import org.otojunior.sample.app.backend.repository.ClienteRepository;
-import org.otojunior.sample.app.entity.ClienteTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
