@@ -31,7 +31,7 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers=EnderecoRest.class, secure=false)
 public class EnderecoRestTest {
-	private static List<Endereco> enderecos;
+	private static final List<Endereco> MOCK_ENDERECOS = new ArrayList<>();
 	
 	/**
 	 * 
@@ -39,7 +39,6 @@ public class EnderecoRestTest {
 	@BeforeClass
 	public static void beforeClass() {
 		final int N = 3; 
-		enderecos = new ArrayList<>();
 		for (int i = 1; i <= N; i++) {
 			Endereco endereco = new Endereco();
 			endereco.setAtivo(i == N ? true : false);
@@ -49,7 +48,7 @@ public class EnderecoRestTest {
 			endereco.setCidade("Belo Horizonte");
 			endereco.setUf(Uf.MG);
 			endereco.setCep(i + "2345678");
-			enderecos.add(endereco);
+			MOCK_ENDERECOS.add(endereco);
 		} 
 	}
 
@@ -67,7 +66,7 @@ public class EnderecoRestTest {
 	public void testFindAll() throws Exception {
 		BDDMockito.
 			given(enderecoService.findAll()).
-			willReturn(enderecos);
+			willReturn(MOCK_ENDERECOS);
 		
 		RestAssuredMockMvc.
 			given().mockMvc(mvc).
@@ -84,12 +83,12 @@ public class EnderecoRestTest {
 	}
 	
 	/**
-	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findAll()}.
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findByCep()}.
 	 * @throws Exception 
 	 */
 	@Test
 	public void testFindByCep() throws Exception {
-		Optional<Endereco> opt = Optional.of(enderecos.get(1));
+		Optional<Endereco> opt = Optional.of(MOCK_ENDERECOS.get(1));
 		
 		BDDMockito.
 			given(enderecoService.findByCep("22345678")).
@@ -110,12 +109,31 @@ public class EnderecoRestTest {
 	}
 	
 	/**
-	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findAll()}.
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findByCep()}.
+	 * @throws Exception 
+	 */
+	@Test
+	public void testFindByCepNaoEncontrado() throws Exception {
+		Optional<Endereco> opt = Optional.of(MOCK_ENDERECOS.get(1));
+		
+		BDDMockito.
+			given(enderecoService.findByCep("12345678")).
+			willReturn(opt);
+		
+		RestAssuredMockMvc.
+			given().mockMvc(mvc).
+			param("cep", "11111111").
+			when().get("/api/endereco").
+			then().statusCode(404);
+	}
+	
+	/**
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findById()}.
 	 * @throws Exception 
 	 */
 	@Test
 	public void testFindById() throws Exception {
-		Optional<Endereco> opt = Optional.of(enderecos.get(1));
+		Optional<Endereco> opt = Optional.of(MOCK_ENDERECOS.get(1));
 		
 		BDDMockito.
 			given(enderecoService.findById(2L)).
@@ -135,12 +153,12 @@ public class EnderecoRestTest {
 	}
 	
 	/**
-	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findAll()}.
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.EnderecoRest#findById()}.
 	 * @throws Exception 
 	 */
 	@Test
 	public void testFindByIdNaoEncontrado() throws Exception {
-		Optional<Endereco> opt = Optional.of(enderecos.get(1));
+		Optional<Endereco> opt = Optional.of(MOCK_ENDERECOS.get(1));
 		
 		BDDMockito.
 			given(enderecoService.findById(2L)).
