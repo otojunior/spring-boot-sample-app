@@ -3,8 +3,7 @@
  */
 package org.otojunior.sample.app.backend.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.entity.ItemTest;
 import org.otojunior.sample.app.backend.repository.ItemRepository;
@@ -115,5 +115,17 @@ public class ItemServiceTest {
 	@Test
 	public void testFindByNomeInexistente() {
 		assertFalse(service.findByNome("Chave de fenda").isPresent());
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testSave() {
+		Item item = new Item();
+		BDDMockito.
+			given(repository.save(Mockito.any(Item.class))).
+			willReturn(item);
+		assertNotNull(service.save(item));
 	}
 }
