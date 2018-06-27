@@ -33,7 +33,7 @@ public abstract class AbstractEntity implements Serializable {
 	 * 
 	 */
 	@Version
-	private Long version;
+	private Long versao;
 
 	/**
 	 * {@inheritDoc}
@@ -58,10 +58,10 @@ public abstract class AbstractEntity implements Serializable {
 	}
 
 	/**
-	 * @return the version
+	 * @return the versao
 	 */
-	public Long getVersion() {
-		return version;
+	public Long getVersao() {
+		return versao;
 	}
 
 	/**
@@ -83,10 +83,10 @@ public abstract class AbstractEntity implements Serializable {
 	}
 
 	/**
-	 * @param version the version to set
+	 * @param versao the versao to set
 	 */
-	public void setVersion(Long version) {
-		this.version = version;
+	public void setVersao(Long versao) {
+		this.versao = versao;
 	}
 
 	/**

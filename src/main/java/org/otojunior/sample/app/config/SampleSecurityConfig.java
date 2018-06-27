@@ -4,7 +4,6 @@
 package org.otojunior.sample.app.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,6 +25,8 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 		/*
 		 * Por enquanto, a segurança de autenticação ficará desabilitada.
 		 */
-		http.httpBasic().disable();
+		http.httpBasic().disable().
+			csrf().disable().
+			headers().frameOptions().disable();
 	}
 }
