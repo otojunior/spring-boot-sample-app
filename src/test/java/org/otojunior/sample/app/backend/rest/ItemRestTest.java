@@ -7,9 +7,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.fail;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -33,10 +31,12 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers=ItemRest.class, secure=false)
 public class ItemRestTest {
-	private final List<Item> MOCK_ITEMS = Arrays.asList(
-		ItemTest.of(100L, "Alicate"),
-		ItemTest.of(200L, "Martelo"),
-		ItemTest.of(300L, "Parafuso"));
+	private static final String[] NOMES = { "Alicate", "Martelo", "Parafuso" };
+	
+	private static final List<Item> MOCK_ITEMS = Arrays.asList(
+		ItemTest.of(100L, NOMES[0]),
+		ItemTest.of(200L, NOMES[1]),
+		ItemTest.of(300L, NOMES[2]));
 	
 	@MockBean
 	private ItemService service;
@@ -65,12 +65,12 @@ public class ItemRestTest {
 			given().mockMvc(mvc).
 			when().get("/api/item").
 			then().
-				statusCode(200).root("[0]").
-				body("codigo", equalTo("100")).body("nome", equalTo("Alicate")).
-				body("codigo", equalTo("200")).body("nome", equalTo("Martelo")).
-				body("codigo", equalTo("300")).body("nome", equalTo("Parafuso"));
+				statusCode(200).
+				body("[0].codigo", equalTo(100)).body("[0].nome", equalTo(NOMES[0])).
+				body("[1].codigo", equalTo(200)).body("[1].nome", equalTo(NOMES[1])).
+				body("[2].codigo", equalTo(300)).body("[2].nome", equalTo(NOMES[2]));
 	}
-
+	
 	/**
 	 * Test method for {@link org.otojunior.sample.app.backend.rest.ItemRest#findByCodigo(java.lang.Long)}.
 	 */
@@ -80,20 +80,16 @@ public class ItemRestTest {
 		BDDMockito.given(service.findByCodigo(200L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
 		BDDMockito.given(service.findByCodigo(300L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
-		Map<Long, String> nomes = new LinkedHashMap<>(3);
-		nomes.put(MOCK_ITEMS.get(0).getCodigo(), MOCK_ITEMS.get(0).getNome());
-		nomes.put(MOCK_ITEMS.get(1).getCodigo(), MOCK_ITEMS.get(1).getNome());
-		nomes.put(MOCK_ITEMS.get(2).getCodigo(), MOCK_ITEMS.get(2).getNome());
-		
-		for (long i = 100; i <= 300; i += 100) {
+		for (int i = 100; i <= 300 ; i+= 100) {
 			RestAssuredMockMvc.
 				given().mockMvc(mvc).
 				param("codigo", i).
 				when().get("/api/item").
 				then().
 					statusCode(200).
-					body("codigo", equalTo(i)).
-					body("nome", equalTo(nomes.get(i)));	
+					body(
+						"codigo", equalTo(i), 
+						"nome", equalTo(NOMES[i/100-1]));
 		}
 	}
 
@@ -106,19 +102,13 @@ public class ItemRestTest {
 		BDDMockito.given(service.findById(2L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
 		BDDMockito.given(service.findById(3L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
-		Map<Long, String> nomes = new LinkedHashMap<>(3);
-		nomes.put(1L, MOCK_ITEMS.get(0).getNome());
-		nomes.put(2L, MOCK_ITEMS.get(1).getNome());
-		nomes.put(3L, MOCK_ITEMS.get(2).getNome());
-		
-		for (long i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 3; i++) {
 			RestAssuredMockMvc.
 				given().mockMvc(mvc).
 				when().get("/api/item/" + i).
 				then().
 					statusCode(200).
-					body("codigo", equalTo(i * 100)).
-					body("nome", equalTo(nomes.get(i)));	
+					body("codigo", equalTo(i * 100), "nome", equalTo(NOMES[i-1]));
 		}
 	}
 
@@ -131,37 +121,15 @@ public class ItemRestTest {
 		BDDMockito.given(service.findByNome("Martelo")).willReturn(Optional.of(MOCK_ITEMS.get(1)));
 		BDDMockito.given(service.findByNome("Parafuso")).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
-		Map<Long, String> nomes = new LinkedHashMap<>(3);
-		nomes.put(MOCK_ITEMS.get(0).getCodigo(), MOCK_ITEMS.get(0).getNome());
-		nomes.put(MOCK_ITEMS.get(1).getCodigo(), MOCK_ITEMS.get(1).getNome());
-		nomes.put(MOCK_ITEMS.get(2).getCodigo(), MOCK_ITEMS.get(2).getNome());
-		
-		RestAssuredMockMvc.
+		for (int i = 1; i <= 3; i++) {
+			RestAssuredMockMvc.
 			given().mockMvc(mvc).
-			param("nome", "Alicate").
+			param("nome", NOMES[i-1]).
 			when().get("/api/item").
 			then().
 				statusCode(200).
-				body("codigo", equalTo(100L)).
-				body("nome", equalTo(nomes.get(0)));
-		
-		RestAssuredMockMvc.
-			given().mockMvc(mvc).
-			param("nome", "Martelo").
-			when().get("/api/item").
-			then().
-				statusCode(200).
-				body("codigo", equalTo(200L)).
-				body("nome", equalTo(nomes.get(1)));
-		
-		RestAssuredMockMvc.
-			given().mockMvc(mvc).
-			param("nome", "Parafuso").
-			when().get("/api/item").
-			then().
-				statusCode(200).
-				body("codigo", equalTo(300L)).
-				body("nome", equalTo(nomes.get(2)));
+				body("codigo", equalTo(i*100), "nome", equalTo(NOMES[i-1]));
+		}
 	}
 
 	/**
@@ -171,5 +139,4 @@ public class ItemRestTest {
 	public void testSave() {
 		fail("Not yet implemented");
 	}
-
 }
