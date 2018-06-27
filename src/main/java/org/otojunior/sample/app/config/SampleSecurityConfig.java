@@ -23,9 +23,9 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().
-			antMatchers(HttpMethod.GET, "/api/cliente/**").permitAll().
-			antMatchers(HttpMethod.POST, "/api/cliente/**").authenticated().
-			antMatchers(HttpMethod.DELETE, "/api/cliente/**").hasRole("ADMIN");
+		/*
+		 * Por enquanto, a segurança de autenticação ficará desabilitada.
+		 */
+		http.httpBasic().disable();
 	}
 }
