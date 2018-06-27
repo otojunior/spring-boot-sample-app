@@ -3,7 +3,8 @@
  */
 package org.otojunior.sample.app.backend.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.Arrays;
 import java.util.List;
