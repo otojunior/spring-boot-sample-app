@@ -76,20 +76,6 @@ public abstract class AbstractEntity implements Serializable {
 	}
 
 	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @param versao the versao to set
-	 */
-	public void setVersao(Long versao) {
-		this.versao = versao;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
