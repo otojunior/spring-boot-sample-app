@@ -5,6 +5,8 @@ package org.otojunior.sample.app.backend.entity;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 
 /**
@@ -22,7 +24,7 @@ public class ItemTest {
 		Item item = new Item();
 		item.setCodigo(codigo);
 		item.setNome(nome);
-		item.setPreco(Math.random());
+		item.setPreco(BigDecimal.valueOf(Math.random()));
 		return item;
 	}
 	
@@ -32,7 +34,7 @@ public class ItemTest {
 	@Test
 	public void testAccessors() {
 		Item item = of(100L, "Teste");
-		item.setPreco(1.25);
+		item.setPreco(BigDecimal.valueOf(1.25));
 		assertEquals(100L, item.getCodigo().longValue());
 		assertEquals("Teste", item.getNome());
 		assertEquals(1.25, item.getPreco().doubleValue(), 0);

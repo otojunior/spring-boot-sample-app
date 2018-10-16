@@ -11,13 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
  *
  */
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded=true)
+@ToString
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,6 +29,7 @@ public abstract class AbstractEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -34,52 +39,4 @@ public abstract class AbstractEntity implements Serializable {
 	 */
 	@Version
 	private Long versao;
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
-		AbstractEntity other = (AbstractEntity) obj;
-		if (id == null) {
-			if (other.id != null) return false;
-		} else if (!id.equals(other.id)) return false;
-		return true;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @return the versao
-	 */
-	public Long getVersao() {
-		return versao;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
 }

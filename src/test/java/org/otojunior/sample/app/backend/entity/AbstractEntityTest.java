@@ -128,7 +128,7 @@ public class AbstractEntityTest {
 	public void testHashCode() throws Exception {
 		AbstractEntity entity = new TestEntity();
 		setPrivate(entity, "id", Long.valueOf(1L));
-		assertEquals(32, entity.hashCode());
+		assertEquals(60, entity.hashCode());
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class AbstractEntityTest {
 	 */
 	@Test
 	public void testHashCodeNull() throws Exception {
-		assertEquals(31, new TestEntity().hashCode());
+		assertEquals(102, new TestEntity().hashCode());
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class AbstractEntityTest {
 		AbstractEntity entity = new TestEntity();
 		setPrivate(entity, "id", Long.valueOf(1L));
 		setPrivate(entity, "versao", Long.valueOf(2L));
-		assertEquals("AbstractEntityTest.TestEntity[id=1,versao=2]", entity.toString());
+		assertEquals("AbstractEntity(id=1, versao=2)", entity.toString());
 	}
 	
 

@@ -3,14 +3,23 @@
  */
 package org.otojunior.sample.app.backend.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
  *
  */
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded=true, callSuper=true)
+@ToString(callSuper=true)
 @Entity
 public class Item extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
@@ -24,48 +33,6 @@ public class Item extends AbstractEntity {
 	private String nome;
 	
 	@NotNull
-	@Column(nullable=false, precision=2)
-	private Double preco;
-
-	/**
-	 * @return the codigo
-	 */
-	public Long getCodigo() {
-		return codigo;
-	}
-
-	/**
-	 * @param codigo the codigo to set
-	 */
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
-	}
-
-	/**
-	 * @return the nome
-	 */
-	public String getNome() {
-		return nome;
-	}
-
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	/**
-	 * @return the preco
-	 */
-	public Double getPreco() {
-		return preco;
-	}
-
-	/**
-	 * @param preco the preco to set
-	 */
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
+	@Column(nullable=false, precision=15, scale=2)
+	private BigDecimal preco;
 }
