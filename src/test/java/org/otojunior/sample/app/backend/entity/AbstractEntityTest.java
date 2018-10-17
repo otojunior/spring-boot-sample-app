@@ -150,7 +150,7 @@ public class AbstractEntityTest {
 		AbstractEntity entity = new TestEntity();
 		setPrivate(entity, "id", Long.valueOf(1L));
 		setPrivate(entity, "versao", Long.valueOf(2L));
-		assertEquals("AbstractEntity(id=1, versao=2)", entity.toString());
+		assertEquals("AbstractEntityTest.TestEntity[id=1,versao=2]", entity.toString());
 	}
 	
 

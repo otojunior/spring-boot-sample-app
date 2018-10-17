@@ -9,17 +9,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
  *
  */
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded=true, callSuper=true)
-@ToString(callSuper=true)
+@Getter
+@Setter
 @Entity
 public class Item extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
