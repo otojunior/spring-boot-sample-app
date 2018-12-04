@@ -7,8 +7,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.Field;
-
 import org.junit.Test;
 
 /**
@@ -30,8 +28,8 @@ public class AbstractEntityTest {
 	public void testEquals() throws Exception {
 		AbstractEntity entity1 = new TestEntity();
 		AbstractEntity entity2 = new TestEntity();
-		setPrivate(entity1, "id", Long.valueOf(1L));
-		setPrivate(entity2, "id", Long.valueOf(1L));
+		entity1.setId(Long.valueOf(1L));
+		entity2.setId(Long.valueOf(1L));
 		assertTrue(entity1.equals(entity2));
 	}
 	
@@ -46,7 +44,7 @@ public class AbstractEntityTest {
 	public void testEquals2() throws Exception {
 		AbstractEntity entity1 = new TestEntity();
 		AbstractEntity entity2 = new TestEntity();
-		setPrivate(entity2, "id", Long.valueOf(1L));
+		entity2.setId(Long.valueOf(1L));
 		assertFalse(entity1.equals(entity2));
 	}
 	
@@ -75,8 +73,8 @@ public class AbstractEntityTest {
 	public void testEquals4() throws Exception {
 		AbstractEntity entity1 = new TestEntity();
 		AbstractEntity entity2 = new TestEntity();
-		setPrivate(entity1, "id", 1L);
-		setPrivate(entity2, "id", 2L);
+		entity1.setId(Long.valueOf(1L));
+		entity2.setId(Long.valueOf(2L));
 		assertFalse(entity1.equals(entity2));
 	}
 	
@@ -113,8 +111,8 @@ public class AbstractEntityTest {
 	@Test
 	public void testGetValues() throws Exception {
 		AbstractEntity entity = new TestEntity();
-		setPrivate(entity, "id", Long.valueOf(1L));
-		setPrivate(entity, "versao", Long.valueOf(2L));
+		entity.setId(Long.valueOf(1L));
+		entity.setVersao(Long.valueOf(2L));
 		assertEquals(1L, entity.getId().longValue());
 		assertEquals(2L, entity.getVersao().longValue());
 	}
@@ -127,7 +125,7 @@ public class AbstractEntityTest {
 	@Test
 	public void testHashCode() throws Exception {
 		AbstractEntity entity = new TestEntity();
-		setPrivate(entity, "id", Long.valueOf(1L));
+		entity.setId(Long.valueOf(1L));
 		assertEquals(60, entity.hashCode());
 	}
 	
@@ -148,22 +146,8 @@ public class AbstractEntityTest {
 	@Test
 	public void testString() throws Exception {
 		AbstractEntity entity = new TestEntity();
-		setPrivate(entity, "id", Long.valueOf(1L));
-		setPrivate(entity, "versao", Long.valueOf(2L));
+		entity.setId(Long.valueOf(1L));
+		entity.setVersao(Long.valueOf(2L));
 		assertEquals("AbstractEntityTest.TestEntity[id=1,versao=2]", entity.toString());
-	}
-	
-
-	/**
-	 * 
-	 * @param object
-	 * @param fieldName
-	 * @param value
-	 * @throws Exception
-	 */
-	private void setPrivate(AbstractEntity object, String fieldName, Object value) throws Exception {
-		Field field = object.getClass().getSuperclass().getDeclaredField(fieldName);
-		field.setAccessible(true);
-		field.set(object, value);
 	}
 }

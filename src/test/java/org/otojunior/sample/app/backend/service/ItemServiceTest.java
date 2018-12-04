@@ -4,6 +4,9 @@
 package org.otojunior.sample.app.backend.service;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +16,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.entity.ItemTest;
@@ -43,11 +45,20 @@ public class ItemServiceTest {
 		ItemTest.of(300L, "Parafuso"));
 
 	/**
+	 * Test method for {@link org.otojunior.sample.app.backend.service.ItemService#deleteById()}.
+	 */
+	@Test
+	public void testDeleteById() {
+		doNothing().when(repository).deleteById(anyLong());
+		service.deleteById(2L);
+	}
+	
+	/**
 	 * Test method for {@link org.otojunior.sample.app.backend.service.ItemService#findAll()}.
 	 */
 	@Test
 	public void testFindAll() {
-		BDDMockito.given(repository.findAll()).willReturn(MOCK_ITEMS);
+		given(repository.findAll()).willReturn(MOCK_ITEMS);
 		assertEquals(3, service.findAll().size());
 	}
 
@@ -56,9 +67,9 @@ public class ItemServiceTest {
 	 */
 	@Test
 	public void testFindByCodigo() {
-		BDDMockito.given(repository.findByCodigo(100L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
-		BDDMockito.given(repository.findByCodigo(200L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
-		BDDMockito.given(repository.findByCodigo(300L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		given(repository.findByCodigo(100L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(repository.findByCodigo(200L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(repository.findByCodigo(300L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
 		assertEquals("Alicate", service.findByCodigo(100L).get().getNome());
 		assertEquals("Martelo", service.findByCodigo(200L).get().getNome());
@@ -78,9 +89,9 @@ public class ItemServiceTest {
 	 */
 	@Test
 	public void testFindById() {
-		BDDMockito.given(repository.findById(1L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
-		BDDMockito.given(repository.findById(2L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
-		BDDMockito.given(repository.findById(3L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		given(repository.findById(1L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(repository.findById(2L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(repository.findById(3L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
 		assertEquals("Alicate", service.findById(1L).get().getNome());
 		assertEquals("Martelo", service.findById(2L).get().getNome());
@@ -100,9 +111,9 @@ public class ItemServiceTest {
 	 */
 	@Test
 	public void testFindByNome() {
-		BDDMockito.given(repository.findByNome("Alicate")).willReturn(Optional.of(MOCK_ITEMS.get(0)));
-		BDDMockito.given(repository.findByNome("Martelo")).willReturn(Optional.of(MOCK_ITEMS.get(1)));
-		BDDMockito.given(repository.findByNome("Parafuso")).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		given(repository.findByNome("Alicate")).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(repository.findByNome("Martelo")).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(repository.findByNome("Parafuso")).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
 		assertEquals(Long.valueOf(100L), service.findByNome("Alicate").get().getCodigo());
 		assertEquals(Long.valueOf(200L), service.findByNome("Martelo").get().getCodigo());
@@ -123,7 +134,7 @@ public class ItemServiceTest {
 	@Test
 	public void testSave() {
 		Item item = new Item();
-		BDDMockito.
+		
 			given(repository.save(Mockito.any(Item.class))).
 			willReturn(item);
 		assertNotNull(service.save(item));

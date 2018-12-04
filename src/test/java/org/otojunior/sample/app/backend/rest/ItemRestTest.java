@@ -4,16 +4,18 @@
 package org.otojunior.sample.app.backend.rest;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.entity.ItemTest;
 import org.otojunior.sample.app.backend.service.ItemService;
@@ -49,9 +51,13 @@ public class ItemRestTest {
 	 * Test method for {@link org.otojunior.sample.app.backend.rest.ItemRest#deleteById(java.lang.Long)}.
 	 */
 	@Test
-	@Ignore
 	public void testDeleteById() {
-		fail("Not yet implemented");
+		doNothing().when(service).deleteById(anyLong());
+		
+		RestAssuredMockMvc.
+			given().mockMvc(mvc).
+			when().delete("/api/item/1").
+			then().statusCode(200);
 	}
 
 	/**
@@ -59,9 +65,7 @@ public class ItemRestTest {
 	 */
 	@Test
 	public void testFindAll() {
-		BDDMockito.
-			given(service.findAll()).
-			willReturn(MOCK_ITEMS);
+		given(service.findAll()).willReturn(MOCK_ITEMS);
 		
 		RestAssuredMockMvc.
 			given().mockMvc(mvc).
@@ -78,9 +82,9 @@ public class ItemRestTest {
 	 */
 	@Test
 	public void testFindByCodigo() {
-		BDDMockito.given(service.findByCodigo(100L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
-		BDDMockito.given(service.findByCodigo(200L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
-		BDDMockito.given(service.findByCodigo(300L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		given(service.findByCodigo(100L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(service.findByCodigo(200L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(service.findByCodigo(300L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
 		for (int i = 100; i <= 300 ; i+= 100) {
 			RestAssuredMockMvc.
@@ -100,9 +104,9 @@ public class ItemRestTest {
 	 */
 	@Test
 	public void testFindById() {
-		BDDMockito.given(service.findById(1L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
-		BDDMockito.given(service.findById(2L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
-		BDDMockito.given(service.findById(3L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		given(service.findById(1L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(service.findById(2L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(service.findById(3L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
 		for (int i = 1; i <= 3; i++) {
 			RestAssuredMockMvc.
@@ -119,9 +123,9 @@ public class ItemRestTest {
 	 */
 	@Test
 	public void testFindByNome() {
-		BDDMockito.given(service.findByNome("Alicate")).willReturn(Optional.of(MOCK_ITEMS.get(0)));
-		BDDMockito.given(service.findByNome("Martelo")).willReturn(Optional.of(MOCK_ITEMS.get(1)));
-		BDDMockito.given(service.findByNome("Parafuso")).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		given(service.findByNome("Alicate")).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(service.findByNome("Martelo")).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(service.findByNome("Parafuso")).willReturn(Optional.of(MOCK_ITEMS.get(2)));
 		
 		for (int i = 1; i <= 3; i++) {
 			RestAssuredMockMvc.
@@ -138,8 +142,12 @@ public class ItemRestTest {
 	 * Test method for {@link org.otojunior.sample.app.backend.rest.ItemRest#save(org.otojunior.sample.app.backend.entity.Item)}.
 	 */
 	@Test
-	@Ignore
 	public void testSave() {
-		fail("Not yet implemented");
+		doReturn(new Item()).when(service).save(any(Item.class));
+		
+		RestAssuredMockMvc.
+			given().mockMvc(mvc).
+			when().post("/api/item").
+			then().statusCode(200);
 	}
 }
