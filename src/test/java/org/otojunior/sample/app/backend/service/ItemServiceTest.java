@@ -3,7 +3,10 @@
  */
 package org.otojunior.sample.app.backend.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
@@ -16,7 +19,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.Mockito;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.entity.ItemTest;
 import org.otojunior.sample.app.backend.repository.ItemRepository;
@@ -134,9 +136,7 @@ public class ItemServiceTest {
 	@Test
 	public void testSave() {
 		Item item = new Item();
-		
-			given(repository.save(Mockito.any(Item.class))).
-			willReturn(item);
+		given(repository.saveAndFlush(any(Item.class))).willReturn(item);
 		assertNotNull(service.save(item));
 	}
 }

@@ -154,9 +154,9 @@ public class ItemRestTest {
 		jsonAsMap.put("preco", 1.25);
 		
 		RestAssuredMockMvc.
-			given().log().all().mockMvc(mvc).
+			given().mockMvc(mvc).
 			contentType(ContentType.JSON).body(jsonAsMap).
 			when().post("/api/item").
-			then().log().all().statusCode(200);
+			then().statusCode(200);
 	}
 }
