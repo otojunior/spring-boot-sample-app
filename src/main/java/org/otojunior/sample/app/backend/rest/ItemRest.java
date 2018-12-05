@@ -8,8 +8,6 @@ import java.util.List;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.exception.HttpNotFoundException;
 import org.otojunior.sample.app.backend.service.ItemService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -22,15 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author otojunior
  *
  */
+@Slf4j
 @RestController
 @RequestMapping("/${sample.app.rest.rootpath}/item")
 public class ItemRest {
-	private static final Logger LOG = LoggerFactory.getLogger(ItemRest.class);
-	
 	@Autowired
 	private ItemService service;
 	
@@ -42,8 +41,8 @@ public class ItemRest {
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		service.deleteById(id);
 		
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Item excluído: {}", id);
+		if (log.isDebugEnabled()) {
+			log.debug("Item excluído: {}", id);
 		}
 		
 		return ResponseEntity.ok("Item excluído: " + id);
@@ -58,8 +57,8 @@ public class ItemRest {
 	public ResponseEntity<List<Item>> findAll() {
 		List<Item> items = service.findAll();
 		
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Itens encontrados: {}", items.size());
+		if (log.isDebugEnabled()) {
+			log.debug("Itens encontrados: {}", items.size());
 		}
 		
 		return (CollectionUtils.isEmpty(items)) ?
@@ -78,8 +77,8 @@ public class ItemRest {
 			findByCodigo(codigo).
 			orElseThrow(() -> new HttpNotFoundException("Item não encontrado. Código=" + codigo));
 		
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Item encontrado. Código={}: {}", codigo, item);
+		if (log.isDebugEnabled()) {
+			log.debug("Item encontrado. Código={}: {}", codigo, item);
 		}
 		
 		return ResponseEntity.ok(item);
@@ -96,8 +95,8 @@ public class ItemRest {
 			findById(id).
 			orElseThrow(() -> new HttpNotFoundException("Item não encontrado. ID=" + id));
 			
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Item encontrado. ID={}: {}", id, item);
+		if (log.isDebugEnabled()) {
+			log.debug("Item encontrado. ID={}: {}", id, item);
 		}
 
 		return ResponseEntity.ok(item);
@@ -114,8 +113,8 @@ public class ItemRest {
 			findByNome(nome).
 			orElseThrow(() -> new HttpNotFoundException("Item não encontrado. Nome=" + nome));
 			
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Item encontrado. Nome={}: {}", nome, item);
+		if (log.isDebugEnabled()) {
+			log.debug("Item encontrado. Nome={}: {}", nome, item);
 		}
 			
 		return ResponseEntity.ok(item);
@@ -129,8 +128,8 @@ public class ItemRest {
 	public ResponseEntity<Item> save(@RequestBody Item item) {
 		Item salvo = service.save(item);
 		
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("save: {}", salvo);
+		if (log.isDebugEnabled()) {
+			log.debug("save: {}", salvo);
 		}
 
 		return ResponseEntity.ok(salvo);

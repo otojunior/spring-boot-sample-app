@@ -126,7 +126,7 @@ public class AbstractEntityTest {
 	public void testHashCode() throws Exception {
 		AbstractEntity entity = new TestEntity();
 		entity.setId(Long.valueOf(1L));
-		assertEquals(60, entity.hashCode());
+		assertEquals(32, entity.hashCode());
 	}
 	
 	/**
@@ -136,7 +136,7 @@ public class AbstractEntityTest {
 	 */
 	@Test
 	public void testHashCodeNull() throws Exception {
-		assertEquals(102, new TestEntity().hashCode());
+		assertEquals(31, new TestEntity().hashCode());
 	}
 	
 	/**

@@ -11,19 +11,24 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.entity.ItemTest;
+import org.otojunior.sample.app.backend.exception.HttpNotFoundException;
 import org.otojunior.sample.app.backend.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,8 +39,10 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers=ItemRest.class, secure=false)
+@WebMvcTest(controllers=ItemRest.class, secure=false, properties= {
+	"logging.level.org.otojunior.sample.app.backend.rest=DEBUG"})
 public class ItemRestTest {
 	private static final String[] NOMES = { "Alicate", "Martelo", "Parafuso" };
 	
@@ -60,7 +67,7 @@ public class ItemRestTest {
 		RestAssuredMockMvc.
 			given().mockMvc(mvc).
 			when().delete("/api/item/1").
-			then().statusCode(200);
+			then().statusCode(HttpStatus.OK.value());
 	}
 
 	/**
@@ -74,10 +81,23 @@ public class ItemRestTest {
 			given().mockMvc(mvc).
 			when().get("/api/item").
 			then().
-				statusCode(200).
+				statusCode(HttpStatus.OK.value()).
 				body("[0].codigo", equalTo(100)).body("[0].nome", equalTo(NOMES[0])).
 				body("[1].codigo", equalTo(200)).body("[1].nome", equalTo(NOMES[1])).
 				body("[2].codigo", equalTo(300)).body("[2].nome", equalTo(NOMES[2]));
+	}
+	
+	/**
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.ItemRest#findAll()}.
+	 */
+	@Test
+	public void testFindAllNoContent() {
+		given(service.findAll()).willReturn(Collections.emptyList());
+		
+		RestAssuredMockMvc.
+			given().mockMvc(mvc).
+			when().get("/api/item").
+			then().statusCode(HttpStatus.NO_CONTENT.value());
 	}
 	
 	/**
@@ -95,11 +115,27 @@ public class ItemRestTest {
 				param("codigo", i).
 				when().get("/api/item").
 				then().
-					statusCode(200).
+					statusCode(HttpStatus.OK.value()).
 					body(
 						"codigo", equalTo(i), 
 						"nome", equalTo(NOMES[i/100-1]));
 		}
+	}
+	
+	/**
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.ItemRest#findByCodigo(java.lang.Long)}.
+	 */
+	@Test
+	public void testFindByCodigoNaoExistente() {
+		given(service.findByCodigo(100L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(service.findByCodigo(200L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(service.findByCodigo(300L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		
+		RestAssuredMockMvc.
+			given().mockMvc(mvc).
+			param("codigo", 999).
+			when().get("/api/item").
+			then().statusCode(HttpStatus.NOT_FOUND.value());
 	}
 
 	/**
@@ -116,9 +152,24 @@ public class ItemRestTest {
 				given().mockMvc(mvc).
 				when().get("/api/item/" + i).
 				then().
-					statusCode(200).
+					statusCode(HttpStatus.OK.value()).
 					body("codigo", equalTo(i * 100), "nome", equalTo(NOMES[i-1]));
 		}
+	}
+	
+	/**
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.ItemRest#findById(java.lang.Long)}.
+	 */
+	@Test
+	public void testFindByIdNaoExistente() {
+		given(service.findById(1L)).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(service.findById(2L)).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(service.findById(3L)).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		
+		RestAssuredMockMvc.
+			given().mockMvc(mvc).
+			when().get("/api/item/999").
+			then().statusCode(HttpStatus.NOT_FOUND.value());
 	}
 
 	/**
@@ -132,13 +183,29 @@ public class ItemRestTest {
 		
 		for (int i = 1; i <= 3; i++) {
 			RestAssuredMockMvc.
-			given().mockMvc(mvc).
-			param("nome", NOMES[i-1]).
-			when().get("/api/item").
-			then().
-				statusCode(200).
-				body("codigo", equalTo(i*100), "nome", equalTo(NOMES[i-1]));
+				given().mockMvc(mvc).
+				param("nome", NOMES[i-1]).
+				when().get("/api/item").
+				then().
+					statusCode(HttpStatus.OK.value()).
+					body("codigo", equalTo(i*100), "nome", equalTo(NOMES[i-1]));
 		}
+	}
+	
+	/**
+	 * Test method for {@link org.otojunior.sample.app.backend.rest.ItemRest#findByNome(java.lang.String)}.
+	 */
+	@Test
+	public void testFindByNomeNaoExistente() {
+		given(service.findByNome("Alicate")).willReturn(Optional.of(MOCK_ITEMS.get(0)));
+		given(service.findByNome("Martelo")).willReturn(Optional.of(MOCK_ITEMS.get(1)));
+		given(service.findByNome("Parafuso")).willReturn(Optional.of(MOCK_ITEMS.get(2)));
+		
+		RestAssuredMockMvc.
+			given().mockMvc(mvc).
+			param("nome", "xxxyyyzzz").
+			when().get("/api/item").
+			then().statusCode(HttpStatus.NOT_FOUND.value());
 	}
 
 	/**
@@ -157,6 +224,6 @@ public class ItemRestTest {
 			given().mockMvc(mvc).
 			contentType(ContentType.JSON).body(jsonAsMap).
 			when().post("/api/item").
-			then().statusCode(200);
+			then().statusCode(HttpStatus.OK.value());
 	}
 }
