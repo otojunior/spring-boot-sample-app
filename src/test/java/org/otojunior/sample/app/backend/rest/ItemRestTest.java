@@ -11,7 +11,9 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -25,6 +27,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 
 /**
@@ -145,9 +148,15 @@ public class ItemRestTest {
 	public void testSave() {
 		doReturn(new Item()).when(service).save(any(Item.class));
 		
+		Map<String, Object>  jsonAsMap = new LinkedHashMap<>();
+		jsonAsMap.put("codigo", 1000);
+		jsonAsMap.put("nome", "Teste");
+		jsonAsMap.put("preco", 1.25);
+		
 		RestAssuredMockMvc.
-			given().mockMvc(mvc).
+			given().log().all().mockMvc(mvc).
+			contentType(ContentType.JSON).body(jsonAsMap).
 			when().post("/api/item").
-			then().statusCode(200);
+			then().log().all().statusCode(200);
 	}
 }

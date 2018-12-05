@@ -71,6 +71,6 @@ public class ItemService {
 	 * @return
 	 */
 	public Item save(Item item) {
-		return repository.save(item);
+		return repository.saveAndFlush(item);
 	}
 }
