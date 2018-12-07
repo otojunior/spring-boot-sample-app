@@ -3,8 +3,6 @@
  */
 package org.otojunior.sample.app;
 
-import static org.junit.Assert.*;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
