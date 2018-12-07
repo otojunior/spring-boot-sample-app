@@ -23,7 +23,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.entity.ItemTest;
-import org.otojunior.sample.app.backend.exception.HttpNotFoundException;
 import org.otojunior.sample.app.backend.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

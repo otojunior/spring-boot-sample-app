@@ -1,0 +1,42 @@
+/**
+ * 
+ */
+package org.otojunior.sample.app.backend.entity;
+
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.validation.constraints.NotNull;
+
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ *
+ */
+@Getter
+@Setter
+@Entity
+public class Arquivo extends AbstractEntity {
+	private static final long serialVersionUID = 1L;
+
+	@NotNull
+	@Column(nullable=false, unique=true)
+	private Long codigo;
+	
+	@NotNull
+	@Column(nullable=false, length=20)
+	private String nome;
+
+	@NotNull
+	@Column(nullable=false)
+	private Long tamanho;
+	
+	@Lob
+	@NotNull
+	@Column(nullable=false)
+	private byte[] conteudo;
+}
