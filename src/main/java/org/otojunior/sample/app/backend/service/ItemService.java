@@ -72,6 +72,6 @@ public class ItemService {
 	 */
 	@Transactional
 	public Item save(Item item) {
-		return repository.save(item);
+		return repository.saveAndFlush(item);
 	}
 }

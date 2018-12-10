@@ -52,6 +52,11 @@ public class ItemController {
 		}
 		
 		Optional<Item> item = service.findById(id);
+		
+		if (log.isTraceEnabled()) {
+			log.trace("ItemController.editar({}) carregado", item.get());
+		}
+		
 		model.addAttribute("item", item.get());
 		return "item_edit";
 	}
@@ -92,13 +97,17 @@ public class ItemController {
 	 * @return
 	 */
 	@PostMapping
-	
 	public String salvar(@Valid Item item) {
 		if (log.isTraceEnabled()) {
-			log.trace("ItemController.salvar() chamado");
+			log.trace("ItemController.salvar({}) chamado", item);
 		}
 		
-		service.save(item);
+		Item salvo = service.save(item);
+		
+		if (log.isTraceEnabled()) {
+			log.trace("ItemController.salvar({}) salvo", salvo);
+		}
+		
 		return "redirect:/";
 	}
 }
