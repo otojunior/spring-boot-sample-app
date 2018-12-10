@@ -48,7 +48,7 @@ public class ArquivoRestTest {
 		
 		RestAssuredMockMvc.
 			given().mockMvc(mvc).
-			multiPart(new File("/tmp/arquivo_teste.txt")).
+			multiPart(new File("ArquivoRestTest_testSave.txt")).
 			contentType(ContentType.BINARY).
 			when().post("/api/arquivo/100").
 			then().statusCode(HttpStatus.OK.value());

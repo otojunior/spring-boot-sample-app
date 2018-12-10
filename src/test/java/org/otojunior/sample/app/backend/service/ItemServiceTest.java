@@ -136,7 +136,7 @@ public class ItemServiceTest {
 	@Test
 	public void testSave() {
 		Item item = new Item();
-		given(repository.saveAndFlush(any(Item.class))).willReturn(item);
+		given(repository.save(any(Item.class))).willReturn(item);
 		assertNotNull(service.save(item));
 	}
 }

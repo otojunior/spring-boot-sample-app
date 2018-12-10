@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Service
-@Transactional(readOnly=true)
 public class ItemService {
 	@Autowired
 	private ItemRepository repository;
@@ -61,6 +60,7 @@ public class ItemService {
 	 * 
 	 * @param id
 	 */
+	@Transactional
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
@@ -70,7 +70,8 @@ public class ItemService {
 	 * @param item
 	 * @return
 	 */
+	@Transactional
 	public Item save(Item item) {
-		return repository.saveAndFlush(item);
+		return repository.save(item);
 	}
 }
