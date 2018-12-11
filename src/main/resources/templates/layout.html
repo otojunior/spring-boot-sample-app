@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (corpo)">
+<head> 
+    <title>Getting Started: Serving Web Content</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+	<style>
+		.w3-tangerine { font-family: "Tangerine", serif; }
+		.w3-lobster { font-family: "Lobster", serif; }
+	</style>
+</head>
+<body>
+	<div class="w3-container w3-black w3-topbar w3-border-green w3-lobster">
+    	<div class="w3-xxlarge">SpringBoot Application Sample</div>
+  	</div>
+	
+    <div class="w3-panel">
+        <th:block th:include="${corpo}"/>
+    </div>
+    
+	<div class="w3-panel w3-black w3-center">Footer</div>
+</body>
+</html>
