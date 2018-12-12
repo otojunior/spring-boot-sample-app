@@ -9,7 +9,6 @@
 <body>
 	<div class="w3-panel">
 		<form method="POST" th:action="@{/item/salvar}" th:object="${item}">
-			
 			<input type="hidden" th:field="*{id}"/>
 			<input type="hidden" th:field="*{versao}"/>
 			<div>
@@ -26,10 +25,9 @@
 			</div>
 			<div class="w3-panel">
 				<input class="w3-button w3-ripple w3-dark-green w3-padding-small" type="submit" value="Salvar">
-				<input class="w3-button w3-ripple w3-dark-green w3-padding-small" type="reset" value="Limpar" />
+				<input class="w3-button w3-ripple w3-dark-green w3-padding-small" type="reset" value="Limpar" th:if="${item.id==null}"/>
 				<a class="w3-button w3-ripple w3-dark-green w3-padding-small" th:href="@{/item/listar}">Cancelar</a>
 			</div>
-					
 		</form>
 	</div>
 </body>
