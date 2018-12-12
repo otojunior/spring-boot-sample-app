@@ -16,12 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author 01456231650
  *
  */
 @Controller
+@RequestMapping("/item")
 public class ItemController {
 	@Autowired
 	private ItemService service;
@@ -31,7 +33,7 @@ public class ItemController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/")
+	@GetMapping("/listar")
 	public String listar(Model model) {
 		List<Item> itens = service.findAll();
 		model.addAttribute("itens", itens);
@@ -57,7 +59,7 @@ public class ItemController {
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, Model model) {
 		service.deleteById(id);
-		return "redirect:/";
+		return "redirect:/item/listar";
 	}
 	
 	/**
@@ -76,9 +78,9 @@ public class ItemController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping
+	@PostMapping("/salvar")
 	public String salvar(@Valid Item item) {
 		service.save(item);
-		return "redirect:/";
+		return "redirect:/item/listar";
 	}
 }

@@ -26,11 +26,11 @@
 	    			<td th:text="${item.preco}"></td>
 	    			<td>
 	    				<div class="w3-bar">
-		    				<a	th:href="@{/editar/{id}(id=${item.id})}"
+		    				<a	th:href="@{/item/editar/{id}(id=${item.id})}"
 		    					class="w3-button w3-ripple w3-dark-green w3-padding-small">
 		    						Editar
 		    				</a>
-		    				<a	th:href="@{/excluir/{id}(id=${item.id})}"
+		    				<a	th:href="@{/item/excluir/{id}(id=${item.id})}"
 		    					class="w3-button w3-ripple w3-dark-green w3-padding-small">
 		    						Excluir
 		    				</a>
@@ -41,7 +41,7 @@
 	    </table>
 	</div>
     
-    <a 	th:href="@{/adicionar}"
+    <a 	th:href="@{/item/adicionar}"
     	class="w3-button w3-ripple w3-dark-green w3-padding-small">
     		Adicionar
     </a>
