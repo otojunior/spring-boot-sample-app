@@ -57,7 +57,7 @@ public class ItemController {
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, Model model) {
 		service.deleteById(id);
-		return listar(model);
+		return "redirect:/";
 	}
 	
 	/**
