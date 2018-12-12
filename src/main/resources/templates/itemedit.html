@@ -1,33 +1,36 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout :: layout (~{::body})}">
 <head> 
     <title>Getting Started: Serving Web Content</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<form method="POST" th:action="@{/item/salvar}" th:object="${item}">
-		<fieldset>
+	<div class="w3-panel">
+		<form method="POST" th:action="@{/item/salvar}" th:object="${item}">
+			
 			<input type="hidden" th:field="*{id}"/>
 			<input type="hidden" th:field="*{versao}"/>
 			<div>
 				<label>C&oacute;digo:</label>
-				<input type="text" th:field="*{codigo}"/>
+				<input class="w3-input w3-border" type="text" th:field="*{codigo}"/>
 			</div>
 			<div>
 				<label>Nome:</label>
-				<input type="text" th:field="*{nome}"/>
+				<input class="w3-input w3-border" type="text" th:field="*{nome}"/>
 			</div>
 			<div>
 				<label>Pre&ccedil;o:</label>
-				<input type="text" th:field="*{preco}"/>
+				<input class="w3-input w3-border" type="text" th:field="*{preco}"/>
 			</div>
-			<div>
-				<input type="submit" value="Salvar">
-				<input type="reset" />
-				<a th:href="@{/item/listar}">Cancelar</a>
+			<div class="w3-panel">
+				<input class="w3-button w3-ripple w3-dark-green w3-padding-small" type="submit" value="Salvar">
+				<input class="w3-button w3-ripple w3-dark-green w3-padding-small" type="reset" value="Limpar" />
+				<a class="w3-button w3-ripple w3-dark-green w3-padding-small" th:href="@{/item/listar}">Cancelar</a>
 			</div>
-		</fieldset>		
-	</form>
+					
+		</form>
+	</div>
 </body>
 </html>
