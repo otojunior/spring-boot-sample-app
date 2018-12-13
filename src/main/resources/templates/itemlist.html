@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout :: layout (~{::body})}">
+	th:replace="~{layout :: layout (~{::title}, ~{::body})}">
+<head>
+    <title>Listagem de Itens</title>
+</head>
 <body>
 	<div class="w3-panel">
 		<b><div class="w3-xlarge" th:text="|Listagem de Items:|"/></b>
