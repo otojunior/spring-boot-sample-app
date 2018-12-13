@@ -16,7 +16,7 @@
 	    			<th>C&oacute;digo</th>
 	    			<th>Nome</th>
 	    			<th>Pre&ccedil;o</th>
-	    			<th></th>
+	    			<th/>
 	    		</tr>
 	    	</thead>
 	    	<tbody>
@@ -26,14 +26,14 @@
 	    			<td th:text="${item.nome}"></td>
 	    			<td th:text="${item.preco}"></td>
 	    			<td>
-	    				<div class="w3-bar">
+	    				<div>
 		    				<a	th:href="@{/item/editar/{id}(id=${item.id})}"
 		    					class="w3-button w3-ripple app-dark-green w3-padding-small">
-		    						Editar
+		    						<i class="material-icons">edit</i>
 		    				</a>
 		    				<a	th:href="@{/item/excluir/{id}(id=${item.id})}"
 		    					class="w3-button w3-ripple app-dark-green w3-padding-small">
-		    						Excluir
+		    						<i class="material-icons">delete</i>
 		    				</a>
 		    			</div>
 	    			</td>
