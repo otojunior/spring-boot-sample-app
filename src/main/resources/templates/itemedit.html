@@ -25,9 +25,9 @@
 				<input class="w3-input w3-border" type="text" th:field="*{preco}"/>
 			</div>
 			<div class="w3-panel">
-				<input class="w3-button w3-ripple app-dark-green w3-padding-small" type="submit" value="Salvar">
-				<input class="w3-button w3-ripple app-dark-green w3-padding-small" type="reset" value="Limpar" th:if="${item.id==null}"/>
-				<a class="w3-button w3-ripple app-dark-green w3-padding-small" th:href="@{/item/listar}">Cancelar</a>
+				<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Salvar">
+				<input class="w3-button w3-ripple app-color w3-padding-small" type="reset" value="Limpar" th:if="${item.id==null}"/>
+				<a class="w3-button w3-ripple app-color w3-padding-small" th:href="@{/item/listar}">Cancelar</a>
 			</div>
 		</form>
 	</div>

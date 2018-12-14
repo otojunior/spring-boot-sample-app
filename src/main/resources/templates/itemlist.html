@@ -9,9 +9,9 @@
 		<b><div class="w3-xlarge" th:text="|Listagem de Itens:|"/></b>
 	</div>
 	<div class="w3-panel">
-		<table class="w3-table-all">
+		<table class="app-table-all">
 	    	<thead>
-	    		<tr class="app-dark-green">
+	    		<tr class="app-color">
 	    			<th>ID</th>
 	    			<th>C&oacute;digo</th>
 	    			<th>Nome</th>
@@ -26,7 +26,7 @@
 	    			<td th:text="${item.nome}"></td>
 	    			<td th:text="${item.preco}"></td>
 	    			<td>
-						<div class="w3-text-green">
+						<div class="app-text-color">
 							<a th:href="@{/item/editar/{id}(id=${item.id})}"><i class="material-icons">edit</i></a>
 							<a th:href="@{/item/excluir/{id}(id=${item.id})}"><i class="material-icons">delete</i></a>
 						</div>
@@ -35,7 +35,7 @@
 	    	</tbody>
 	    </table>
 	    <div class="w3-panel">
-			<a th:href="@{/item/adicionar}" class="w3-button w3-ripple app-dark-green w3-padding-small">Adicionar</a>
+			<a th:href="@{/item/adicionar}" class="w3-button w3-ripple app-color w3-padding-small">Adicionar</a>
 		</div>
 	</div>
 </body>

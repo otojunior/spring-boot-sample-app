@@ -2,9 +2,20 @@
 	background-color:#f1f1f1!important;
 }
 
-.app-dark-green,.app-hover-dark-green:hover {
+.app-color,
+.app-hover-color:hover {
 	color:#fff!important;
 	background-color:#003000!important;
+}
+
+.app-border-color,
+.app-hover-border-color:hover {
+	border-color: #4CAF50!important
+}
+
+.app-text-color,
+.app-hover-text-color:hover {
+	color: #4CAF50!important
 }
 
 .app-lobster {
@@ -29,8 +40,8 @@
 }
 
 
-.w3-table-all td,
-.w3-table-all th {
+.app-table-all td,
+.app-table-all th {
 	padding:2px 2px;
 	display:table-cell;
 	text-align:left;
