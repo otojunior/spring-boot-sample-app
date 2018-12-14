@@ -1,31 +1,31 @@
-:root {
-	background-color:#f1f1f1!important;
-}
-
 /*
-	Referências de cores do W3.CSS:
-
-			Escuros:	Claros:
 Vermelho:	#300000		#f44336
 Verde:		#003000		#4caf50
 Azul:		#000030		#2196f3
 Preto:		#000000		#9e9e9e
-
 */
+
+@cor-1:	#000030;
+@cor-2:	#2196f3;
+
+:root {
+	background-color:#f1f1f1!important;
+}
+
 .app-color,
 .app-hover-color:hover {
 	color:#fff!important;
-	background-color:#003000!important;
+	background-color:@cor-1!important;
 }
 
 .app-border-color,
 .app-hover-border-color:hover {
-	border-color: #4caf50!important
+	border-color: @cor-2!important;
 }
 
 .app-text-color,
 .app-hover-text-color:hover {
-	color: #4caf50!important
+	color: @cor-2!important;
 }
 
 .app-lobster {
@@ -44,7 +44,7 @@ Preto:		#000000		#9e9e9e
 	white-space: nowrap;
 	word-wrap: normal;
 	direction: ltr;
-	vertical-align:-14%
+	vertical-align:-14%;
 	-moz-font-feature-settings: 'liga';
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -78,8 +78,8 @@ Preto:		#000000		#9e9e9e
 
 /* material icons */
 @font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(font-material-icons.woff2) format('woff2');
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url(font-material-icons.woff2) format('woff2');
 }

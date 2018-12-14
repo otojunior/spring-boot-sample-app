@@ -60,6 +60,11 @@
 			<version>4.1.0</version>
 		</dependency>
 		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>less</artifactId>
+		    <version>3.8.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.4</version><!--$NO-MVN-MAN-VER$-->
@@ -124,6 +129,22 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			
+			<plugin>
+			    <groupId>org.lesscss</groupId>
+			    <artifactId>lesscss-maven-plugin</artifactId>
+			    <version>1.7.0.1.1</version>
+			    <configuration>
+			    	<outputDirectory>${project.build.outputDirectory}/static/css</outputDirectory>
+			    </configuration>
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>compile</goal>
+			            </goals>
+			        </execution>
+			    </executions>
 			</plugin>
 		</plugins>
 	</build>
