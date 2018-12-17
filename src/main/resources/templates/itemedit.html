@@ -5,31 +5,33 @@
     <title>Cadastro de Itens</title>
 </head>
 <body>
-	<div class="w3-panel w3-padding">
-		<b><div class="w3-xlarge" th:text="|Cadastro de Itens:|"/></b>
-	</div>
-	<div class="w3-panel">
-		<form method="POST" th:action="@{/item/salvar}" th:object="${item}">
-			<input type="hidden" th:field="*{id}"/>
-			<input type="hidden" th:field="*{versao}"/>
-			<div>
-				<label>C&oacute;digo:</label>
-				<input class="w3-input w3-border" type="text" th:field="*{codigo}"/>
-			</div>
-			<div>
-				<label>Nome:</label>
-				<input class="w3-input w3-border" type="text" th:field="*{nome}"/>
-			</div>
-			<div>
-				<label>Pre&ccedil;o:</label>
-				<input class="w3-input w3-border" type="text" th:field="*{preco}"/>
-			</div>
-			<div class="w3-panel">
-				<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Salvar">
-				<input class="w3-button w3-ripple app-color w3-padding-small" type="reset" value="Limpar" th:if="${item.id==null}"/>
-				<a class="w3-button w3-ripple app-color w3-padding-small" th:href="@{/item/listar}">Cancelar</a>
-			</div>
-		</form>
+	<div class="w3-border">
+		<div class="w3-panel w3-padding">
+			<b><div class="w3-xlarge" th:text="|Cadastro de Itens:|"/></b>
+		</div>
+		<div class="w3-panel">
+			<form method="POST" th:action="@{/item/salvar}" th:object="${item}">
+				<input type="hidden" th:field="*{id}"/>
+				<input type="hidden" th:field="*{versao}"/>
+				<div>
+					<label>C&oacute;digo:</label>
+					<input class="w3-input w3-border" type="text" th:field="*{codigo}"/>
+				</div>
+				<div>
+					<label>Nome:</label>
+					<input class="w3-input w3-border" type="text" th:field="*{nome}"/>
+				</div>
+				<div>
+					<label>Pre&ccedil;o:</label>
+					<input class="w3-input w3-border" type="text" th:field="*{preco}"/>
+				</div>
+				<div class="w3-panel">
+					<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Salvar">
+					<input class="w3-button w3-ripple app-color w3-padding-small" type="reset" value="Limpar" th:if="${item.id==null}"/>
+					<a class="w3-button w3-ripple app-color w3-padding-small" th:href="@{/item/listar}">Cancelar</a>
+				</div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
