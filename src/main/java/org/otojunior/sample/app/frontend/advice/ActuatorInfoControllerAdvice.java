@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.otojunior.sample.app.frontend.controller;
+package org.otojunior.sample.app.frontend.advice;
 
 import java.util.Map;
 
@@ -15,18 +15,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
  *
  */
 @ControllerAdvice
-public class GlobalControllerAdvice {
+public class ActuatorInfoControllerAdvice {
 	@Autowired
-	private InfoEndpoint infoendpoint;
+	private InfoEndpoint infoEndpoint;
 	
 	/**
 	 * 
 	 * @return
 	 */
-	@ModelAttribute("buildinfo")
-	public Object readInfo() {
-		Map<String, Object> infomap = infoendpoint.info();
-		Object buildinfo = infomap.get("build");
-		return buildinfo;
+	@ModelAttribute("info")
+	public Map<String, Object> readInfo() {
+		return infoEndpoint.info();
 	}
 }
