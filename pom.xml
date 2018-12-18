@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-boot-sample-app</name>
+	<name>SpringBoot Sample Application</name>
 	<description>Sample Project based on Spring Boot</description>
 
 	<parent>
