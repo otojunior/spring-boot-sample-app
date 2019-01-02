@@ -10,3 +10,10 @@ insert into item (versao, codigo, nome, preco) values (0, 500, 'Lanterna', 18.50
 insert into item (versao, codigo, nome, preco) values (0, 550, 'Escada', 32.10);
 insert into item (versao, codigo, nome, preco) values (0, 600, 'Durepox', 3.25);
 insert into item (versao, codigo, nome, preco) values (0, 650, 'Cola', 4.35);
+
+insert into users (versao, username, password, enabled) values (0, 'admin', '$2a$10$qQsGCq9556LpIYN5pjjJ1OhXgeFbRWPhV3gLgpsbwKUfFWth8xgmO', true);
+insert into users (versao, username, password, enabled) values (0, 'user', '$2a$10$qAlEAmBr2bUFqCCbjrXwLuGpqadctWNQ8TgBwGwJ0RKrb/TUx3zeG', true);
+
+insert into authorities (versao, username, authority) values(0, 'admin', 'ROLE_ADMIN');
+insert into authorities (versao, username, authority) values(0, 'admin', 'ROLE_USER');
+insert into authorities (versao, username, authority) values(0, 'user', 'ROLE_USER');
