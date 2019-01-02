@@ -40,7 +40,7 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 		"/api/**" };
 	
 	/**
-	 * 
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -49,7 +49,6 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 			authoritiesByUsernameQuery(JdbcDaoImpl.DEF_AUTHORITIES_BY_USERNAME_QUERY).
 			passwordEncoder(new BCryptPasswordEncoder());
 	}
-
 	
 	/**
 	 * {@inheritDoc}
