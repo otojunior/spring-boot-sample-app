@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * Referências: 
  * http://www.baeldung.com/spring-security-expressions
  * https://spring.io/guides/topicals/spring-security-architecture/
+ * https://www.boraji.com/spring-security-5-jdbc-based-authentication-example
  */
 @Configuration
 @EnableWebSecurity
@@ -42,10 +44,10 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(datasource)
-			.usersByUsernameQuery("select username, password, enabled from users where username=?")
-			.authoritiesByUsernameQuery("select username, authority from authorities where username=?")
-			.passwordEncoder(new BCryptPasswordEncoder());
+		auth.jdbcAuthentication().dataSource(datasource).
+			usersByUsernameQuery(JdbcDaoImpl.DEF_USERS_BY_USERNAME_QUERY).
+			authoritiesByUsernameQuery(JdbcDaoImpl.DEF_AUTHORITIES_BY_USERNAME_QUERY).
+			passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	
