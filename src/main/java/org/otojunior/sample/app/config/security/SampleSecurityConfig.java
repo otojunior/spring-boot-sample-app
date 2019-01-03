@@ -31,7 +31,8 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 		"/actuator/**",
 		"/h2-console/**",
 		"/css/**",
-		"/imagens/**" };
+		"/imagens/**",
+		"/webjars/**" };
 	
 	private final String[] FOR_USER_ROLE = {
 		"/item/**" };
@@ -61,7 +62,10 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 			antMatchers(FOR_ADMIN_ROLE).hasRole("ADMIN").
 			anyRequest().authenticated().
 		and().
-			formLogin().permitAll().
+			formLogin().
+				loginPage("/login").
+				failureUrl("/login-error").
+				permitAll().
 		and().
 			csrf().disable().
 			headers().frameOptions().disable();
