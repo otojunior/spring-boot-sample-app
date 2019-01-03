@@ -67,6 +67,8 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 				failureUrl("/login-error").
 				permitAll().
 		and().
+			logout().permitAll().
+		and().
 			csrf().disable().
 			headers().frameOptions().disable();
 	}

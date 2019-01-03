@@ -19,7 +19,7 @@
 		</div>
 		<div class="w3-panel">
 			<p th:if="${error}" class="w3-panel w3-pale-red w3-leftbar w3-border-red">Credenciais inv&aacute;lidas.</p>
-			<p th:if="${param.logout}">Usu&aacute;rio deslogado.</p>
+			<p th:if="${param.logout}" class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">Usu&aacute;rio deslogado.</p>
 			<form method="POST" action="/login">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<div>
