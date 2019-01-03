@@ -10,34 +10,31 @@
     <script th:src="@{/webjars/less/3.8.1/less.min.js}" ></script>
 </head>
 <body>
-  	<!-- Corpo -->
     <div class="w3-panel app-login-padding">
-        
-	<div class="w3-card-4">
-		<div class="w3-panel w3-padding">
-			<b><div class="w3-xlarge w3-center app-lobster">SpringBoot Sample Application</div></b>
+		<div class="w3-card-4">
+			<div class="w3-panel w3-padding">
+				<b><div class="w3-xlarge w3-center app-lobster">SpringBoot Sample Application</div></b>
+			</div>
+			<div class="w3-panel">
+				<p th:if="${param.error}" class="w3-panel w3-pale-red w3-leftbar w3-border-red">Credenciais inv&aacute;lidas.</p>
+				<p th:if="${param.logout}" class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">Usu&aacute;rio deslogado.</p>
+				<form method="POST" action="/login">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					<div>
+						<label>Login:</label>
+						<input class="w3-input w3-border" type="text" id="username" name="username" value=""/>
+					</div>
+					<div>
+						<label>Senha:</label>
+						<input class="w3-input w3-border" type="password" id="password" name="password" value=""/>
+					</div>
+					<div class="w3-panel w3-center">
+						<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Login">
+						<input class="w3-button w3-ripple app-color w3-padding-small" type="reset" value="Cancelar"/>
+					</div>
+				</form>
+			</div>
 		</div>
-		<div class="w3-panel">
-			<p th:if="${error}" class="w3-panel w3-pale-red w3-leftbar w3-border-red">Credenciais inv&aacute;lidas.</p>
-			<p th:if="${param.logout}" class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">Usu&aacute;rio deslogado.</p>
-			<form method="POST" action="/login">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				<div>
-					<label>Login:</label>
-					<input class="w3-input w3-border" type="text" id="username" name="username" value=""/>
-				</div>
-				<div>
-					<label>Senha:</label>
-					<input class="w3-input w3-border" type="password" id="password" name="password" value=""/>
-				</div>
-				<div class="w3-panel w3-center">
-					<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Login">
-					<input class="w3-button w3-ripple app-color w3-padding-small" type="reset" value="Cancelar"/>
-				</div>
-			</form>
-		</div>
-	</div>
-
     </div>
 </body>
 </html>

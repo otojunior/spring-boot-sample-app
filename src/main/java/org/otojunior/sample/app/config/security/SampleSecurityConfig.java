@@ -63,9 +63,7 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 			anyRequest().authenticated().
 		and().
 			formLogin().
-				loginPage("/login").
-				failureUrl("/login-error").
-				permitAll().
+				loginPage("/login").permitAll().
 		and().
 			logout().permitAll().
 		and().
