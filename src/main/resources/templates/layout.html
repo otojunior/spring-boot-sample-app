@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (titulo, corpo)">
+<html th:fragment="layout (titulo, corpo)"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<th:block th:replace="${titulo}"/>
     <meta charset="UTF-8">
@@ -16,7 +18,14 @@
     		<img alt="logo" height="32" width="32" th:src="@{/imagens/logo.png}">
     	</span>
     	<span class="w3-bar-item w3-padding-small w3-xlarge app-lobster">SpringBoot Sample Application</span>
-  	</div>
+		<span class="w3-right">
+			<i class="w3-padding w3-xlarge fas fa-user-tie">
+				<a class="w3-btn w3-padding-small" th:href="@{/logout}">
+					<span sec:authentication="name"></span>
+				</a>
+			</i>
+		</span>
+	</div>
   	
   	<!-- Corpo -->
     <div class="w3-panel">
@@ -26,7 +35,6 @@
     <!-- Rodapé -->
 	<div class="w3-panel w3-card-4 app-color w3-center">
 		<span th:text="|Vers&atilde;o: ${info.build.version} / Status: ${health.status.code} / Database: ${health.details.db} :: |"></span>
-		<a th:href="@{/logout}">Logout</a>&nbsp;-
 		<a th:href="@{/api/item}">API</a>
 	</div>
 </body>
