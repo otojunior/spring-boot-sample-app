@@ -12,8 +12,9 @@
     <script th:src="@{/webjars/less/3.8.1/less.min.js}" ></script>
 </head>
 <body>
-	<!-- Cabeçalho 	-->	<th:block th:replace="~{cabecalho :: frag-cabecalho}"/>
+	<!-- Cabeçalho 	-->	<th:block th:replace="~{layout_cabecalho :: frag-cabecalho}"/>
+	<!-- Cabeçalho 	-->	<th:block th:replace="~{layout_menu :: frag-menu}"/>
   	<!-- Corpo 		-->	<th:block th:replace="${corpo}"/>
-    <!-- Rodapé 	-->	<th:block th:replace="~{rodape :: frag-rodape}"/>
+    <!-- Rodapé 	-->	<th:block th:replace="~{layout_rodape :: frag-rodape}"/>
 </body>
 </html>
