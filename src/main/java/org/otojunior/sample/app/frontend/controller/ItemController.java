@@ -37,7 +37,7 @@ public class ItemController {
 	public String listar(Model model) {
 		List<Item> itens = service.findAll();
 		model.addAttribute("itens", itens);
-		return "itemlist";
+		return "item/itemlist";
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class ItemController {
 	public String editar(@PathVariable("id") Long id, Model model) {
 		Optional<Item> item = service.findById(id);
 		model.addAttribute("item", item.get());
-		return "itemedit";
+		return "item/itemedit";
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class ItemController {
 	public String adicionar(Model model) {
 		Item item = new Item();
 		model.addAttribute("item", item);
-		return "itemedit";
+		return "item/itemedit";
 	}
 	
 	/**
