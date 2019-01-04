@@ -12,30 +12,8 @@
     <script th:src="@{/webjars/less/3.8.1/less.min.js}" ></script>
 </head>
 <body>
-	<!-- Cabeçalho -->
-	<div class="w3-bar w3-card-4 app-color">
-    	<span class="w3-bar-item  w3-padding-small">
-    		<img alt="logo" height="32" width="32" th:src="@{/imagens/logo.png}">
-    	</span>
-    	<span class="w3-bar-item w3-padding-small w3-xlarge app-lobster">SpringBoot Sample Application</span>
-		<span class="w3-right">
-			<i class="w3-padding w3-xlarge fas fa-user-tie">
-				<a class="w3-btn w3-padding-small" th:href="@{/logout}">
-					<span sec:authentication="name"></span>
-				</a>
-			</i>
-		</span>
-	</div>
-  	
-  	<!-- Corpo -->
-    <div class="w3-panel">
-        <th:block th:include="${corpo}"/>
-    </div>
-    
-    <!-- Rodapé -->
-	<div class="w3-panel w3-card-4 app-color w3-center">
-		<span th:text="|Vers&atilde;o: ${info.build.version} / Status: ${health.status.code} / Database: ${health.details.db} :: |"></span>
-		<a th:href="@{/api/item}">API</a>
-	</div>
+	<!-- Cabeçalho 	-->	<th:block th:replace="~{cabecalho :: frag-cabecalho}"/>
+  	<!-- Corpo 		-->	<div class="w3-panel"><th:block th:include="${corpo}"/></div>
+    <!-- Rodapé 	-->	<th:block th:replace="~{rodape :: frag-rodape}"/>
 </body>
 </html>

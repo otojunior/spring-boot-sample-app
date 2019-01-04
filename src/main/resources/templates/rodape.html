@@ -1,0 +1,9 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="frag-rodape" class="w3-panel w3-card-4 app-color w3-center">
+		<span th:text="|Vers&atilde;o: ${info.build.version} / Status: ${health.status.code} / Database: ${health.details.db} :: |"></span>
+		<a th:href="@{/api/item}">API</a>
+	</div>
+</body>
+</html>
