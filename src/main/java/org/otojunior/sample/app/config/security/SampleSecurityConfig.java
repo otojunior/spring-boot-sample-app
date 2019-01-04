@@ -45,9 +45,8 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(datasource).
-			usersByUsernameQuery(JdbcDaoImpl.DEF_USERS_BY_USERNAME_QUERY).
-			authoritiesByUsernameQuery(JdbcDaoImpl.DEF_AUTHORITIES_BY_USERNAME_QUERY).
+		auth.jdbcAuthentication().
+			dataSource(datasource).
 			passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
