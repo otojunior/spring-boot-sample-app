@@ -13,7 +13,7 @@
 </head>
 <body>
 	<!-- Cabeçalho 	-->	<th:block th:replace="~{cabecalho :: frag-cabecalho}"/>
-  	<!-- Corpo 		-->	<div class="w3-panel"><th:block th:include="${corpo}"/></div>
+  	<!-- Corpo 		-->	<th:block th:replace="${corpo}"/>
     <!-- Rodapé 	-->	<th:block th:replace="~{rodape :: frag-rodape}"/>
 </body>
 </html>
