@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout :: frag-layout (~{::title}, ~{::body})}">
+<head>
+    <title>Listagem de Itens</title>
+</head>
+<body class="w3-panel">
+	<div class="w3-card-4">
+		<div class="w3-panel w3-padding">
+			<b><div class="w3-large" th:text="|Listagem de Itens:|"/></b>
+		</div>
+		<div class="w3-panel">
+			<table class="w3-table-all">
+		    	<thead>
+		    		<tr class="app-color">
+		    			<th>ID</th>
+		    			<th>C&oacute;digo</th>
+		    			<th>Nome</th>
+		    			<th>Pre&ccedil;o</th>
+		    			<th/>
+		    		</tr>
+		    	</thead>
+		    	<tbody>
+		    		<tr th:each="item : ${itens.content}">
+		    			<td th:text="${item.id}"></td>
+		    			<td th:text="${item.codigo}"></td>
+		    			<td th:text="${item.nome}"></td>
+		    			<td th:text="${item.preco}"></td>
+		    			<td>
+							<div class="app-text-color">
+								<a th:href="@{/item/editar/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-edit"></i></a>
+								<a th:href="@{/item/excluir/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-trash"></i></a>
+							</div>
+		    			</td>
+		    		</tr>
+		    	</tbody>
+		    </table>
+		    <div th:if="${itens.totalPages > 0}" class="w3-bar w3-center">
+				<a th:each="n : ${paginas}"
+					th:href="@{/item/listar(pagina=${n})}"
+					th:text="${n+1}"
+					th:class="${n==itens.number} ? 'w3-button w3-padding-small w3-green' : 'w3-button w3-padding-small'"></a>
+			</div>
+		    <div class="w3-panel">
+				<a th:href="@{/item/adicionar}" class="w3-button w3-ripple app-color w3-padding-small">Adicionar</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

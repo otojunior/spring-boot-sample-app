@@ -5,18 +5,22 @@ package org.otojunior.sample.app.frontend.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.validation.Valid;
 
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author 01456231650
@@ -38,6 +42,22 @@ public class ItemController {
 		List<Item> itens = service.findAll();
 		model.addAttribute("itens", itens);
 		return "item/itemlist";
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@GetMapping(path="/listar", params="pagina")
+	public String listar(Model model,
+			@RequestParam Optional<Integer> pagina,
+			@RequestParam Optional<Integer> tamanho) {
+		Page<Item> itens = service.findAll(pagina, tamanho);
+		List<Integer> paginas = toRangeList(0, itens.getTotalPages());
+		model.addAttribute("itens", itens);
+		model.addAttribute("paginas", paginas);
+		return "item/itempagin";
 	}
 	
 	/**
@@ -82,5 +102,17 @@ public class ItemController {
 	public String salvar(@Valid Item item) {
 		service.save(item);
 		return "redirect:/item/listar";
+	}
+	
+	/**
+	 * 
+	 * @param intStream
+	 * @return
+	 */
+	private List<Integer> toRangeList(int min, int max) {
+		return IntStream.
+			range(min, max).
+			boxed().
+			collect(Collectors.toList());
 	}
 }

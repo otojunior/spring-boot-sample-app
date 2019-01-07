@@ -9,6 +9,9 @@ import java.util.Optional;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class ItemService {
+	private static final int NUMERO_PAGINA_DEFAULT = 0;
+	private static final int TAMANHO_PAGINA_DEFAULT = 5;
+	
 	@Autowired
 	private ItemRepository repository;
 	
@@ -27,6 +33,17 @@ public class ItemService {
 	 */
 	public List<Item> findAll() {
 		return repository.findAll();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Page<Item> findAll(Optional<Integer> pagina, Optional<Integer> tamanho) {
+		Pageable pageable = PageRequest.of(
+			pagina.orElse(NUMERO_PAGINA_DEFAULT),
+			tamanho.orElse(TAMANHO_PAGINA_DEFAULT));
+		return repository.findAll(pageable);
 	}
 	
 	/**
