@@ -38,9 +38,10 @@ public class ItemController {
 	 * @return
 	 */
 	@GetMapping("/listar")
-	public String listar(Model model,
+	public String listar(
 			@RequestParam Optional<Integer> pagina,
-			@RequestParam Optional<Integer> tamanho) {
+			@RequestParam Optional<Integer> tamanho,
+			Model model) {
 		Page<Item> itens = service.findAll(pagina, tamanho);
 		List<Integer> paginas = toRangeList(0, itens.getTotalPages());
 		model.addAttribute("itens", itens);
