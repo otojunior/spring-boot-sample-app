@@ -21,7 +21,7 @@
 		    		</tr>
 		    	</thead>
 		    	<tbody>
-		    		<tr th:each="item : ${itens}">
+		    		<tr th:each="item : ${itens.content}">
 		    			<td th:text="${item.id}"></td>
 		    			<td th:text="${item.codigo}"></td>
 		    			<td th:text="${item.nome}"></td>
@@ -35,6 +35,12 @@
 		    		</tr>
 		    	</tbody>
 		    </table>
+		    <div th:if="${itens.totalPages > 0}" class="w3-bar w3-center">
+				<a th:each="n : ${paginas}"
+					th:href="@{/item/listar(pagina=${n})}"
+					th:text="${n+1}"
+					th:class="${n==itens.number} ? 'w3-button w3-padding-small w3-green' : 'w3-button w3-padding-small'"></a>
+			</div>
 		    <div class="w3-panel">
 				<a th:href="@{/item/adicionar}" class="w3-button w3-ripple app-color w3-padding-small">Adicionar</a>
 			</div>

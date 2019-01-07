@@ -38,18 +38,6 @@ public class ItemController {
 	 * @return
 	 */
 	@GetMapping("/listar")
-	public String listar(Model model) {
-		List<Item> itens = service.findAll();
-		model.addAttribute("itens", itens);
-		return "item/itemlist";
-	}
-	
-	/**
-	 * 
-	 * @param model
-	 * @return
-	 */
-	@GetMapping(path="/listar", params="pagina")
 	public String listar(Model model,
 			@RequestParam Optional<Integer> pagina,
 			@RequestParam Optional<Integer> tamanho) {
@@ -57,7 +45,7 @@ public class ItemController {
 		List<Integer> paginas = toRangeList(0, itens.getTotalPages());
 		model.addAttribute("itens", itens);
 		model.addAttribute("paginas", paginas);
-		return "item/itempagin";
+		return "item/itemlist";
 	}
 	
 	/**
