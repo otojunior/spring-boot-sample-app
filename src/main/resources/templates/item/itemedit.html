@@ -1,34 +1,33 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout :: frag-layout (~{::title}, ~{::body})}">
+<html data-th-replace="~{layout :: frag-layout (~{::title}, ~{::body})}">
 <head>
     <title>Cadastro de Itens</title>
 </head>
 <body class="w3-panel">
 	<div class="w3-card-4">
 		<div class="w3-panel w3-padding">
-			<b><div class="w3-large" th:text="|Cadastro de Itens:|"/></b>
+			<b><div class="w3-large" data-th-text="|Cadastro de Itens:|"/></b>
 		</div>
 		<div class="w3-panel">
-			<form method="POST" th:action="@{/item/salvar}" th:object="${item}">
-				<input type="hidden" th:field="*{id}"/>
-				<input type="hidden" th:field="*{versao}"/>
+			<form method="POST" data-th-action="@{/item/salvar}" data-th-object="${item}">
+				<input type="hidden" data-th-field="*{id}"/>
+				<input type="hidden" data-th-field="*{versao}"/>
 				<div>
 					<label>C&oacute;digo:</label>
-					<input class="w3-input w3-border" type="text" th:field="*{codigo}"/>
+					<input class="w3-input w3-border" type="text" data-th-field="*{codigo}"/>
 				</div>
 				<div>
 					<label>Nome:</label>
-					<input class="w3-input w3-border" type="text" th:field="*{nome}"/>
+					<input class="w3-input w3-border" type="text" data-th-field="*{nome}"/>
 				</div>
 				<div>
 					<label>Pre&ccedil;o:</label>
-					<input class="w3-input w3-border" type="text" th:field="*{preco}"/>
+					<input class="w3-input w3-border" type="text" data-th-field="*{preco}"/>
 				</div>
 				<div class="w3-panel">
 					<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Salvar">
-					<input class="w3-button w3-ripple app-color w3-padding-small" type="reset" value="Limpar" th:if="${item.id==null}"/>
-					<a class="w3-button w3-ripple app-color w3-padding-small" th:href="@{/item/listar}">Cancelar</a>
+					<input class="w3-button w3-ripple app-color w3-padding-small" type="reset" value="Limpar" data-th-if="${item.id==null}"/>
+					<a class="w3-button w3-ripple app-color w3-padding-small" data-th-href="@{/item/listar}">Cancelar</a>
 				</div>
 			</form>
 		</div>

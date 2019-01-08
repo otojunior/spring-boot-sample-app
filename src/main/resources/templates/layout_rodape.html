@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <body>
-	<div th:fragment="frag-rodape" class="w3-panel w3-card-4 app-color w3-center">
-		<span th:text="|Vers&atilde;o: ${infoVersao} / Status: ${infoStatus} / Database: ${infoBancoDados} :: |"></span>
-		<a th:href="@{/api/item}">API</a>
-	</div>
+	<div data-th-fragment="frag-rodape" class="w3-panel w3-card-4 app-color w3-center">
+		<span data-th-text="|Vers&atilde;o: ${infoVersao} / Status: ${infoStatus} / Database: ${infoBancoDados} :: |"></span>
+		<a data-th-href="@{/api/item}">API</a>
+	</div><div data-th-></div>
 </body>
 </html>

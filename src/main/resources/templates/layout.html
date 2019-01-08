@@ -1,20 +1,18 @@
 <!DOCTYPE HTML>
-<html th:fragment="frag-layout (titulo, corpo)"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html data-th-fragment="frag-layout (titulo, corpo)" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<th:block th:replace="${titulo}"/>
+	<data-th-block data-th-replace="${titulo}"/>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/webjars/w3-css/4.1.0/w3.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.5.0/css/all.css}"/>
-    <link rel="stylesheet/less" type="text/css" th:href="@{/css/app.less}"/>
-    <script th:src="@{/webjars/less/3.8.1/less.min.js}" ></script>
+    <link rel="stylesheet" data-th-href="@{/webjars/w3-css/4.1.0/w3.css}"/>
+    <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/5.5.0/css/all.css}"/>
+    <link rel="stylesheet/less" type="text/css" data-th-href="@{/css/app.less}"/>
+    <script data-th-src="@{/webjars/less/3.8.1/less.min.js}" ></script>
 </head>
 <body>
-	<!-- Cabeçalho 	-->	<th:block th:replace="~{layout_cabecalho :: frag-cabecalho}"/>
-	<!-- Cabeçalho 	-->	<th:block th:replace="~{layout_menu :: frag-menu}"/>
-  	<!-- Corpo 		-->	<th:block th:replace="${corpo}"/>
-    <!-- Rodapé 	-->	<th:block th:replace="~{layout_rodape :: frag-rodape}"/>
+	<!-- Cabeçalho 	-->	<data-th-block data-th-replace="~{layout_cabecalho :: frag-cabecalho}"/>
+	<!-- Cabeçalho 	-->	<data-th-block data-th-replace="~{layout_menu :: frag-menu}"/>
+  	<!-- Corpo 		-->	<data-th-block data-th-replace="${corpo}"/>
+    <!-- Rodapé 	-->	<data-th-block data-th-replace="~{layout_rodape :: frag-rodape}"/>
 </body>
 </html>

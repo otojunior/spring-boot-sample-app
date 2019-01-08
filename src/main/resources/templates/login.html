@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 	<title>Sample Application Login</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/webjars/w3-css/4.1.0/w3.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.5.0/css/all.css}"/>
-    <link rel="stylesheet/less" type="text/css" th:href="@{/css/app.less}"/>
-    <script th:src="@{/webjars/less/3.8.1/less.min.js}" ></script>
+    <link rel="stylesheet" data-th-href="@{/webjars/w3-css/4.1.0/w3.css}"/>
+    <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/5.5.0/css/all.css}"/>
+    <link rel="stylesheet/less" type="text/css" data-th-href="@{/css/app.less}"/>
+    <script data-th-src="@{/webjars/less/3.8.1/less.min.js}" ></script>
 </head>
 <body>
     <div class="w3-panel app-login-padding">
@@ -16,8 +16,8 @@
 				<b><div class="w3-xlarge w3-center app-lobster">SpringBoot Sample Application</div></b>
 			</div>
 			<div class="w3-panel">
-				<p th:if="${param.error}" class="w3-panel w3-pale-red w3-leftbar w3-border-red">Credenciais inv&aacute;lidas.</p>
-				<p th:if="${param.logout}" class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">Usu&aacute;rio deslogado.</p>
+				<p data-th-if="${param.error}" class="w3-panel w3-pale-red w3-leftbar w3-border-red">Credenciais inv&aacute;lidas.</p>
+				<p data-th-if="${param.logout}" class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">Usu&aacute;rio deslogado.</p>
 				<form method="POST" action="/login">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div>
