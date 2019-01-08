@@ -3,6 +3,8 @@
  */
 package org.otojunior.sample.app.frontend.advice;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthEndpoint;
@@ -22,8 +24,23 @@ public class ActuatorHealthControllerAdvice {
 	 * 
 	 * @return
 	 */
-	@ModelAttribute("health")
-	public Health readInfo() {
-		return healthEndpoint.health();
+	@ModelAttribute("infoStatus")
+	public String infoStatus() {
+		return healthEndpoint.
+			health().
+			getStatus().
+			getCode();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@ModelAttribute("infoBancoDados")
+	public String infoBancoDados() {
+		Map<String, Object> details = healthEndpoint.
+			health().
+			getDetails();
+		return String.valueOf(details.get("db"));
 	}
 }

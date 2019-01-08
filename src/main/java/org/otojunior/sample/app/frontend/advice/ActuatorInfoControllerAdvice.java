@@ -23,8 +23,11 @@ public class ActuatorInfoControllerAdvice {
 	 * 
 	 * @return
 	 */
-	@ModelAttribute("info")
-	public Map<String, Object> readInfo() {
-		return infoEndpoint.info();
+	@SuppressWarnings("unchecked")
+	@ModelAttribute("infoVersao")
+	public String infoVersao() {
+		Map<String, Object> info = infoEndpoint.info();
+		Map<String, String> build = (Map<String, String>) info.get("build");
+		return build.get("version");
 	}
 }
