@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author 01456231650
@@ -66,8 +67,9 @@ public class ItemController {
 	 * @return
 	 */
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, Model model) {
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes rattr) {
 		service.deleteById(id);
+		rattr.addFlashAttribute("idexcluido", id);
 		return "redirect:/item/listar";
 	}
 	

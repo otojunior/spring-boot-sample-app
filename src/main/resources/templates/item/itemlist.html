@@ -7,6 +7,9 @@
 <body class="w3-panel">
 	<div class="w3-card-4">
 		<div class="w3-panel w3-padding">
+			<p th:if="${idexcluido}"
+				th:text="|Item de ID ${idexcluido} exclu&iacute;do|"
+				class="w3-panel w3-padding w3-pale-blue w3-leftbar w3-border-blue"/>
 			<b><div class="w3-large" th:text="|Listagem de Itens:|"/></b>
 		</div>
 		<div class="w3-panel">
