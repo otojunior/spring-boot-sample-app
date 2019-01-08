@@ -19,7 +19,6 @@
 				<p data-th-if="${param.error}" class="w3-panel w3-pale-red w3-leftbar w3-border-red">Credenciais inv&aacute;lidas.</p>
 				<p data-th-if="${param.logout}" class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">Usu&aacute;rio deslogado.</p>
 				<form method="POST" action="/login">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div>
 						<label>Login:</label>
 						<input class="w3-input w3-border" type="text" id="username" name="username"/>
@@ -32,6 +31,7 @@
 						<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Login">
 						<input class="w3-button w3-ripple app-color w3-padding-small" type="reset" value="Cancelar"/>
 					</div>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
 			</div>
 		</div>

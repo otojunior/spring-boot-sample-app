@@ -9,6 +9,9 @@
 			<p data-th-if="${idexcluido}"
 				data-th-text="|Item de ID ${idexcluido} exclu&iacute;do|"
 				class="w3-panel w3-padding w3-pale-blue w3-leftbar w3-border-blue"/>
+			<p data-th-if="${itemsalvo}"
+				data-th-text="|Item (${itemsalvo.id}: ${itemsalvo.nome}) salvo|"
+				class="w3-panel w3-padding w3-pale-blue w3-leftbar w3-border-blue"/>
 			<b><div class="w3-large" data-th-text="|Listagem de Itens:|"/></b>
 		</div>
 		<div class="w3-panel">

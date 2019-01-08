@@ -90,8 +90,9 @@ public class ItemController {
 	 * @return
 	 */
 	@PostMapping("/salvar")
-	public String salvar(@Valid Item item) {
+	public String salvar(@Valid Item item, RedirectAttributes rattr) {
 		service.save(item);
+		rattr.addFlashAttribute("itemsalvo", item);
 		return "redirect:/item/listar";
 	}
 	
