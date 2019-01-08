@@ -3,15 +3,13 @@
  */
 package org.otojunior.sample.app.frontend.controller;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import javax.validation.Valid;
 
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.service.ItemService;
+import org.otojunior.sample.app.frontend.util.Navegador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -44,9 +42,12 @@ public class ItemController {
 			@RequestParam Optional<Integer> tamanho,
 			Model model) {
 		Page<Item> itens = service.findAll(pagina, tamanho);
-		List<Integer> paginas = toRangeList(0, itens.getTotalPages());
+		Navegador navegador = Navegador.of(
+			itens.getNumber(),
+			itens.getTotalPages(),
+			ItemService.TAMANHO_PAGINA_DEFAULT);
 		model.addAttribute("itens", itens);
-		model.addAttribute("paginas", paginas);
+		model.addAttribute("nav", navegador);
 		return "item/itemlist";
 	}
 	
@@ -94,17 +95,5 @@ public class ItemController {
 		service.save(item);
 		rattr.addFlashAttribute("itemsalvo", item);
 		return "redirect:/item/listar";
-	}
-	
-	/**
-	 * 
-	 * @param intStream
-	 * @return
-	 */
-	private List<Integer> toRangeList(int min, int max) {
-		return IntStream.
-			range(min, max).
-			boxed().
-			collect(Collectors.toList());
 	}
 }

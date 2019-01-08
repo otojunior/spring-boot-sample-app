@@ -40,11 +40,17 @@
 		    		</tr>
 		    	</tbody>
 		    </table>
-		    <div data-th-if="${itens.totalPages > 0}" class="w3-bar w3-center">
-				<a data-th-each="n : ${paginas}"
+		    <div data-th-if="${nav.totalPaginas > 0}" class="w3-bar w3-center">
+				<a data-th-href="${nav.anterior} ? |@{/item/listar(pagina=${nav.pagina - nav.totalPaginasJanela})}| : |#|"
+					data-th-text="|&lt;|"
+					data-th-class="|w3-button w3-padding-small | + |${!nav.anterior} ? w3-disabled|"></a>
+				<a data-th-each="n : ${nav.intervalo}"
 					data-th-href="@{/item/listar(pagina=${n})}"
 					data-th-text="${n+1}"
 					data-th-class="${n==itens.number} ? 'w3-button w3-padding-small w3-green' : 'w3-button w3-padding-small'"></a>
+				<a data-th-href="${nav.proximo} ? |@{/item/listar(pagina=${nav.pagina + nav.totalPaginasJanela})}| : |#|"
+					data-th-text="|&gt;|"
+					data-th-class="|w3-button w3-padding-small | + |${!nav.proximo} ? w3-disabled|"></a>
 			</div>
 		    <div class="w3-panel">
 				<a data-th-href="@{/item/adicionar}" class="w3-button w3-ripple app-color w3-padding-small">Adicionar</a>

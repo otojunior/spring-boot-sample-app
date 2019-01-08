@@ -5,7 +5,6 @@ package org.otojunior.sample.app.frontend.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import lombok.Getter;
 
@@ -14,17 +13,23 @@ import lombok.Getter;
  *
  */
 @Getter
-public class Navigation {
+public class Navegador {
 	/**
 	 * 
 	 * @param pagina Numero da pagina
 	 * @param totalPaginas Total de paginas
-	 * @param registrosPorPagina Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
 	 * @return
 	 */
-	public static Navigation of(int pagina,
+	public static Navegador of(int pagina,
 			int totalPaginas,
-			int registrosPorPagina) {
+			int totalPaginasJanela) {
+		
+		/*
+		 * Ajuste de total de paginas, pois o indice da pagina começa de 0.
+		 */
+		totalPaginas--;
+		
 		boolean anterior = false;
 		boolean proximo = true;
 		
@@ -32,31 +37,39 @@ public class Navigation {
 			pagina = totalPaginas;
 		}
 		
-		int min = ((pagina/registrosPorPagina) * registrosPorPagina);
+		int min = ((pagina/totalPaginasJanela) * totalPaginasJanela);
 		if (min > 0) {
 			anterior = true;
 		}
 		
-		int max = (min + (registrosPorPagina-1));
+		int max = (min + (totalPaginasJanela-1));
 		if (max >= totalPaginas) {
 			max = totalPaginas;
 			proximo = false;
 		}
 		
-		return new Navigation(min, max, anterior, proximo);
+		return new Navegador(min, max, anterior, proximo,
+			pagina, totalPaginas, totalPaginasJanela);
 	}
 	
 	private int min;
 	private int max;
+	private int pagina;
+	private int totalPaginas;
+	private int totalPaginasJanela;
 	private boolean anterior;
 	private boolean proximo;
 	
 	/**
 	 * 
 	 */
-	private Navigation(int min, int max, boolean anterior, boolean proximo) {
+	private Navegador(int min, int max, boolean anterior, boolean proximo,
+			int pagina, int totalPaginas, int totalPaginasJanela) {
 		this.min = min;
 		this.max = max;
+		this.pagina = pagina;
+		this.totalPaginas = totalPaginas;
+		this.totalPaginasJanela = totalPaginasJanela;
 		this.anterior = anterior;
 		this.proximo = proximo;
 	}
