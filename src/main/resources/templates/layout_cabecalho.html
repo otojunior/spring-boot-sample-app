@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html>
 
 	<div data-th-fragment="frag-cabecalho" class="w3-bar w3-card-4 app-color w3-border-bottom w3-border-green">
     	<span class="w3-bar-item  w3-padding-small">
@@ -9,7 +9,7 @@
 		<span class="w3-right">
 			<i class="w3-padding w3-xlarge fas fa-user-tie">
 				<a class="w3-btn w3-padding-small" data-th-href="@{/logout}">
-					<span sec:authentication="name"></span>
+					<span data-sec-authentication="name"/>
 				</a>
 			</i>
 		</span>
