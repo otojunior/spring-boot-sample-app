@@ -27,6 +27,8 @@ import org.otojunior.sample.app.backend.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -40,8 +42,11 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers=ItemRest.class, secure=false, properties= {
-	"logging.level.org.otojunior.sample.app.backend.rest=DEBUG"})
+@WebMvcTest(
+	controllers=ItemRest.class,
+	secure=false,
+	properties="logging.level.org.otojunior.sample.app.backend.rest=DEBUG",
+	excludeFilters=@ComponentScan.Filter(type=FilterType.REGEX, pattern="org.otojunior.sample.app.frontend.advice.*"))
 public class ItemRestTest {
 	private static final String[] NOMES = { "Alicate", "Martelo", "Parafuso" };
 	
