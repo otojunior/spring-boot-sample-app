@@ -17,6 +17,10 @@
 
 	<name>SpringBoot Sample Application</name>
 	<description>Sample Project based on Spring Boot</description>
+	
+	<scm>
+		<developerConnection>scm:git:https://otojunior@github.com/otojunior/spring-boot-sample-app.git</developerConnection>
+	</scm>
 
 	<distributionManagement>
 		<snapshotRepository>
