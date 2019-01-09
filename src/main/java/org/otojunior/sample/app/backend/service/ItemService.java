@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ItemService {
 	public static final int NUMERO_PAGINA_DEFAULT = 0;
-	public static final int TAMANHO_PAGINA_DEFAULT = 5;
+	public static final int TAMANHO_PAGINA_DEFAULT = 10;
 	
 	@Autowired
 	private ItemRepository repository;

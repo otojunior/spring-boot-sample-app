@@ -44,8 +44,16 @@
 		    <!-- Navegação -->
 		    <div data-th-if="${nav.totalPaginas > 0}" class="w3-bar w3-center">
 				<a	data-th-if="${nav.anterior}"
+					data-th-text="|&lt;&lt;|"
+					data-th-href="@{/item/listar(pagina=${nav.primeiraJanela})}"
+					data-th-class="|w3-button w3-padding-small|"/>	
+				<span data-th-if="${!nav.anterior}"
+					data-th-text="|&lt;&lt;|"
+					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
+				
+				<a	data-th-if="${nav.anterior}"
 					data-th-text="|&lt;|"
-					data-th-href="@{/item/listar(pagina=${nav.pagina - nav.totalPaginasJanela})}"
+					data-th-href="@{/item/listar(pagina=${nav.janelaAnterior})}"
 					data-th-class="|w3-button w3-padding-small|"/>	
 				<span data-th-if="${!nav.anterior}"
 					data-th-text="|&lt;|"
@@ -58,10 +66,18 @@
 					
 				<a	data-th-if="${nav.proximo}"
 					data-th-text="|&gt;|"
-					data-th-href="@{/item/listar(pagina=${nav.pagina + nav.totalPaginasJanela})}"
+					data-th-href="@{/item/listar(pagina=${nav.proximaJanela})}"
 					data-th-class="|w3-button w3-padding-small|"/>	
 				<span data-th-if="${!nav.proximo}"
 					data-th-text="|&gt;|"
+					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
+				
+				<a	data-th-if="${nav.proximo}"
+					data-th-text="|&gt;&gt;|"
+					data-th-href="@{/item/listar(pagina=${nav.ultimaJanela})}"
+					data-th-class="|w3-button w3-padding-small|"/>	
+				<span data-th-if="${!nav.proximo}"
+					data-th-text="|&gt;&gt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 			</div>
 			

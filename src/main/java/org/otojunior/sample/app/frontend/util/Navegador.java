@@ -25,16 +25,12 @@ public class Navegador {
 			int totalPaginas,
 			int totalPaginasJanela) {
 		
-		/*
-		 * Ajuste de total de paginas, pois o indice da pagina começa de 0.
-		 */
-		totalPaginas--;
-		
 		boolean anterior = false;
 		boolean proximo = true;
+		int ultimaPagina = totalPaginas - 1;
 		
-		if (pagina > totalPaginas) {
-			pagina = totalPaginas;
+		if (pagina > ultimaPagina) {
+			pagina = ultimaPagina;
 		}
 		
 		int min = ((pagina/totalPaginasJanela) * totalPaginasJanela);
@@ -43,8 +39,8 @@ public class Navegador {
 		}
 		
 		int max = (min + (totalPaginasJanela-1));
-		if (max >= totalPaginas) {
-			max = totalPaginas;
+		if (max >= ultimaPagina) {
+			max = ultimaPagina;
 			proximo = false;
 		}
 		
@@ -84,6 +80,41 @@ public class Navegador {
 			intervalo.add(i);
 		}
 		return intervalo;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Integer getProximaJanela() {
+		int proxima = (pagina + totalPaginasJanela);
+		int ultimaPagina = (totalPaginas - 1);
+		return (proxima > ultimaPagina) ? ultimaPagina : proxima; 
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Integer getUltimaJanela() {
+		return (totalPaginas - 1);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Integer getPrimeiraJanela() {
+		return 0;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Integer getJanelaAnterior() {
+		int anterior = (pagina - totalPaginasJanela);
+		return (anterior < 0) ? 0 : anterior;
 	}
 	
 	/**
