@@ -5,6 +5,8 @@ package org.otojunior.sample.app.frontend.util;
 
 import java.util.stream.IntStream;
 
+import org.springframework.data.domain.Page;
+
 import lombok.Getter;
 
 /**
@@ -13,6 +15,16 @@ import lombok.Getter;
  */
 @Getter
 public class Navegador {
+	/**
+	 *
+	 * @param page
+	 * @param totalPaginasJanela
+	 * @return
+	 */
+	public static Navegador of(Page<?> page, int totalPaginasJanela) {
+		return of(page.getNumber(), page.getTotalPages(), totalPaginasJanela);
+	}
+
 	/**
 	 * 
 	 * @param pagina Numero da pagina

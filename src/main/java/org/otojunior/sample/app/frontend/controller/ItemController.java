@@ -42,10 +42,7 @@ public class ItemController {
 			@RequestParam Optional<Integer> tamanho,
 			Model model) {
 		Page<Item> itens = service.findAll(pagina, tamanho);
-		Navegador navegador = Navegador.of(
-			itens.getNumber(),
-			itens.getTotalPages(),
-			ItemService.TAMANHO_PAGINA_DEFAULT);
+		Navegador navegador = Navegador.of(itens, ItemService.TAMANHO_PAGINA_DEFAULT);
 		model.addAttribute("itens", itens);
 		model.addAttribute("nav", navegador);
 		return "item/itemlist";
