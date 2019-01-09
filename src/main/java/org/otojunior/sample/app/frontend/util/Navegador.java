@@ -3,8 +3,7 @@
  */
 package org.otojunior.sample.app.frontend.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.IntStream;
 
 import lombok.Getter;
 
@@ -62,12 +61,8 @@ public class Navegador {
 	 * 
 	 * @return
 	 */
-	public List<Integer> getIntervalo() {
-		List<Integer> intervalo = new ArrayList<>();
-		for (int i = min; i <= max ; i++) {
-			intervalo.add(i);
-		}
-		return intervalo;
+	public int[] getIntervalo() {
+		return IntStream.rangeClosed(min, max).toArray();
 	}
 	
 	/**

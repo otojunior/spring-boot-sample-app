@@ -5,8 +5,6 @@ package org.otojunior.sample.app.frontend.util;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
 import org.junit.Test;
 
 /**
@@ -47,14 +45,14 @@ public class NavegadorTest {
 	 */
 	@Test
 	public void testGetIntervalo() {
-		List<Integer> intervalo = Navegador.of(25, 35, 7).getIntervalo();
-		assertEquals(7, intervalo.size());
-		assertEquals(21, intervalo.get(0).intValue());
-		assertEquals(22, intervalo.get(1).intValue());
-		assertEquals(23, intervalo.get(2).intValue());
-		assertEquals(24, intervalo.get(3).intValue());
-		assertEquals(25, intervalo.get(4).intValue());
-		assertEquals(26, intervalo.get(5).intValue());
-		assertEquals(27, intervalo.get(6).intValue());
+		int[] intervalo = Navegador.of(25, 35, 7).getIntervalo();
+		assertEquals(7, intervalo.length);
+		assertEquals(21, intervalo[0]);
+		assertEquals(22, intervalo[1]);
+		assertEquals(23, intervalo[2]);
+		assertEquals(24, intervalo[3]);
+		assertEquals(25, intervalo[4]);
+		assertEquals(26, intervalo[5]);
+		assertEquals(27, intervalo[6]);
 	}
 }
