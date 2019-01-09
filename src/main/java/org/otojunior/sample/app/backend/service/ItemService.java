@@ -3,8 +3,12 @@
  */
 package org.otojunior.sample.app.backend.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.annotation.PostConstruct;
 
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.repository.ItemRepository;
@@ -90,5 +94,23 @@ public class ItemService {
 	@Transactional
 	public Item save(Item item) {
 		return repository.save(item);
+	}
+	
+	/**
+	 * 
+	 */
+	@Transactional
+	@PostConstruct
+	public void cargaInicialExtra() {
+		final int N = 217;
+		final List<Item> ITENS = new ArrayList<>(N);
+		for (int i = 1; i <= N; i++) {
+			Item item = new Item();
+			item.setCodigo(Long.valueOf(1000+i));
+			item.setNome("Item " + i);
+			item.setPreco(BigDecimal.valueOf(i));
+			ITENS.add(item);
+		}
+		repository.saveAll(ITENS);
 	}
 }
