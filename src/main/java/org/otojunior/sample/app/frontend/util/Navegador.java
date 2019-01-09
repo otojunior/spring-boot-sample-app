@@ -25,8 +25,6 @@ public class Navegador {
 			int totalPaginas,
 			int totalPaginasJanela) {
 		
-		boolean anterior = false;
-		boolean proximo = true;
 		int ultimaPagina = totalPaginas - 1;
 		
 		if (pagina > ultimaPagina) {
@@ -34,18 +32,13 @@ public class Navegador {
 		}
 		
 		int min = ((pagina/totalPaginasJanela) * totalPaginasJanela);
-		if (min > 0) {
-			anterior = true;
-		}
 		
 		int max = (min + (totalPaginasJanela-1));
 		if (max >= ultimaPagina) {
 			max = ultimaPagina;
-			proximo = false;
 		}
 		
-		return new Navegador(min, max, anterior, proximo,
-			pagina, totalPaginas, totalPaginasJanela);
+		return new Navegador(min, max, pagina, totalPaginas, totalPaginasJanela);
 	}
 	
 	private int min;
@@ -53,21 +46,16 @@ public class Navegador {
 	private int pagina;
 	private int totalPaginas;
 	private int totalPaginasJanela;
-	private boolean anterior;
-	private boolean proximo;
 	
 	/**
 	 * 
 	 */
-	private Navegador(int min, int max, boolean anterior, boolean proximo,
-			int pagina, int totalPaginas, int totalPaginasJanela) {
+	private Navegador(int min, int max,	int pagina, int totalPaginas, int totalPaginasJanela) {
 		this.min = min;
 		this.max = max;
 		this.pagina = pagina;
 		this.totalPaginas = totalPaginas;
 		this.totalPaginasJanela = totalPaginasJanela;
-		this.anterior = anterior;
-		this.proximo = proximo;
 	}
 	
 	/**
@@ -86,11 +74,29 @@ public class Navegador {
 	 * 
 	 * @return
 	 */
+	public Integer getJanelaAnterior() {
+		int anterior = (pagina - totalPaginasJanela);
+		return (anterior < 0) ? 0 : anterior;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer getProximaJanela() {
 		int proxima = (pagina + totalPaginasJanela);
 		int ultimaPagina = (totalPaginas - 1);
 		return (proxima > ultimaPagina) ? ultimaPagina : proxima; 
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Integer getPrimeiraJanela() {
+		return 0;
+	}
+	
 	
 	/**
 	 * 
@@ -104,17 +110,17 @@ public class Navegador {
 	 * 
 	 * @return
 	 */
-	public Integer getPrimeiraJanela() {
-		return 0;
+	public boolean isAnterior() {
+		return (min > 0);
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public Integer getJanelaAnterior() {
-		int anterior = (pagina - totalPaginasJanela);
-		return (anterior < 0) ? 0 : anterior;
+	public boolean isProximo() {
+		int ultimaPagina = (totalPaginas - 1);
+		return (max < ultimaPagina);
 	}
 	
 	/**
@@ -122,6 +128,6 @@ public class Navegador {
 	 */
 	@Override
 	public String toString() {
-		return anterior + " [" + min + ".." + max + "] " + proximo;
+		return isAnterior() + " [" + min + ".." + max + "] " + isProximo();
 	}
 }
