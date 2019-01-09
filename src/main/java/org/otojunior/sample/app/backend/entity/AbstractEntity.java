@@ -20,8 +20,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * <p>Abstract AbstractEntity class.</p>
  *
+ * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @version $Id: $Id
  */
 @Getter
 @Setter
@@ -45,6 +47,7 @@ public abstract class AbstractEntity implements Serializable {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
@@ -57,14 +60,13 @@ public abstract class AbstractEntity implements Serializable {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);

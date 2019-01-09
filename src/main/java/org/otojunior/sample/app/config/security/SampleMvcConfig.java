@@ -8,14 +8,14 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * <p>SampleMvcConfig class.</p>
  *
+ * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @version $Id: $Id
  */
 @Configuration
 public class SampleMvcConfig implements WebMvcConfigurer {
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("login");

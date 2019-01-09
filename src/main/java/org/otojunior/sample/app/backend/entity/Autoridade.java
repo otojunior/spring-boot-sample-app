@@ -15,8 +15,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * <p>Autoridade class.</p>
  *
+ * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @version $Id: $Id
  */
 @Getter
 @Setter

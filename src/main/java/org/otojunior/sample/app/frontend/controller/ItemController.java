@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * @author 01456231650
+ * <p>ItemController class.</p>
  *
+ * @author 01456231650
+ * @version $Id: $Id
  */
 @Controller
 @RequestMapping("/item")
@@ -32,9 +34,12 @@ public class ItemController {
 	private ItemService service;
 	
 	/**
-	 * 
-	 * @param model
-	 * @return
+	 * <p>listar.</p>
+	 *
+	 * @param model a {@link org.springframework.ui.Model} object.
+	 * @param pagina a {@link java.util.Optional} object.
+	 * @param tamanho a {@link java.util.Optional} object.
+	 * @return a {@link java.lang.String} object.
 	 */
 	@GetMapping("/listar")
 	public String listar(
@@ -49,8 +54,11 @@ public class ItemController {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>editar.</p>
+	 *
+	 * @param id a {@link java.lang.Long} object.
+	 * @param model a {@link org.springframework.ui.Model} object.
+	 * @return a {@link java.lang.String} object.
 	 */
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable("id") Long id, Model model) {
@@ -60,9 +68,11 @@ public class ItemController {
 	}
 	
 	/**
-	 * 
-	 * @param model
-	 * @return
+	 * <p>excluir.</p>
+	 *
+	 * @param id a {@link java.lang.Long} object.
+	 * @param rattr a {@link org.springframework.web.servlet.mvc.support.RedirectAttributes} object.
+	 * @return a {@link java.lang.String} object.
 	 */
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes rattr) {
@@ -72,8 +82,10 @@ public class ItemController {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>adicionar.</p>
+	 *
+	 * @param model a {@link org.springframework.ui.Model} object.
+	 * @return a {@link java.lang.String} object.
 	 */
 	@GetMapping("/adicionar")
 	public String adicionar(Model model) {
@@ -83,9 +95,11 @@ public class ItemController {
 	}
 	
 	/**
-	 * 
-	 * @param model
-	 * @return
+	 * <p>salvar.</p>
+	 *
+	 * @param item a {@link org.otojunior.sample.app.backend.entity.Item} object.
+	 * @param rattr a {@link org.springframework.web.servlet.mvc.support.RedirectAttributes} object.
+	 * @return a {@link java.lang.String} object.
 	 */
 	@PostMapping("/salvar")
 	public String salvar(@Valid Item item, RedirectAttributes rattr) {

@@ -7,14 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * @author 01456231650
+ * <p>IndexController class.</p>
  *
+ * @author 01456231650
+ * @version $Id: $Id
  */
 @Controller
 public class IndexController {
 	/**
-	 * 
-	 * @return
+	 * <p>index.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	@GetMapping("/")
 	public String index() {

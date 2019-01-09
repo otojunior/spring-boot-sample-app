@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
- * @author 01456231650
+ * <p>ActuatorInfoControllerAdvice class.</p>
  *
+ * @author 01456231650
+ * @version $Id: $Id
  */
 @ControllerAdvice
 public class ActuatorInfoControllerAdvice {
@@ -20,8 +22,9 @@ public class ActuatorInfoControllerAdvice {
 	private InfoEndpoint infoEndpoint;
 	
 	/**
-	 * 
-	 * @return
+	 * <p>infoVersao.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	@SuppressWarnings("unchecked")
 	@ModelAttribute("infoVersao")

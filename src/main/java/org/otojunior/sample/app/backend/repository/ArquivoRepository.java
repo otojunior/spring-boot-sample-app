@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * <p>ArquivoRepository interface.</p>
  *
+ * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @version $Id: $Id
  */
 @Repository
 public interface ArquivoRepository extends JpaRepository<Arquivo, Long>{

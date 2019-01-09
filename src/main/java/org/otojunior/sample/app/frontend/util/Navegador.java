@@ -10,27 +10,32 @@ import org.springframework.data.domain.Page;
 import lombok.Getter;
 
 /**
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * <p>Navegador class.</p>
  *
+ * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @version $Id: $Id
  */
 @Getter
 public class Navegador {
 	/**
+	 * <p>of.</p>
 	 *
-	 * @param page
-	 * @param totalPaginasJanela
-	 * @return
+	 * @param page a {@link org.springframework.data.domain.Page} object.
+	 * @param totalPaginasJanela a int.
+	 * @return a {@link org.otojunior.sample.app.frontend.util.Navegador} object.
 	 */
 	public static Navegador of(Page<?> page, int totalPaginasJanela) {
 		return of(page.getNumber(), page.getTotalPages(), totalPaginasJanela);
 	}
 
 	/**
-	 * 
+	 * <p>of.</p>
+	 *
 	 * @param pagina Numero da pagina
 	 * @param totalPaginas Total de paginas
 	 * @param totalPaginasJanela Quantidade de registros por pagina
-	 * @return
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @return a {@link org.otojunior.sample.app.frontend.util.Navegador} object.
 	 */
 	public static Navegador of(int pagina,
 			int totalPaginas,
@@ -70,16 +75,18 @@ public class Navegador {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>getIntervalo.</p>
+	 *
+	 * @return an array of {@link int} objects.
 	 */
 	public int[] getIntervalo() {
 		return IntStream.rangeClosed(min, max).toArray();
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>getJanelaAnterior.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public Integer getJanelaAnterior() {
 		int anterior = (pagina - totalPaginasJanela);
@@ -87,8 +94,9 @@ public class Navegador {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>getProximaJanela.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public Integer getProximaJanela() {
 		int proxima = (pagina + totalPaginasJanela);
@@ -97,8 +105,9 @@ public class Navegador {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * <p>getPrimeiraJanela.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public Integer getPrimeiraJanela() {
 		return 0;
@@ -106,33 +115,34 @@ public class Navegador {
 	
 	
 	/**
-	 * 
-	 * @return
+	 * <p>getUltimaJanela.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public Integer getUltimaJanela() {
 		return (totalPaginas - 1);
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>isAnterior.</p>
+	 *
+	 * @return a boolean.
 	 */
 	public boolean isAnterior() {
 		return (min > 0);
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>isProximo.</p>
+	 *
+	 * @return a boolean.
 	 */
 	public boolean isProximo() {
 		int ultimaPagina = (totalPaginas - 1);
 		return (max < ultimaPagina);
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return isAnterior() + " [" + min + ".." + max + "] " + isProximo();

@@ -15,11 +15,14 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
+ * <p>SampleSecurityConfig class.</p>
+ *
  * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
- * Referências: 
+ * Referências:
  * http://www.baeldung.com/spring-security-expressions
  * https://spring.io/guides/topicals/spring-security-architecture/
  * https://www.boraji.com/spring-security-5-jdbc-based-authentication-example
+ * @version $Id: $Id
  */
 @Configuration
 @EnableWebSecurity
@@ -40,9 +43,7 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 	private final String[] FOR_ADMIN_ROLE = {
 		"/api/**" };
 	
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().
@@ -50,9 +51,7 @@ public class SampleSecurityConfig extends WebSecurityConfigurerAdapter {
 			passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().

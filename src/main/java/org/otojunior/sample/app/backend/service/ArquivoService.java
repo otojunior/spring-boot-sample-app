@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author otojunior
+ * <p>ArquivoService class.</p>
  *
+ * @author otojunior
+ * @version $Id: $Id
  */
 @Service
 public class ArquivoService {
@@ -19,9 +21,10 @@ public class ArquivoService {
 	private ArquivoRepository repository;
 	
 	/**
+	 * <p>save.</p>
 	 *
-	 * @param item
-	 * @return
+	 * @param arquivo a {@link org.otojunior.sample.app.backend.entity.Arquivo} object.
+	 * @return a {@link org.otojunior.sample.app.backend.entity.Arquivo} object.
 	 */
 	@Transactional
 	public Arquivo save(Arquivo arquivo) {

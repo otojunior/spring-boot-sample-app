@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
- * @author 01456231650
+ * <p>ActuatorHealthControllerAdvice class.</p>
  *
+ * @author 01456231650
+ * @version $Id: $Id
  */
 @ControllerAdvice
 public class ActuatorHealthControllerAdvice {
@@ -20,8 +22,9 @@ public class ActuatorHealthControllerAdvice {
 	private HealthEndpoint healthEndpoint;
 	
 	/**
-	 * 
-	 * @return
+	 * <p>infoStatus.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	@ModelAttribute("infoStatus")
 	public String infoStatus() {
@@ -32,8 +35,9 @@ public class ActuatorHealthControllerAdvice {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>infoBancoDados.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	@ModelAttribute("infoBancoDados")
 	public String infoBancoDados() {

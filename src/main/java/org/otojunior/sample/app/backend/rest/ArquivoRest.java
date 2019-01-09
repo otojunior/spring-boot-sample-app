@@ -20,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author otojunior
+ * <p>ArquivoRest class.</p>
  *
+ * @author otojunior
+ * @version $Id: $Id
  */
 @Slf4j
 @RestController
@@ -31,9 +33,12 @@ public class ArquivoRest {
 	private ArquivoService service;
 	
 	/**
-	 * 
-	 * @param item
-	 * @throws IOException 
+	 * <p>save.</p>
+	 *
+	 * @throws java.io.IOException
+	 * @param codigo a {@link java.lang.Long} object.
+	 * @param file a {@link org.springframework.web.multipart.MultipartFile} object.
+	 * @return a {@link org.springframework.http.ResponseEntity} object.
 	 */
 	@PostMapping("/{codigo}")
 	public ResponseEntity<Arquivo> save(

@@ -20,28 +20,36 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author otojunior
+ * <p>ItemService class.</p>
  *
+ * @author otojunior
+ * @version $Id: $Id
  */
 @Service
 public class ItemService {
+	/** Constant <code>NUMERO_PAGINA_DEFAULT=0</code> */
 	public static final int NUMERO_PAGINA_DEFAULT = 0;
+	/** Constant <code>TAMANHO_PAGINA_DEFAULT=10</code> */
 	public static final int TAMANHO_PAGINA_DEFAULT = 10;
 	
 	@Autowired
 	private ItemRepository repository;
 	
 	/**
-	 * 
-	 * @return
+	 * <p>findAll.</p>
+	 *
+	 * @return a {@link java.util.List} object.
 	 */
 	public List<Item> findAll() {
 		return repository.findAll();
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * <p>findAll.</p>
+	 *
+	 * @param pagina a {@link java.util.Optional} object.
+	 * @param tamanho a {@link java.util.Optional} object.
+	 * @return a {@link org.springframework.data.domain.Page} object.
 	 */
 	public Page<Item> findAll(Optional<Integer> pagina, Optional<Integer> tamanho) {
 		Pageable pageable = PageRequest.of(
@@ -51,35 +59,39 @@ public class ItemService {
 	}
 	
 	/**
-	 * 
-	 * @param cpf
-	 * @return
+	 * <p>findByCodigo.</p>
+	 *
+	 * @param codigo a {@link java.lang.Long} object.
+	 * @return a {@link java.util.Optional} object.
 	 */
 	public Optional<Item> findByCodigo(Long codigo) {
 		return repository.findByCodigo(codigo);
 	}
 	
 	/**
-	 * 
-	 * @param id
-	 * @return
+	 * <p>findById.</p>
+	 *
+	 * @param id a {@link java.lang.Long} object.
+	 * @return a {@link java.util.Optional} object.
 	 */
 	public Optional<Item> findById(Long id) {
 		return repository.findById(id);
 	}
 	
 	/**
-	 * 
-	 * @param cpf
-	 * @return
+	 * <p>findByNome.</p>
+	 *
+	 * @param nome a {@link java.lang.String} object.
+	 * @return a {@link java.util.Optional} object.
 	 */
 	public Optional<Item> findByNome(String nome) {
 		return repository.findByNome(nome);
 	}
 
 	/**
-	 * 
-	 * @param id
+	 * <p>deleteById.</p>
+	 *
+	 * @param id a {@link java.lang.Long} object.
 	 */
 	@Transactional
 	public void deleteById(Long id) {
@@ -87,9 +99,10 @@ public class ItemService {
 	}
 
 	/**
+	 * <p>save.</p>
 	 *
-	 * @param item
-	 * @return
+	 * @param item a {@link org.otojunior.sample.app.backend.entity.Item} object.
+	 * @return a {@link org.otojunior.sample.app.backend.entity.Item} object.
 	 */
 	@Transactional
 	public Item save(Item item) {
@@ -97,7 +110,7 @@ public class ItemService {
 	}
 	
 	/**
-	 * 
+	 * <p>cargaInicialExtra.</p>
 	 */
 	@Transactional
 	@PostConstruct

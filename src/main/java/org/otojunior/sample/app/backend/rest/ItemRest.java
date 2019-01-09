@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author otojunior
+ * <p>ItemRest class.</p>
  *
+ * @author otojunior
+ * @version $Id: $Id
  */
 @Slf4j
 @RestController
@@ -34,8 +36,10 @@ public class ItemRest {
 	private ItemService service;
 	
 	/**
-	 * 
-	 * @param item
+	 * <p>deleteById.</p>
+	 *
+	 * @param id a {@link java.lang.Long} object.
+	 * @return a {@link org.springframework.http.ResponseEntity} object.
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
@@ -49,9 +53,9 @@ public class ItemRest {
 	}
 	
 	/**
-	 * 
-	 * @param cpf
-	 * @return
+	 * <p>findAll.</p>
+	 *
+	 * @return a {@link org.springframework.http.ResponseEntity} object.
 	 */
 	@GetMapping
 	public ResponseEntity<List<Item>> findAll() {
@@ -67,9 +71,10 @@ public class ItemRest {
 	}
 	
 	/**
-	 * 
-	 * @param cpf
-	 * @return
+	 * <p>findByCodigo.</p>
+	 *
+	 * @param codigo a {@link java.lang.Long} object.
+	 * @return a {@link org.springframework.http.ResponseEntity} object.
 	 */
 	@GetMapping(path="", params="codigo")
 	public ResponseEntity<Item> findByCodigo(@RequestParam Long codigo) {
@@ -85,9 +90,10 @@ public class ItemRest {
 	}
 	
 	/**
-	 * 
-	 * @param id
-	 * @return
+	 * <p>findById.</p>
+	 *
+	 * @param id a {@link java.lang.Long} object.
+	 * @return a {@link org.springframework.http.ResponseEntity} object.
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Item> findById(@PathVariable Long id) {
@@ -103,9 +109,10 @@ public class ItemRest {
 	}
 
 	/**
-	 * 
-	 * @param cpf
-	 * @return
+	 * <p>findByNome.</p>
+	 *
+	 * @param nome a {@link java.lang.String} object.
+	 * @return a {@link org.springframework.http.ResponseEntity} object.
 	 */
 	@GetMapping(path="", params="nome")
 	public ResponseEntity<Item> findByNome(@RequestParam String nome) {
@@ -121,8 +128,10 @@ public class ItemRest {
 	}
 	
 	/**
-	 * 
-	 * @param item
+	 * <p>save.</p>
+	 *
+	 * @param item a {@link org.otojunior.sample.app.backend.entity.Item} object.
+	 * @return a {@link org.springframework.http.ResponseEntity} object.
 	 */
 	@PostMapping
 	public ResponseEntity<Item> save(@RequestBody Item item) {
