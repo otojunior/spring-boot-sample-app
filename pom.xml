@@ -19,8 +19,8 @@
 	
 	<scm>
 		<developerConnection>scm:git:https://otojunior@github.com/otojunior/spring-boot-sample-app.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
 	<distributionManagement>
 		<snapshotRepository>

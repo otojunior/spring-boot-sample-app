@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.service.ItemService;
-import org.otojunior.sample.app.frontend.util.Navegador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -46,10 +45,8 @@ public class ItemController {
 			@RequestParam Optional<Integer> pagina,
 			@RequestParam Optional<Integer> tamanho,
 			Model model) {
-		Page<Item> itens = service.findAll(pagina, tamanho);
-		Navegador navegador = Navegador.of(itens, ItemService.TAMANHO_PAGINA_DEFAULT);
-		model.addAttribute("itens", itens);
-		model.addAttribute("nav", navegador);
+		Page<Item> page = service.findAll(pagina, tamanho);
+		model.addAttribute("pagina", page);
 		return "item/itemlist";
 	}
 	

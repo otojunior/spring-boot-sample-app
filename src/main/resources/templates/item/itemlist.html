@@ -26,7 +26,7 @@
 		    		</tr>
 		    	</thead>
 		    	<tbody>
-		    		<tr data-th-each="item : ${itens.content}">
+		    		<tr data-th-each="item : ${pagina.content}">
 		    			<td data-th-text="${item.id}"></td>
 		    			<td data-th-text="${item.codigo}"></td>
 		    			<td data-th-text="${item.nome}"></td>
@@ -42,41 +42,38 @@
 		    </table>
 		    
 		    <!-- Navegação -->
-		    <div data-th-if="${nav.totalPaginas > 0}" class="w3-bar w3-center">
-				<a	data-th-if="${nav.anterior}"
+		    <div data-th-if="${pagina.totalPages > 1}" class="w3-bar w3-center">
+				<a	data-th-if="${!pagina.first}"
 					data-th-text="|&lt;&lt;|"
-					data-th-href="@{/item/listar(pagina=${nav.primeiraJanela})}"
+					data-th-href="@{/item/listar(pagina=0)}"
 					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${!nav.anterior}"
+				<span data-th-if="${pagina.first}"
 					data-th-text="|&lt;&lt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<a	data-th-if="${nav.anterior}"
+				<a	data-th-if="${pagina.hasPrevious()}"
 					data-th-text="|&lt;|"
-					data-th-href="@{/item/listar(pagina=${nav.janelaAnterior})}"
+					data-th-href="@{/item/listar(pagina=${pagina.previousPageable().pageNumber})}"
 					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${!nav.anterior}"
+				<span data-th-if="${!pagina.hasPrevious()}"
 					data-th-text="|&lt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<a data-th-each="n : ${nav.intervalo}"
-					data-th-href="@{/item/listar(pagina=${n})}"
-					data-th-text="${n+1}"
-					data-th-class="${n==itens.number} ? 'w3-button w3-padding-small w3-green' : 'w3-button w3-padding-small'"/>
+				<span data-th-text="${pagina.number}" data-th-class="|w3-button w3-padding-small|"/>
 					
-				<a	data-th-if="${nav.proximo}"
+				<a	data-th-if="${pagina.hasNext()}"
 					data-th-text="|&gt;|"
-					data-th-href="@{/item/listar(pagina=${nav.proximaJanela})}"
+					data-th-href="@{/item/listar(pagina=${pagina.nextPageable().pageNumber})}"
 					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${!nav.proximo}"
+				<span data-th-if="${!pagina.hasNext()}"
 					data-th-text="|&gt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<a	data-th-if="${nav.proximo}"
+				<a	data-th-if="${!pagina.last}"
 					data-th-text="|&gt;&gt;|"
-					data-th-href="@{/item/listar(pagina=${nav.ultimaJanela})}"
+					data-th-href="@{/item/listar(pagina=${pagina.totalPages-1})}"
 					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${!nav.proximo}"
+				<span data-th-if="${pagina.last}"
 					data-th-text="|&gt;&gt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 			</div>
