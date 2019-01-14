@@ -42,10 +42,19 @@ public class ItemController {
 	 * @param itemdto a {@link org.otojunior.sample.app.backend.dto.ItemDto} object.
 	 */
 	@GetMapping("/listar")
-	public String listar(@RequestParam Optional<Integer> pagina,
+	public String listar(
+			@RequestParam Optional<String> anterior,
+			@RequestParam Optional<String> proximo,
 			ItemDto itemdto,
 			Model model) {
-		Page<Item> page = service.findAll(itemdto, pagina);
+		
+		if (anterior.isPresent()) {
+			itemdto.decrementarPagina();
+		} else if (proximo.isPresent()) {
+			itemdto.incrementarPagina();
+		}
+		
+		Page<Item> page = service.findAll(itemdto);
 		itemdto.setPage(page);
 		model.addAttribute("itemdto", itemdto);
 		return "item/itemlist";

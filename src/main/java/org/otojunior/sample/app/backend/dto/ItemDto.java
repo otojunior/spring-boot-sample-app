@@ -3,9 +3,12 @@
  */
 package org.otojunior.sample.app.backend.dto;
 
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+
 import java.io.Serializable;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.springframework.data.domain.Page;
 
@@ -25,6 +28,7 @@ public class ItemDto implements Serializable {
 
 	private Long codigo;
 	private String nome;
+	private Integer pagina = 0;
 	private Page<Item> page;
 
 	/**
@@ -34,8 +38,33 @@ public class ItemDto implements Serializable {
 	 */
 	public Item toItem() {
 		Item item = new Item();
-		item.setCodigo(this.codigo);
+		item.setCodigo(codigo);
 		item.setNome(StringUtils.isNotBlank(nome) ? nome : null);
 		return item;
+	}
+
+	/**
+	 * 
+	 */
+	public void decrementarPagina() {
+		pagina--;
+		if (pagina < 0) {
+			pagina = 0;
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void incrementarPagina() {
+		pagina++;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
 	}
 }

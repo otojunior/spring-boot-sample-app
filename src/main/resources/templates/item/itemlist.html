@@ -15,9 +15,9 @@
 			<b><div class="w3-large" th:text="|Listagem de Itens:|"/></b>
 		</div>
 		<div class="w3-panel">
-			<!-- Pesquisa -->
-			<div class="w3-panel">
-				<form method="GET" th:action="@{/item/listar}" th:object="${itemdto}">
+			<form method="GET" th:action="@{/item/listar}" th:object="${itemdto}">
+				<!-- Pesquisa -->
+				<div class="w3-panel">
 					<div>
 						<label>C&oacute;digo:</label>
 						<input class="w3-input w3-border" type="text" th:field="*{codigo}"/>
@@ -30,72 +30,52 @@
 						<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Pesquisar"/>
 						<a class="w3-button w3-ripple app-color w3-padding-small" th:href="@{/item/listar}" th:text="Limpar"/>
 					</div>
-				</form>
-			</div>
+				</div>
 
-			<!-- Tabela -->
-			<table class="w3-table-all" th:if="${itemdto.page.totalElements > 0}">
-		    	<thead>
-		    		<tr class="app-color">
-		    			<th>ID</th>
-		    			<th>C&oacute;digo</th>
-		    			<th>Nome</th>
-		    			<th>Pre&ccedil;o</th>
-		    			<th/>
-		    		</tr>
-		    	</thead>
-		    	<tbody>
-		    		<tr th:each="item : ${itemdto.page.content}">
-		    			<td th:text="${item.id}"></td>
-		    			<td th:text="${item.codigo}"></td>
-		    			<td th:text="${item.nome}"></td>
-		    			<td th:text="${item.preco}"></td>
-		    			<td>
-							<div class="app-text-color">
-								<a th:href="@{/item/editar/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-edit"></i></a>
-								<a th:href="@{/item/excluir/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-trash"></i></a>
-							</div>
-		    			</td>
-		    		</tr>
-		    	</tbody>
-		    </table>
+				<!-- Tabela -->
+				<table class="w3-table-all" th:if="${itemdto.page.totalElements > 0}">
+			    	<thead>
+			    		<tr class="app-color">
+			    			<th>ID</th>
+			    			<th>C&oacute;digo</th>
+			    			<th>Nome</th>
+			    			<th>Pre&ccedil;o</th>
+			    			<th/>
+			    		</tr>
+			    	</thead>
+			    	<tbody>
+			    		<tr th:each="item : ${itemdto.page.content}">
+			    			<td th:text="${item.id}"></td>
+			    			<td th:text="${item.codigo}"></td>
+			    			<td th:text="${item.nome}"></td>
+			    			<td th:text="${item.preco}"></td>
+			    			<td>
+								<div class="app-text-color">
+									<a th:href="@{/item/editar/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-edit"></i></a>
+									<a th:href="@{/item/excluir/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-trash"></i></a>
+								</div>
+			    			</td>
+			    		</tr>
+			    	</tbody>
+			    </table>
 		    
-		    <!-- Navegação -->
-		    <div th:if="${itemdto.page.totalPages > 1}" class="w3-bar w3-center">
-				<a	th:if="${!itemdto.page.first}"
-					th:text="|&lt;&lt;|"
-					th:href="@{/item/listar(pagina=0)}"
-					th:class="|w3-button w3-padding-small|"/>	
-				<span th:if="${itemdto.page.first}"
-					th:text="|&lt;&lt;|"
-					th:class="|w3-button w3-padding-small w3-disabled|"/>
-				
-				<a	th:if="${itemdto.page.hasPrevious()}"
-					th:text="|&lt;|"
-					th:href="@{/item/listar(pagina=${itemdto.page.previousPageable().pageNumber})}"
-					th:class="|w3-button w3-padding-small|"/>	
-				<span th:if="${!itemdto.page.hasPrevious()}"
-					th:text="|&lt;|"
-					th:class="|w3-button w3-padding-small w3-disabled|"/>
-				
-				<span th:text="${itemdto.page.number}" th:class="|w3-button w3-padding-small|"/>
+			    <!-- Navegação -->
+			    <div th:if="${itemdto.page.totalPages > 1}" class="w3-bar w3-center">
+					<input class="w3-button w3-padding-small" type="submit"
+						th:if="${itemdto.page.hasPrevious()}"
+						th:name="anterior"
+						th:value="|<|"/>
 					
-				<a	th:if="${itemdto.page.hasNext()}"
-					th:text="|&gt;|"
-					th:href="@{/item/listar(pagina=${itemdto.page.nextPageable().pageNumber})}"
-					th:class="|w3-button w3-padding-small|"/>	
-				<span th:if="${!itemdto.page.hasNext()}"
-					th:text="|&gt;|"
-					th:class="|w3-button w3-padding-small w3-disabled|"/>
-				
-				<a	th:if="${!itemdto.page.last}"
-					th:text="|&gt;&gt;|"
-					th:href="@{/item/listar(pagina=${itemdto.page.totalPages-1})}"
-					th:class="|w3-button w3-padding-small|"/>	
-				<span th:if="${itemdto.page.last}"
-					th:text="|&gt;&gt;|"
-					th:class="|w3-button w3-padding-small w3-disabled|"/>
-			</div>
+					<input type="text" size="3"
+						th:field="*{pagina}"						
+						th:value="${itemdto.page.number}"/>
+					
+					<input class="w3-button w3-padding-small" type="submit"
+						th:if="${itemdto.page.hasNext()}"
+						th:name="proximo"
+						th:value="|>|"/>
+				</div>
+			</form>
 			
 		    <div class="w3-panel">
 				<a th:href="@{/item/adicionar}" class="w3-button w3-ripple app-color w3-padding-small">Adicionar</a>

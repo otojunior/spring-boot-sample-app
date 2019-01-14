@@ -54,7 +54,7 @@ public class ItemService {
 	 * @return a {@link org.springframework.data.domain.Page} object.
 	 * @param itemdto a {@link org.otojunior.sample.app.backend.dto.ItemDto} object.
 	 */
-	public Page<Item> findAll(ItemDto itemdto, Optional<Integer> pagina) {
+	public Page<Item> findAll(ItemDto itemdto) {
 		Item item = itemdto.toItem();
 		
 		ExampleMatcher matcher = ExampleMatcher.matching().
@@ -64,8 +64,8 @@ public class ItemService {
 		Example<Item> example = Example.of(item, matcher);
 		
 		Pageable pageable = PageRequest.of(
-				pagina.orElse(NUMERO_PAGINA_DEFAULT),
-				TAMANHO_PAGINA_DEFAULT);
+			itemdto.getPagina(),
+			TAMANHO_PAGINA_DEFAULT);
 		
 		return repository.findAll(example, pageable);
 	}
