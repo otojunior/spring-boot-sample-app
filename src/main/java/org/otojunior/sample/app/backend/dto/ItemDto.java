@@ -35,9 +35,10 @@ public class ItemDto implements Serializable {
 	private Page<Item> page;
 
 	/**
-	 * 
-	 * @param operacao
-	 * @return
+	 * <p>Getter for the field <code>pagina</code>.</p>
+	 *
+	 * @param operacao a {@link java.util.Optional} object.
+	 * @return a int.
 	 */
 	public int getPagina(Optional<String> operacao) {
 		if (operacao.isPresent()) {
@@ -71,9 +72,7 @@ public class ItemDto implements Serializable {
 		return item;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);

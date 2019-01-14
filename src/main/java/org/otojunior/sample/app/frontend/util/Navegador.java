@@ -39,6 +39,42 @@ public class Navegador {
 	 * @param totalPaginasJanela Quantidade de registros por pagina
 	 * @param totalPaginasJanela Quantidade de registros por pagina
 	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
+	 * @param totalPaginasJanela Quantidade de registros por pagina
 	 * @return a {@link org.otojunior.sample.app.frontend.util.Navegador} object.
 	 */
 	public static Navegador of(int pagina,

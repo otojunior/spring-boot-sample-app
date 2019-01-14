@@ -37,9 +37,9 @@ public class ItemController {
 	 * <p>listar.</p>
 	 *
 	 * @param model a {@link org.springframework.ui.Model} object.
-	 * @param pagina a {@link java.util.Optional} object.
 	 * @return a {@link java.lang.String} object.
 	 * @param itemdto a {@link org.otojunior.sample.app.backend.dto.ItemDto} object.
+	 * @param operacao a {@link java.util.Optional} object.
 	 */
 	@GetMapping("/listar")
 	public String listar(

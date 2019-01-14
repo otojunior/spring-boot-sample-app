@@ -50,9 +50,9 @@ public class ItemService {
 	/**
 	 * <p>findAll.</p>
 	 *
-	 * @param pagina a {@link java.util.Optional} object.
 	 * @return a {@link org.springframework.data.domain.Page} object.
 	 * @param itemdto a {@link org.otojunior.sample.app.backend.dto.ItemDto} object.
+	 * @param operacao a {@link java.util.Optional} object.
 	 */
 	public Page<Item> findAll(ItemDto itemdto, Optional<String> operacao) {
 		Item item = itemdto.toItem();
