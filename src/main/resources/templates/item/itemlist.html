@@ -26,7 +26,7 @@
 		    		</tr>
 		    	</thead>
 		    	<tbody>
-		    		<tr data-th-each="item : ${pagina.content}">
+		    		<tr data-th-each="item : ${itemdto.page.content}">
 		    			<td data-th-text="${item.id}"></td>
 		    			<td data-th-text="${item.codigo}"></td>
 		    			<td data-th-text="${item.nome}"></td>
@@ -42,38 +42,38 @@
 		    </table>
 		    
 		    <!-- Navegação -->
-		    <div data-th-if="${pagina.totalPages > 1}" class="w3-bar w3-center">
-				<a	data-th-if="${!pagina.first}"
+		    <div data-th-if="${itemdto.page.totalPages > 1}" class="w3-bar w3-center">
+				<a	data-th-if="${!itemdto.page.first}"
 					data-th-text="|&lt;&lt;|"
 					data-th-href="@{/item/listar(pagina=0)}"
 					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${pagina.first}"
+				<span data-th-if="${itemdto.page.first}"
 					data-th-text="|&lt;&lt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<a	data-th-if="${pagina.hasPrevious()}"
+				<a	data-th-if="${itemdto.page.hasPrevious()}"
 					data-th-text="|&lt;|"
-					data-th-href="@{/item/listar(pagina=${pagina.previousPageable().pageNumber})}"
+					data-th-href="@{/item/listar(pagina=${itemdto.page.previousPageable().pageNumber})}"
 					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${!pagina.hasPrevious()}"
+				<span data-th-if="${!itemdto.page.hasPrevious()}"
 					data-th-text="|&lt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<span data-th-text="${pagina.number}" data-th-class="|w3-button w3-padding-small|"/>
+				<span data-th-text="${itemdto.page.number}" data-th-class="|w3-button w3-padding-small|"/>
 					
-				<a	data-th-if="${pagina.hasNext()}"
+				<a	data-th-if="${itemdto.page.hasNext()}"
 					data-th-text="|&gt;|"
-					data-th-href="@{/item/listar(pagina=${pagina.nextPageable().pageNumber})}"
+					data-th-href="@{/item/listar(pagina=${itemdto.page.nextPageable().pageNumber})}"
 					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${!pagina.hasNext()}"
+				<span data-th-if="${!itemdto.page.hasNext()}"
 					data-th-text="|&gt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<a	data-th-if="${!pagina.last}"
+				<a	data-th-if="${!itemdto.page.last}"
 					data-th-text="|&gt;&gt;|"
-					data-th-href="@{/item/listar(pagina=${pagina.totalPages-1})}"
+					data-th-href="@{/item/listar(pagina=${itemdto.page.totalPages-1})}"
 					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${pagina.last}"
+				<span data-th-if="${itemdto.page.last}"
 					data-th-text="|&gt;&gt;|"
 					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
 			</div>

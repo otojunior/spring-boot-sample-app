@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.otojunior.sample.app.backend.dto.ItemDto;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,8 @@ public class ItemController {
 			@RequestParam Optional<Integer> tamanho,
 			Model model) {
 		Page<Item> page = service.findAll(pagina, tamanho);
-		model.addAttribute("pagina", page);
+		ItemDto itemdto = new ItemDto(page);
+		model.addAttribute("itemdto", itemdto);
 		return "item/itemlist";
 	}
 	
