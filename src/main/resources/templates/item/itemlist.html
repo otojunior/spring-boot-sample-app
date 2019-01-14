@@ -1,34 +1,34 @@
 <!DOCTYPE HTML>
-<html data-th-replace="~{layout :: frag-layout (~{::title}, ~{::body})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: frag-layout (~{::title}, ~{::body})}">
 <head>
     <title>Listagem de Itens</title>
 </head>
 <body class="w3-panel">
 	<div class="w3-card-4">
 		<div class="w3-panel w3-padding">
-			<p data-th-if="${idexcluido}"
-				data-th-text="|Item de ID ${idexcluido} exclu&iacute;do|"
+			<p th:if="${idexcluido}"
+				th:text="|Item de ID ${idexcluido} exclu&iacute;do|"
 				class="w3-panel w3-padding w3-pale-blue w3-leftbar w3-border-blue"/>
-			<p data-th-if="${itemsalvo}"
-				data-th-text="|Item (${itemsalvo.id}: ${itemsalvo.nome}) salvo|"
+			<p th:if="${itemsalvo}"
+				th:text="|Item (${itemsalvo.id}: ${itemsalvo.nome}) salvo|"
 				class="w3-panel w3-padding w3-pale-blue w3-leftbar w3-border-blue"/>
-			<b><div class="w3-large" data-th-text="|Listagem de Itens:|"/></b>
+			<b><div class="w3-large" th:text="|Listagem de Itens:|"/></b>
 		</div>
 		<div class="w3-panel">
 			<!-- Pesquisa -->
 			<div class="w3-panel">
-				<form method="GET" data-th-action="@{/item/listar}" data-th-object="${itemdto}">
+				<form method="GET" th:action="@{/item/listar}" th:object="${itemdto}">
 					<div>
 						<label>C&oacute;digo:</label>
-						<input class="w3-input w3-border" type="text" data-th-field="*{codigo}"/>
+						<input class="w3-input w3-border" type="text" th:field="*{codigo}"/>
 					</div>
 					<div>
 						<label>Nome:</label>
-						<input class="w3-input w3-border" type="text" data-th-field="*{nome}"/>
+						<input class="w3-input w3-border" type="text" th:field="*{nome}"/>
 					</div>
 					<div class="w3-panel w3-center">
 						<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Pesquisar"/>
-						<a class="w3-button w3-ripple app-color w3-padding-small" data-th-href="@{/item/listar}" data-th-text="Limpar"/>
+						<a class="w3-button w3-ripple app-color w3-padding-small" th:href="@{/item/listar}" th:text="Limpar"/>
 					</div>
 				</form>
 			</div>
@@ -45,15 +45,15 @@
 		    		</tr>
 		    	</thead>
 		    	<tbody>
-		    		<tr data-th-each="item : ${itemdto.page.content}">
-		    			<td data-th-text="${item.id}"></td>
-		    			<td data-th-text="${item.codigo}"></td>
-		    			<td data-th-text="${item.nome}"></td>
-		    			<td data-th-text="${item.preco}"></td>
+		    		<tr th:each="item : ${itemdto.page.content}">
+		    			<td th:text="${item.id}"></td>
+		    			<td th:text="${item.codigo}"></td>
+		    			<td th:text="${item.nome}"></td>
+		    			<td th:text="${item.preco}"></td>
 		    			<td>
 							<div class="app-text-color">
-								<a data-th-href="@{/item/editar/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-edit"></i></a>
-								<a data-th-href="@{/item/excluir/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-trash"></i></a>
+								<a th:href="@{/item/editar/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-edit"></i></a>
+								<a th:href="@{/item/excluir/{id}(id=${item.id})}"><i class="w3-xlarge fas fa-trash"></i></a>
 							</div>
 		    			</td>
 		    		</tr>
@@ -61,44 +61,44 @@
 		    </table>
 		    
 		    <!-- Navegação -->
-		    <div data-th-if="${itemdto.page.totalPages > 1}" class="w3-bar w3-center">
-				<a	data-th-if="${!itemdto.page.first}"
-					data-th-text="|&lt;&lt;|"
-					data-th-href="@{/item/listar(pagina=0)}"
-					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${itemdto.page.first}"
-					data-th-text="|&lt;&lt;|"
-					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
+		    <div th:if="${itemdto.page.totalPages > 1}" class="w3-bar w3-center">
+				<a	th:if="${!itemdto.page.first}"
+					th:text="|&lt;&lt;|"
+					th:href="@{/item/listar(pagina=0)}"
+					th:class="|w3-button w3-padding-small|"/>	
+				<span th:if="${itemdto.page.first}"
+					th:text="|&lt;&lt;|"
+					th:class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<a	data-th-if="${itemdto.page.hasPrevious()}"
-					data-th-text="|&lt;|"
-					data-th-href="@{/item/listar(pagina=${itemdto.page.previousPageable().pageNumber})}"
-					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${!itemdto.page.hasPrevious()}"
-					data-th-text="|&lt;|"
-					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
+				<a	th:if="${itemdto.page.hasPrevious()}"
+					th:text="|&lt;|"
+					th:href="@{/item/listar(pagina=${itemdto.page.previousPageable().pageNumber})}"
+					th:class="|w3-button w3-padding-small|"/>	
+				<span th:if="${!itemdto.page.hasPrevious()}"
+					th:text="|&lt;|"
+					th:class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<span data-th-text="${itemdto.page.number}" data-th-class="|w3-button w3-padding-small|"/>
+				<span th:text="${itemdto.page.number}" th:class="|w3-button w3-padding-small|"/>
 					
-				<a	data-th-if="${itemdto.page.hasNext()}"
-					data-th-text="|&gt;|"
-					data-th-href="@{/item/listar(pagina=${itemdto.page.nextPageable().pageNumber})}"
-					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${!itemdto.page.hasNext()}"
-					data-th-text="|&gt;|"
-					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
+				<a	th:if="${itemdto.page.hasNext()}"
+					th:text="|&gt;|"
+					th:href="@{/item/listar(pagina=${itemdto.page.nextPageable().pageNumber})}"
+					th:class="|w3-button w3-padding-small|"/>	
+				<span th:if="${!itemdto.page.hasNext()}"
+					th:text="|&gt;|"
+					th:class="|w3-button w3-padding-small w3-disabled|"/>
 				
-				<a	data-th-if="${!itemdto.page.last}"
-					data-th-text="|&gt;&gt;|"
-					data-th-href="@{/item/listar(pagina=${itemdto.page.totalPages-1})}"
-					data-th-class="|w3-button w3-padding-small|"/>	
-				<span data-th-if="${itemdto.page.last}"
-					data-th-text="|&gt;&gt;|"
-					data-th-class="|w3-button w3-padding-small w3-disabled|"/>
+				<a	th:if="${!itemdto.page.last}"
+					th:text="|&gt;&gt;|"
+					th:href="@{/item/listar(pagina=${itemdto.page.totalPages-1})}"
+					th:class="|w3-button w3-padding-small|"/>	
+				<span th:if="${itemdto.page.last}"
+					th:text="|&gt;&gt;|"
+					th:class="|w3-button w3-padding-small w3-disabled|"/>
 			</div>
 			
 		    <div class="w3-panel">
-				<a data-th-href="@{/item/adicionar}" class="w3-button w3-ripple app-color w3-padding-small">Adicionar</a>
+				<a th:href="@{/item/adicionar}" class="w3-button w3-ripple app-color w3-padding-small">Adicionar</a>
 			</div>
 		</div>
 	</div>

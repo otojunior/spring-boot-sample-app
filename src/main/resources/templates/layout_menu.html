@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html>
-	<div data-th-fragment="frag-menu" class="w3-bar w3-card-4 app-color">
-		<a data-th-href="@{/}"><i class="w3-padding-small w3-xlarge fas fa-home"></i></a>
-		<a style="vertical-align:top;" class="w3-button w3-ripple app-color w3-padding-small" data-th-href="@{/item/listar}">Itens</a>
-		<a style="vertical-align:top;" class="w3-button w3-ripple app-color w3-padding-small w3-disabled" data-th-href="@{/item/listar}">Upload</a>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div th:fragment="frag-menu" class="w3-bar w3-card-4 app-color">
+		<a th:href="@{/}"><i class="w3-padding-small w3-xlarge fas fa-home"></i></a>
+		<a style="vertical-align:top;" class="w3-button w3-ripple app-color w3-padding-small" th:href="@{/item/listar}">Itens</a>
+		<a style="vertical-align:top;" class="w3-button w3-ripple app-color w3-padding-small w3-disabled" th:href="@{/item/listar}">Upload</a>
 	</div>
 </html>

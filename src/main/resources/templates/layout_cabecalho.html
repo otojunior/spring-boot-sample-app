@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-	<div data-th-fragment="frag-cabecalho" class="w3-bar w3-card-4 app-color w3-border-bottom w3-border-green">
+	<div th:fragment="frag-cabecalho" class="w3-bar w3-card-4 app-color w3-border-bottom w3-border-green">
     	<span class="w3-bar-item  w3-padding-small">
-    		<img alt="logo" height="32" width="32" data-th-src="@{/imagens/logo.png}">
+    		<img alt="logo" height="32" width="32" th:src="@{/imagens/logo.png}">
     	</span>
     	<span class="w3-bar-item w3-padding-small w3-xlarge app-lobster">SpringBoot Sample Application</span>
 		<span class="w3-right">
 			<i class="w3-padding w3-xlarge fas fa-user-tie">
-				<a class="w3-btn w3-padding-small" data-th-href="@{/logout}">
+				<a class="w3-btn w3-padding-small" th:href="@{/logout}">
 					<span data-sec-authentication="name"/>
 				</a>
 			</i>
