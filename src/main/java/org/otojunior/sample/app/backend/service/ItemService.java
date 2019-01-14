@@ -15,6 +15,7 @@ import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -54,10 +55,18 @@ public class ItemService {
 	 * @param itemdto a {@link org.otojunior.sample.app.backend.dto.ItemDto} object.
 	 */
 	public Page<Item> findAll(ItemDto itemdto, Optional<Integer> pagina) {
-		Example<Item> example = Example.of(itemdto.toItem());
+		Item item = itemdto.toItem();
+		
+		ExampleMatcher matcher = ExampleMatcher.matching().
+			withMatcher("codigo", match -> match.exact()).
+			withMatcher("nome", match -> match.startsWith().ignoreCase());
+		
+		Example<Item> example = Example.of(item, matcher);
+		
 		Pageable pageable = PageRequest.of(
 				pagina.orElse(NUMERO_PAGINA_DEFAULT),
 				TAMANHO_PAGINA_DEFAULT);
+		
 		return repository.findAll(example, pageable);
 	}
 	
