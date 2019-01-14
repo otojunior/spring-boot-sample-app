@@ -43,18 +43,10 @@ public class ItemController {
 	 */
 	@GetMapping("/listar")
 	public String listar(
-			@RequestParam Optional<String> anterior,
-			@RequestParam Optional<String> proximo,
+			@RequestParam Optional<String> operacao,
 			ItemDto itemdto,
 			Model model) {
-		
-		if (anterior.isPresent()) {
-			itemdto.decrementarPagina();
-		} else if (proximo.isPresent()) {
-			itemdto.incrementarPagina();
-		}
-		
-		Page<Item> page = service.findAll(itemdto);
+		Page<Item> page = service.findAll(itemdto, operacao);
 		itemdto.setPage(page);
 		model.addAttribute("itemdto", itemdto);
 		return "item/itemlist";

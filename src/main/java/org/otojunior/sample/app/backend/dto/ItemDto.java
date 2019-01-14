@@ -6,6 +6,7 @@ package org.otojunior.sample.app.backend.dto;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -32,6 +33,25 @@ public class ItemDto implements Serializable {
 	private Page<Item> page;
 
 	/**
+	 * 
+	 * @param operacao
+	 * @return
+	 */
+	public int getPagina(Optional<String> operacao) {
+		if (operacao.isPresent()) {
+			switch (operacao.get()) {
+			case "<":
+				this.pagina = (this.pagina > 0) ? (this.pagina - 1) : 0;
+				break;
+			case ">":
+				this.pagina++;
+				break;
+			}
+		}
+		return this.pagina;
+	}
+
+	/**
 	 * Obtem um item a partir de um ItemDTO.
 	 *
 	 * @return Entidade Item.
@@ -43,23 +63,6 @@ public class ItemDto implements Serializable {
 		return item;
 	}
 
-	/**
-	 * 
-	 */
-	public void decrementarPagina() {
-		pagina--;
-		if (pagina < 0) {
-			pagina = 0;
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public void incrementarPagina() {
-		pagina++;
-	}
-	
 	/**
 	 * {@inheritDoc}
 	 */
