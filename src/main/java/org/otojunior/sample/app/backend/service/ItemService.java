@@ -10,9 +10,11 @@ import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
+import org.otojunior.sample.app.backend.dto.ItemDto;
 import org.otojunior.sample.app.backend.entity.Item;
 import org.otojunior.sample.app.backend.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +32,7 @@ public class ItemService {
 	/** Constant <code>NUMERO_PAGINA_DEFAULT=0</code> */
 	public static final int NUMERO_PAGINA_DEFAULT = 0;
 	/** Constant <code>TAMANHO_PAGINA_DEFAULT=10</code> */
-	public static final int TAMANHO_PAGINA_DEFAULT = 10;
+	public static final int TAMANHO_PAGINA_DEFAULT = 5;
 	
 	@Autowired
 	private ItemRepository repository;
@@ -48,14 +50,15 @@ public class ItemService {
 	 * <p>findAll.</p>
 	 *
 	 * @param pagina a {@link java.util.Optional} object.
-	 * @param tamanho a {@link java.util.Optional} object.
 	 * @return a {@link org.springframework.data.domain.Page} object.
+	 * @param itemdto a {@link org.otojunior.sample.app.backend.dto.ItemDto} object.
 	 */
-	public Page<Item> findAll(Optional<Integer> pagina, Optional<Integer> tamanho) {
+	public Page<Item> findAll(ItemDto itemdto, Optional<Integer> pagina) {
+		Example<Item> example = Example.of(itemdto.toItem());
 		Pageable pageable = PageRequest.of(
-			pagina.orElse(NUMERO_PAGINA_DEFAULT),
-			tamanho.orElse(TAMANHO_PAGINA_DEFAULT));
-		return repository.findAll(pageable);
+				pagina.orElse(NUMERO_PAGINA_DEFAULT),
+				TAMANHO_PAGINA_DEFAULT);
+		return repository.findAll(example, pageable);
 	}
 	
 	/**

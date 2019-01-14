@@ -15,6 +15,24 @@
 			<b><div class="w3-large" data-th-text="|Listagem de Itens:|"/></b>
 		</div>
 		<div class="w3-panel">
+			<!-- Pesquisa -->
+			<div class="w3-panel">
+				<form method="GET" data-th-action="@{/item/listar}" data-th-object="${itemdto}">
+					<div>
+						<label>C&oacute;digo:</label>
+						<input class="w3-input w3-border" type="text" data-th-field="*{codigo}"/>
+					</div>
+					<div>
+						<label>Nome:</label>
+						<input class="w3-input w3-border" type="text" data-th-field="*{nome}"/>
+					</div>
+					<div class="w3-panel w3-center">
+						<input class="w3-button w3-ripple app-color w3-padding-small" type="submit" value="Pesquisar"/>
+					</div>
+				</form>
+			</div>
+
+			<!-- Tabela -->
 			<table class="w3-table-all">
 		    	<thead>
 		    		<tr class="app-color">

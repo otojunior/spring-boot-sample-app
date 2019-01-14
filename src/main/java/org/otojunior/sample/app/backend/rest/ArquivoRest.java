@@ -35,10 +35,10 @@ public class ArquivoRest {
 	/**
 	 * <p>save.</p>
 	 *
-	 * @throws java.io.IOException
 	 * @param codigo a {@link java.lang.Long} object.
 	 * @param file a {@link org.springframework.web.multipart.MultipartFile} object.
 	 * @return a {@link org.springframework.http.ResponseEntity} object.
+	 * @throws java.io.IOException if any.
 	 */
 	@PostMapping("/{codigo}")
 	public ResponseEntity<Arquivo> save(

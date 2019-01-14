@@ -38,16 +38,15 @@ public class ItemController {
 	 *
 	 * @param model a {@link org.springframework.ui.Model} object.
 	 * @param pagina a {@link java.util.Optional} object.
-	 * @param tamanho a {@link java.util.Optional} object.
 	 * @return a {@link java.lang.String} object.
+	 * @param itemdto a {@link org.otojunior.sample.app.backend.dto.ItemDto} object.
 	 */
 	@GetMapping("/listar")
-	public String listar(
-			@RequestParam Optional<Integer> pagina,
-			@RequestParam Optional<Integer> tamanho,
+	public String listar(@RequestParam Optional<Integer> pagina,
+			ItemDto itemdto,
 			Model model) {
-		Page<Item> page = service.findAll(pagina, tamanho);
-		ItemDto itemdto = new ItemDto(page);
+		Page<Item> page = service.findAll(itemdto, pagina);
+		itemdto.setPage(page);
 		model.addAttribute("itemdto", itemdto);
 		return "item/itemlist";
 	}
