@@ -67,7 +67,10 @@ public class ItemService {
 			itemdto.getPagina(operacao),
 			TAMANHO_PAGINA_DEFAULT);
 		
-		return repository.findAll(example, pageable);
+		Page<Item> page = repository.findAll(example, pageable);
+		itemdto.setUltimaPagina(page.getTotalPages()-1);
+		
+		return page;
 	}
 	
 	/**

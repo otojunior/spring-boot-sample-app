@@ -30,6 +30,8 @@ public class ItemDto implements Serializable {
 	private Long codigo;
 	private String nome;
 	private Integer pagina = 0;
+	private Integer ultimaPagina = 0;
+	
 	private Page<Item> page;
 
 	/**
@@ -40,12 +42,18 @@ public class ItemDto implements Serializable {
 	public int getPagina(Optional<String> operacao) {
 		if (operacao.isPresent()) {
 			switch (operacao.get()) {
-			case "<":
-				this.pagina = (this.pagina > 0) ? (this.pagina - 1) : 0;
-				break;
-			case ">":
-				this.pagina++;
-				break;
+				case "<":
+					this.pagina = (this.pagina > 0) ? (this.pagina - 1) : 0;
+					break;
+				case ">":
+					this.pagina++;
+					break;
+				case "<<":
+					this.pagina = 0;
+					break;
+				case ">>":
+					this.pagina = ultimaPagina;
+					break;
 			}
 		}
 		return this.pagina;

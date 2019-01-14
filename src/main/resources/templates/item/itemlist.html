@@ -62,18 +62,28 @@
 			    <!-- Navegação -->
 			    <div th:if="${itemdto.page.totalPages > 1}" class="w3-bar w3-center">
 					<input class="w3-button w3-padding-small" type="submit"
+						th:if="${!itemdto.page.first}"
+						th:name="operacao"
+						th:value="|<<|"/>
+					
+					<input class="w3-button w3-padding-small" type="submit"
 						th:if="${itemdto.page.hasPrevious()}"
 						th:name="operacao"
 						th:value="|<|"/>
 					
-					<input type="text" size="3"
-						th:field="*{pagina}"						
-						th:value="${itemdto.page.number}"/>
+					<input type="hidden" size="3" th:field="*{pagina}"/>
+					<input type="hidden" size="3" th:field="*{ultimaPagina}"/>
+					<span th:text="|*{pagina+1} de *{ultimaPagina}|"/>
 					
 					<input class="w3-button w3-padding-small" type="submit"
 						th:if="${itemdto.page.hasNext()}"
 						th:name="operacao"
 						th:value="|>|"/>
+						
+					<input class="w3-button w3-padding-small" type="submit"
+						th:if="${!itemdto.page.last}"
+						th:name="operacao"
+						th:value="|>>|"/>
 				</div>
 			</form>
 			
