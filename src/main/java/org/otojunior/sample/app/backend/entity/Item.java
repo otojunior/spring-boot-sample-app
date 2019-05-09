@@ -21,6 +21,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +35,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Audited
 public class Item extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
