@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * <p>SampleMvcConfig class.</p>
  *
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @author Oto Soares Coelho Junior (otojunior@gmail.com)
  * @version $Id: $Id
  */
 @Configuration

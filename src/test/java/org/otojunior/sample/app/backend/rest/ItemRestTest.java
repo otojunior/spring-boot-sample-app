@@ -37,7 +37,7 @@ import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 
 /**
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @author Oto Soares Coelho Junior (otojunior@gmail.com)
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

@@ -29,7 +29,7 @@ import lombok.Setter;
 /**
  * <p>Item class.</p>
  *
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @author Oto Soares Coelho Junior (otojunior@gmail.com)
  * @version $Id: $Id
  */
 @Getter

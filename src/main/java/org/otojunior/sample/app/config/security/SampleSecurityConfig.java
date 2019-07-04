@@ -28,7 +28,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /**
  * <p>SampleSecurityConfig class.</p>
  *
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @author Oto Soares Coelho Junior (otojunior@gmail.com)
  * Referências:
  * http://www.baeldung.com/spring-security-expressions
  * https://spring.io/guides/topicals/spring-security-architecture/

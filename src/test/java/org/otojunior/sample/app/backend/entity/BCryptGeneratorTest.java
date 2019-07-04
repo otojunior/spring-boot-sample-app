@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 /**
- * @author Oto Soares Coelho Junior (oto.coelho-junior@serpro.gov.br)
+ * @author Oto Soares Coelho Junior (otojunior@gmail.com)
  *
  */
 @Slf4j
