@@ -5,8 +5,9 @@ package org.otojunior.sample.app.backend.rest;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
-
-import java.io.File;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -19,12 +20,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import io.restassured.http.ContentType;
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
 
 /**
  * @author 01456231650
@@ -46,16 +43,22 @@ public class ArquivoRestTest {
 
 	/**
 	 * Test method for {@link org.otojunior.sample.app.backend.rest.ArquivoRest#save(java.lang.Long, org.springframework.web.multipart.MultipartFile)}.
+	 * @throws Exception 
 	 */
 	@Test
-	public void testSave() {
+	public void testSave() throws Exception {
 		doReturn(new Arquivo()).when(service).save(any(Arquivo.class));
 		
-		RestAssuredMockMvc.
-			given().mockMvc(mvc).
-			multiPart(new File("ArquivoRestTest_testSave.txt")).
-			contentType(ContentType.BINARY).
-			when().post("/api/arquivo/100").
-			then().statusCode(HttpStatus.OK.value());
+		mvc.perform(multipart("/api/arquivo/100")
+				.file("ArquivoRestTest_testSave.txt", "teste123".getBytes()))
+			.andDo(print())
+			.andExpect(status().isOk());
+		
+//		RestAssuredMockMvc.
+//			given().mockMvc(mvc).
+//			multiPart(new File("ArquivoRestTest_testSave.txt")).
+//			contentType(ContentType.BINARY).
+//			when().post("/api/arquivo/100").
+//			then().statusCode(HttpStatus.OK.value());
 	}
 }
