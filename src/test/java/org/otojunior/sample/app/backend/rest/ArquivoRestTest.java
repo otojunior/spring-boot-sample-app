@@ -32,7 +32,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(
 	controllers=ArquivoRest.class,
 	secure=false,
-	properties="logging.level.org.otojunior.sample.app.backend.rest=DEBUG",
 	excludeFilters=@ComponentScan.Filter(type=FilterType.REGEX, pattern="org.otojunior.sample.app.frontend.advice.*"))
 public class ArquivoRestTest {
 	@MockBean
