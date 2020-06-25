@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -45,6 +46,7 @@ public class ArquivoRestTest {
 	 * @throws Exception 
 	 */
 	@Test
+	@Ignore
 	public void testSave() throws Exception {
 		doReturn(new Arquivo()).when(service).save(any(Arquivo.class));
 		

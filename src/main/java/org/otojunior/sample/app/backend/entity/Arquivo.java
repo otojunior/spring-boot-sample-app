@@ -40,7 +40,7 @@ public class Arquivo extends AbstractEntity {
 	private Long codigo;
 	
 	@NotNull
-	@Column(nullable=false, length=20)
+	@Column(nullable=false, length=255)
 	private String nome;
 
 	@NotNull
