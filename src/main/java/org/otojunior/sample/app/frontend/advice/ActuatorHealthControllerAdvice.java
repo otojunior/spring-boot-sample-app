@@ -15,10 +15,10 @@
  */
 package org.otojunior.sample.app.frontend.advice;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthEndpoint;
+import org.springframework.boot.actuate.health.SystemHealth;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -53,9 +53,15 @@ public class ActuatorHealthControllerAdvice {
 	 */
 	@ModelAttribute("infoBancoDados")
 	public String infoBancoDados() {
-		Map<String, Object> details = healthEndpoint.
-			health().
-			getDetails();
-		return String.valueOf(details.get("db"));
+		if (healthEndpoint.health() instanceof SystemHealth) {
+			SystemHealth systemHealth = (SystemHealth)healthEndpoint.health();
+			Health health = (Health) systemHealth
+				.getComponents()
+				.get("db");
+			return (String) health
+				.getDetails()
+				.get("database");
+		}
+		return "UNKNOWN";
 	}
 }
