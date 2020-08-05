@@ -14,3 +14,8 @@
 - JDBC URL:	jdbc:h2:mem:testdb
 - User Name: sa
 - Password:	<blank>
+
+### Usuários/Credenciais da aplicação
+
+- Admin: admin/passwd123
+- Comum: user/passwd456
