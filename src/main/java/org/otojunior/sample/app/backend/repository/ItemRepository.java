@@ -47,8 +47,9 @@ public interface ItemRepository extends JpaRepository<Item, Long>{
 	Optional<Item> findByNome(String nome);
 	
 	/**
-	 * 
-	 * @return
+	 * <p>findAllOrderByCodigo.</p>
+	 *  
+	 * @return a {@link List} list.
 	 */
 	@Query("select i "
 		+ "from Item i "
