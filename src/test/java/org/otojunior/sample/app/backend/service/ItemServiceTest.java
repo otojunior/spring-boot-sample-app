@@ -60,7 +60,7 @@ public class ItemServiceTest {
 	 */
 	@Test
 	public void testFindAll() {
-		given(repository.findAll()).willReturn(MOCK_ITEMS);
+		given(repository.findAllOrderByCodigo()).willReturn(MOCK_ITEMS);
 		assertEquals(3, service.findAll().size());
 	}
 

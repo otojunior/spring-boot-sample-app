@@ -15,10 +15,12 @@
  */
 package org.otojunior.sample.app.backend.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.otojunior.sample.app.backend.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -35,12 +37,21 @@ public interface ItemRepository extends JpaRepository<Item, Long>{
 	 * @param codigo a {@link java.lang.Long} object.
 	 * @return a {@link java.util.Optional} object.
 	 */
-	public Optional<Item> findByCodigo(Long codigo);
+	Optional<Item> findByCodigo(Long codigo);
 	/**
 	 * <p>findByNome.</p>
 	 *
 	 * @param nome a {@link java.lang.String} object.
 	 * @return a {@link java.util.Optional} object.
 	 */
-	public Optional<Item> findByNome(String nome);
+	Optional<Item> findByNome(String nome);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@Query("select i "
+		+ "from Item i "
+		+ "order by i.codigo")
+	List<Item> findAllOrderByCodigo();
 }

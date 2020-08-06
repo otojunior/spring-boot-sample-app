@@ -56,7 +56,7 @@ public class ItemService {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<Item> findAll() {
-		return repository.findAll();
+		return repository.findAllOrderByCodigo();
 	}
 	
 	/**
@@ -143,14 +143,14 @@ public class ItemService {
 	@PostConstruct
 	public void cargaInicialExtra() {
 		final int N = 217;
-		final List<Item> ITENS = new ArrayList<>(N);
+		final List<Item> items = new ArrayList<>(N);
 		for (int i = 1; i <= N; i++) {
 			Item item = new Item();
 			item.setCodigo(Long.valueOf(1000+i));
 			item.setNome("Item " + i);
 			item.setPreco(BigDecimal.valueOf(i));
-			ITENS.add(item);
+			items.add(item);
 		}
-		repository.saveAll(ITENS);
+		repository.saveAll(items);
 	}
 }
