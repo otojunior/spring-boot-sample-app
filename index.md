@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+# (Main page under construction)
 
-You can use the [editor on GitHub](https://github.com/otojunior/spring-boot-sample-app/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+| Serviço | Indicadores |
+| --- | --- |
+| Travis-CI | [![Build Status](https://travis-ci.com/otojunior/spring-boot-sample-app.svg?branch=master)](https://travis-ci.com/otojunior/spring-boot-sample-app) |
+| Codecov | [![codecov](https://codecov.io/gh/otojunior/spring-boot-sample-app/branch/master/graph/badge.svg)](https://codecov.io/gh/otojunior/spring-boot-sample-app) |
+| SonarCloud | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=coverage)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=coverage) [![Alert Status](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=alert_status)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=alert_status) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=bugs)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=bugs) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=code_smells)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=code_smells) [![Reliability](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=reliability_rating) [![Security](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=security_rating)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=security_rating) [![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=sqale_rating)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=sqale_rating) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=sqale_index)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=sqale_index) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=org.otojunior%3Aspring-boot-sample-app&metric=vulnerabilities)](https://sonarcloud.io/component_measures?id=org.otojunior%3Aspring-boot-sample-app&metric=vulnerabilities) |
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+-------------------
 
-### Markdown
+# SPRING-BOOT-SAMPLE-APP
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Conexão H2 embutida
 
-```markdown
-Syntax highlighted code block
+- Driver Class:	org.h2.Driver
+- JDBC URL:	jdbc:h2:mem:testdb
+- User Name: sa
+- Password:	<blank>
 
-# Header 1
-## Header 2
-### Header 3
+### Usuários/Credenciais da aplicação
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/otojunior/spring-boot-sample-app/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+- Admin: admin/passwd123
+- Comum: user/passwd456
